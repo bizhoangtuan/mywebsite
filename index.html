@@ -543,6 +543,49 @@ footer a:hover{color:var(--warm);}
   .simple-footer { flex-direction: column; align-items: flex-start; }
 }
 
+
+/* ── MARQUEE TICKER ── */
+.ticker-wrap {
+  width: 100%;
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+  margin-bottom: 88px;
+  position: relative;
+}
+.ticker-wrap::before,
+.ticker-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 80px;
+  z-index: 2;
+  pointer-events: none;
+}
+.ticker-wrap::before { left: 0; background: linear-gradient(to right, var(--bg), transparent); }
+.ticker-wrap::after  { right: 0; background: linear-gradient(to left, var(--bg), transparent); }
+.ticker-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: ticker-scroll 22s linear infinite;
+}
+.ticker-track:hover { animation-play-state: paused; }
+.ticker-item {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  white-space: nowrap;
+  padding: 0 32px;
+  font-style: italic;
+}
+.ticker-sep { color: var(--gold-dim); font-size: 10px; flex-shrink: 0; }
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
 </style>
 </head>
 <body>
@@ -677,6 +720,24 @@ footer a:hover{color:var(--warm);}
       </div>
     </div>
   </section>
+
+  <!-- MARQUEE TICKER -->
+  <div class="ticker-wrap">
+    <div class="ticker-track">
+      <span class="ticker-item">Thành công của khách hàng là thành công của chúng tôi</span>
+      <span class="ticker-sep">✦</span>
+      <span class="ticker-item">Thực Học · Thực Làm · Thực Giá Trị</span>
+      <span class="ticker-sep">✦</span>
+      <span class="ticker-item">Thành công của khách hàng là thành công của chúng tôi</span>
+      <span class="ticker-sep">✦</span>
+      <span class="ticker-item">Thực Học · Thực Làm · Thực Giá Trị</span>
+      <span class="ticker-sep">✦</span>
+      <span class="ticker-item">Thành công của khách hàng là thành công của chúng tôi</span>
+      <span class="ticker-sep">✦</span>
+      <span class="ticker-item">Thực Học · Thực Làm · Thực Giá Trị</span>
+      <span class="ticker-sep">✦</span>
+    </div>
+  </div>
 
   <!-- KẾT QUẢ THỰC TẾ -->
   <section id="results-section" class="fade-up">
