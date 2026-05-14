@@ -61,6 +61,58 @@ body { background: var(--bg); color: var(--cream); font-family: var(--font); dis
 .panel-cta-secondary:hover { border-color: var(--gold); color: var(--gold-lt); background: rgba(200,164,90,.06); }
 
 .loading-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 9999; display: flex; justify-content: center; align-items: center; color: var(--gold); }
+
+/* ── RESPONSIVE MOBILE FIX ── */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column; /* Chuyển từ dàn ngang sang dàn dọc */
+  }
+  
+  #graph-pane {
+    flex: none;
+    height: 45vh; /* Đồ thị chiếm 45% chiều cao màn hình trên */
+    width: 100%;
+  }
+
+  .graph-header {
+    top: 15px;
+    left: 15px;
+  }
+
+  .graph-header h1 {
+    font-size: 18px; /* Thu nhỏ tiêu đề tránh chiếm diện tích */
+  }
+
+  .graph-header p {
+    font-size: 11px;
+  }
+
+  #sidepanel {
+    width: 100%; /* Panel nội dung chiếm 100% chiều rộng */
+    height: 55vh; /* Panel chiếm 55% chiều cao màn hình dưới */
+    border-left: none;
+    border-top: 1px solid var(--border); /* Chuyển viền từ trái lên trên */
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
+  }
+
+  .panel-topbar {
+    padding: 16px 20px 0;
+  }
+
+  #node-title {
+    font-size: 20px;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+  }
+
+  .panel-body {
+    padding: 12px 20px 24px;
+  }
+
+  .panel-footer {
+    padding: 12px 20px 16px;
+  }
+}
 </style>
 </head>
 <body>
