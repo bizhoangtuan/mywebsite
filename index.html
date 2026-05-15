@@ -176,78 +176,91 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0
 .fu2{animation-delay:.1s;}.fu3{animation-delay:.2s;}.fu4{animation-delay:.3s;}
 
 /* ============================================================
-   RESPONSIVE — MOBILE FIXES (áp dụng cho mọi màn hình < 800px)
+   RESPONSIVE — MOBILE (< 600px) — layout dọc hoàn toàn
    ============================================================ */
-
-/* Tablet nhỏ: bắt đầu collapse 3-col grids */
-@media(max-width:800px){
-  .results-grid{grid-template-columns:1fr 1fr;}
-  .compact-contact{grid-template-columns:1fr !important;}
-  .cf-row{grid-template-columns:1fr 1fr;}
-}
-
-/* Mobile chính */
 @media(max-width:600px){
   .page{padding:0 16px;}
 
-  /* NAV */
+  /* NAV — stack dọc */
   nav{
     flex-direction:column;
-    gap:10px;
+    gap:12px;
     align-items:flex-start;
     margin-bottom:32px;
     padding:16px 0;
   }
-  .nav-links{gap:10px;flex-wrap:wrap;}
-  .nav-links a{font-size:12px;}
+  .nav-links{gap:12px;flex-wrap:wrap;}
+  .nav-links a{font-size:13px;}
 
-  /* HERO: stack dọc, ảnh trên */
+  /* HERO — ảnh trên, nội dung dưới, full width */
   .hero{
-    grid-template-columns:1fr !important;
-    gap:20px;
+    display:flex;
+    flex-direction:column;
+    gap:24px;
     margin-bottom:40px;
   }
   .hero-photo-wrap{
     order:-1;
     align-items:center;
-    justify-content:center;
+    width:100%;
   }
   .photo-frame{
-    width:160px;
-    height:200px;
-    border-radius:80px 80px 14px 14px;
+    width:140px;
+    height:176px;
+    border-radius:70px 70px 14px 14px;
     margin:0 auto;
   }
-  .hero-name{font-size:clamp(30px,8vw,44px);}
+  .hero-left{width:100%;}
+  .hero-name{font-size:36px;line-height:1.05;}
   .hero-role{font-size:13px;}
-  .hero-bio{font-size:13px;}
-  .hero-eyebrow{font-size:10px;}
-  .slogan-row{gap:6px;}
-  .slogan-pill{font-size:9px;padding:4px 10px;}
-  .hero-cta{gap:8px;}
-  .hero-cta .btn{flex:1;min-width:0;justify-content:center;font-size:11px;padding:9px 12px;}
+  .hero-bio{font-size:13px;max-width:100%;}
+  .hero-eyebrow{font-size:10px;margin-bottom:12px;}
+  .slogan-row{gap:6px;margin-bottom:24px;}
+  .slogan-pill{font-size:9px;padding:5px 12px;}
+  .hero-cta{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .hero-cta .btn{
+    width:100%;
+    justify-content:center;
+    font-size:13px;
+    padding:12px 16px;
+  }
 
-  /* STATS: 2 cột */
+  /* STATS — 2 cột cân đối */
   .stats-grid{
     grid-template-columns:repeat(2,1fr) !important;
     margin-bottom:40px;
   }
-  .stat-item{padding:16px 12px;}
-  .stat-num{font-size:24px;}
-  .stat-label{font-size:10px;}
+  .stat-item{padding:18px 14px;}
+  .stat-num{font-size:26px;}
+  .stat-label{font-size:11px;}
 
   /* SECTION HEADER */
-  .section-header{flex-direction:column;gap:4px;align-items:flex-start;}
+  .section-header{
+    flex-direction:column;
+    gap:4px;
+    align-items:flex-start;
+  }
+  .section-title{font-size:17px;}
   .section-note{font-size:11px;}
 
-  /* PAIN POINTS: 1 cột */
+  /* PAIN POINTS — 1 cột */
   #pain-section{margin-bottom:48px;}
+  .pain-intro{font-size:13px;margin-bottom:20px;}
   .pain-grid{
     grid-template-columns:1fr !important;
     gap:10px;
     margin-bottom:20px;
   }
-  .pain-card{padding:16px;}
+  .pain-card{
+    padding:16px;
+    flex-direction:row;
+    gap:12px;
+  }
+  .pain-emoji{font-size:22px;}
   .pain-problem{font-size:13px;}
   .pain-solution{font-size:12px;}
   .pain-cta-row{
@@ -256,93 +269,157 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0
     gap:12px;
     padding:16px;
   }
-  .pain-cta-row .btn{text-align:center;justify-content:center;width:100%;}
+  .pain-cta-row .btn{
+    text-align:center;
+    justify-content:center;
+    width:100%;
+    padding:13px;
+    font-size:13px;
+  }
 
-  /* PROCESS: 2×2 */
+  /* PROCESS — 2×2 grid */
   #process-section{margin-bottom:48px;}
   .process-steps{
     grid-template-columns:1fr 1fr !important;
-    gap:20px 10px;
+    gap:24px 16px;
   }
   .process-steps::before{display:none;}
-  .process-step{padding:0 4px;}
-  .step-num{width:42px;height:42px;font-size:12px;margin-bottom:12px;}
-  .step-title{font-size:12px;}
+  .process-step{padding:0;}
+  .step-num{
+    width:44px;
+    height:44px;
+    font-size:12px;
+    margin-bottom:10px;
+  }
+  .step-title{font-size:12px;margin-bottom:6px;}
   .step-desc{font-size:11px;}
 
   /* TICKER */
   .ticker-wrap{margin-bottom:48px;}
   .ticker-item{font-size:12px;padding:0 20px;}
 
-  /* RESULTS: 1 cột */
+  /* RESULTS — 1 cột, full width */
   #results-section{margin-bottom:48px;}
   .results-grid{
     grid-template-columns:1fr !important;
-    gap:10px;
+    gap:12px;
   }
-  .result-card{padding:18px 16px;}
-  .result-outcome{font-size:14px;}
+  .result-card{
+    padding:20px 18px;
+    /* Ngang nội dung ngang để dễ scan */
+    display:grid;
+    grid-template-columns:1fr;
+  }
+  .result-industry{font-size:10px;margin-bottom:6px;}
+  .result-outcome{font-size:15px;margin-bottom:8px;}
+  .result-detail{font-size:13px;}
+  .result-platform{margin-top:10px;}
+  .result-tag{font-size:11px;padding:3px 10px;}
 
   /* QUOTE */
   .quote-section{
-    padding:24px 18px;
+    padding:28px 20px;
     margin-bottom:48px;
+    border-radius:16px;
   }
-  .quote-section blockquote{font-size:15px;}
-  .quote-section::before{font-size:120px;top:-10px;}
+  .quote-section blockquote{
+    font-size:15px;
+    line-height:1.6;
+  }
+  .quote-section::before{
+    font-size:100px;
+    top:-8px;
+  }
+  .quote-section cite{font-size:12px;}
 
   /* GRAPH */
   #graph-section{margin-bottom:48px;}
-  #graph-section > div > div[style]{
-    flex-direction:column;
+  #graph-section > div > div{
+    flex-direction:column !important;
     gap:16px;
   }
-  #graph-section .btn{width:100%;justify-content:center;}
+  #graph-section .btn{
+    width:100%;
+    justify-content:center;
+    padding:13px;
+    font-size:13px;
+  }
 
-  /* CONTACT: 1 cột hoàn toàn */
+  /* CONTACT — 1 cột hoàn toàn, form full-width */
   #contact-section{margin-bottom:48px;}
   .compact-contact{
-    grid-template-columns:1fr !important;
-    gap:24px;
+    display:flex !important;
+    flex-direction:column !important;
+    gap:28px;
   }
-  .cc-tagline{font-size:13px;margin-bottom:16px;}
-  .cc-links{gap:8px;margin-bottom:14px;}
-  .cc-link{padding:9px 12px;}
-  .cc-link-val{font-size:12px;}
+  .cc-tagline{
+    font-size:13px;
+    margin-bottom:16px;
+    line-height:1.7;
+  }
+  .cc-links{gap:10px;margin-bottom:16px;}
+  .cc-link{padding:12px 14px;}
+  .cc-link-icon{font-size:18px;}
+  .cc-link-label{font-size:10px;}
+  .cc-link-val{font-size:13px;}
+  .cc-address{font-size:12px;}
 
-  /* FORM: tất cả 1 cột */
-  .cc-form-wrap{padding:18px 16px;}
+  /* Form — tất cả 1 cột, input đủ cao */
+  .cc-form-wrap{
+    padding:20px 16px;
+    border-radius:14px;
+    width:100%;
+  }
+  .cc-form-wrap > p{font-size:13px;margin-bottom:16px;}
+  .cc-form{gap:10px;}
   .cf-row{
     grid-template-columns:1fr !important;
-    gap:8px;
+    gap:10px;
   }
   .cf-field input,
   .cf-field select,
   .cf-field textarea{
-    font-size:16px;   /* quan trọng: ngăn iOS auto-zoom */
-    padding:12px 13px;
+    font-size:16px; /* ngăn iOS auto-zoom */
+    padding:13px 14px;
+    border-radius:8px;
   }
-  .cf-submit{padding:13px;font-size:14px;}
+  .cf-field select{
+    height:50px;
+    padding:13px 14px;
+  }
+  .cf-field textarea{min-height:100px;}
+  .cf-submit{
+    padding:14px;
+    font-size:14px;
+    border-radius:8px;
+    margin-top:4px;
+  }
 
   /* FOOTER */
   .simple-footer{
     flex-direction:column;
-    gap:8px;
+    gap:10px;
     text-align:center;
     align-items:center;
-    padding:16px 0 28px;
+    padding:18px 0 32px;
   }
-  .sf-left{justify-content:center;flex-direction:column;gap:4px;}
+  .sf-left{
+    justify-content:center;
+    flex-direction:column;
+    gap:4px;
+    line-height:1.6;
+  }
   .sf-sep{display:none;}
-  .sf-right{gap:14px;}
+  .sf-right{gap:16px;}
+  .sf-right a{font-size:12px;}
 }
 
 /* Màn rất nhỏ (< 380px) */
 @media(max-width:380px){
   .page{padding:0 12px;}
-  .hero-name{font-size:28px;}
-  .stat-num{font-size:20px;}
-  .nav-links a{font-size:11px;}
+  .hero-name{font-size:30px;}
+  .stat-num{font-size:22px;}
+  .photo-frame{width:120px;height:150px;}
 }
 </style>
 </head>
@@ -453,9 +530,24 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0
       <div class="section-note">350+ doanh nghiệp đã triển khai</div>
     </div>
     <div class="results-grid">
-      <div class="result-card"><div class="result-industry">FMCG · Hàng tiêu dùng</div><div class="result-outcome">Đồng bộ 5 kênh bán hàng trong 10 ngày</div><div class="result-detail">Doanh nghiệp bán lẻ đa kênh, trước đây quản lý kho thủ công trên Excel — sau khi triển khai Haravan, tồn kho real-time, giảm 80% sai lệch đơn hàng.</div><div class="result-platform"><span class="result-tag">Haravan</span><span class="result-tag">Shopee</span><span class="result-tag">TikTok Shop</span></div></div>
-      <div class="result-card"><div class="result-industry">Dịch vụ · B2B</div><div class="result-outcome">Đội ngũ 20 người tự vận hành không cần sếp can thiệp</div><div class="result-detail">Công ty dịch vụ, sếp phải xử lý mọi phê duyệt — sau khi chuẩn hóa Lark, toàn bộ quy trình tự động, sếp tập trung vào chiến lược.</div><div class="result-platform"><span class="result-tag">Lark Suite</span><span class="result-tag">OKR</span><span class="result-tag">Workflow Auto</span></div></div>
-      <div class="result-card"><div class="result-industry">Thời trang · D2C</div><div class="result-outcome">Tăng trưởng 25% doanh thu sau khi nghiên cứu đúng insight & target audience</div><div class="result-detail">Brand thời trang chạy Ads "mò mẫm" — sau khi phân tích insight, xác định đúng target audience và tối ưu phễu chuyển đổi, doanh thu tăng 25% với cùng ngân sách trong 3 tháng.</div><div class="result-platform"><span class="result-tag">Meta Ads</span><span class="result-tag">GA4</span><span class="result-tag">Haravan CRM</span></div></div>
+      <div class="result-card">
+        <div class="result-industry">FMCG · Hàng tiêu dùng</div>
+        <div class="result-outcome">Đồng bộ 5 kênh bán hàng trong 10 ngày</div>
+        <div class="result-detail">Doanh nghiệp bán lẻ đa kênh, trước đây quản lý kho thủ công trên Excel — sau khi triển khai Haravan, tồn kho real-time, giảm 80% sai lệch đơn hàng.</div>
+        <div class="result-platform"><span class="result-tag">Haravan</span><span class="result-tag">Shopee</span><span class="result-tag">TikTok Shop</span></div>
+      </div>
+      <div class="result-card">
+        <div class="result-industry">Dịch vụ · B2B</div>
+        <div class="result-outcome">Đội ngũ 20 người tự vận hành không cần sếp can thiệp</div>
+        <div class="result-detail">Công ty dịch vụ, sếp phải xử lý mọi phê duyệt — sau khi chuẩn hóa Lark, toàn bộ quy trình tự động, sếp tập trung vào chiến lược.</div>
+        <div class="result-platform"><span class="result-tag">Lark Suite</span><span class="result-tag">OKR</span><span class="result-tag">Workflow Auto</span></div>
+      </div>
+      <div class="result-card">
+        <div class="result-industry">Thời trang · D2C</div>
+        <div class="result-outcome">Tăng trưởng 25% doanh thu sau khi nghiên cứu đúng insight & target audience</div>
+        <div class="result-detail">Brand thời trang chạy Ads "mò mẫm" — sau khi phân tích insight, xác định đúng target audience và tối ưu phễu chuyển đổi, doanh thu tăng 25% với cùng ngân sách trong 3 tháng.</div>
+        <div class="result-platform"><span class="result-tag">Meta Ads</span><span class="result-tag">GA4</span><span class="result-tag">Haravan CRM</span></div>
+      </div>
     </div>
   </section>
 
@@ -551,13 +643,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0
 </div><!-- /page -->
 
 <script>
-  // ============================================================
-  // THAY THẾ GIÁ TRỊ NÀY bằng URL Apps Script mới của bạn
-  // (xem hướng dẫn tạo script bên dưới trong comment)
-  // ============================================================
   var GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwvMxMNGK3IOibOGPRGyQnTVkjSITqWaxB5TbM3ZW71Giy_QMb3R7KPSRKWpdlKAw7FpQ/exec";
-  // ⬆️ Sau khi tạo Apps Script mới (hướng dẫn bên dưới),
-  //    thay URL trên bằng URL deploy của script mới
 
   document.getElementById("contact-form").addEventListener("submit", function(e) {
     e.preventDefault();
@@ -581,7 +667,6 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0
       thoiGian: new Date().toLocaleString("vi-VN", {timeZone:"Asia/Ho_Chi_Minh"})
     });
 
-    // Hiện thành công ngay, gửi data ngầm
     form.reset();
     form.style.display = "none";
 
@@ -601,48 +686,5 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0
     } catch(err) {}
   });
 </script>
-
-<!--
-==============================================================
-HƯỚNG DẪN KẾT NỐI GOOGLE SHEET
-==============================================================
-Google Sheet ID: 1NI19q7qiT-JqHUKDEilbGsc5vN2KroUkywEAzLkn-GQ
-
-BƯỚC 1: Mở Google Sheet của bạn
-→ https://docs.google.com/spreadsheets/d/1NI19q7qiT-JqHUKDEilbGsc5vN2KroUkywEAzLkn-GQ
-
-BƯỚC 2: Tạo header ở hàng 1, các cột theo thứ tự:
-  A: Thời gian  |  B: Họ tên  |  C: SĐT  |  D: Doanh nghiệp  |  E: Dịch vụ  |  F: Nội dung
-
-BƯỚC 3: Vào menu Extensions → Apps Script
-
-BƯỚC 4: Xóa hết code cũ, dán đoạn code sau vào:
-
-function doGet(e) {
-  var sheet = SpreadsheetApp.openById("1NI19q7qiT-JqHUKDEilbGsc5vN2KroUkywEAzLkn-GQ")
-              .getActiveSheet();
-  sheet.appendRow([
-    e.parameter.thoiGian || new Date().toLocaleString("vi-VN"),
-    e.parameter.hoTen    || "",
-    e.parameter.sdt      || "",
-    e.parameter.congTy   || "",
-    e.parameter.linhVuc  || "",
-    e.parameter.noiDung  || ""
-  ]);
-  return ContentService
-    .createTextOutput(JSON.stringify({status:"ok"}))
-    .setMimeType(ContentService.MimeType.JSON);
-}
-
-BƯỚC 5: Nhấn Deploy → New deployment
-  - Type: Web app
-  - Execute as: Me
-  - Who has access: Anyone
-→ Nhấn Deploy → Copy URL
-
-BƯỚC 6: Thay URL trong file HTML:
-  var GOOGLE_SCRIPT_URL = "URL_VỪA_COPY_Ở_BƯỚC_5";
-==============================================================
--->
 </body>
 </html>
