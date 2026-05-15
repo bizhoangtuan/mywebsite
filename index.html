@@ -208,15 +208,16 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0
     width:100%;
   }
   .photo-frame{
-    width:100%; /* bằng với khung chữ */
-    max-width:100%;
-    height:auto;
-    aspect-ratio:3/2;
-    border-radius:16px;
+    width:220px;
+    height:280px;
+    border-radius:110px 110px 20px 20px; /* arch tròn trên */
     margin:0 auto;
-    object-fit:cover;
+    overflow:hidden;
   }
   .photo-frame img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
     object-position:top center;
   }
   .hero-left{width:100%;order:0;}
