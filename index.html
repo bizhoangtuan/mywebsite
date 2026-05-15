@@ -506,21 +506,20 @@ footer a:hover{color:var(--warm);}
 
     // ✅ HIỆN THÀNH CÔNG NGAY — không chờ server
     form.reset();
-    btn.disabled         = true;
-    btn.innerHTML        = "✓ Đã gửi thành công!";
-    btn.style.background = "rgba(200,164,90,0.15)";
-    btn.style.color      = "var(--gold-lt)";
+
+    // Ẩn form, hiện message box
+    form.style.display = "none";
+    var msgBox = document.createElement("div");
+    msgBox.style.cssText = "padding:28px 24px;border-radius:12px;background:rgba(200,164,90,0.07);border:1px solid rgba(200,164,90,0.25);text-align:center;line-height:1.8";
+    msgBox.innerHTML = "<div style=\"font-size:28px;margin-bottom:12px\">🙏</div>"
+      + "<div style=\"font-size:15px;font-weight:600;color:#E8C87A;margin-bottom:8px\">Dạ cảm ơn anh/chị!</div>"
+      + "<div style=\"font-size:14px;color:#A89070\">Thông tin của mình đã được gửi thành công.</div>"
+      + "<div style=\"font-size:14px;color:#A89070\">Hoàng Tuấn sẽ liên hệ lại với anh/chị sớm nhất!</div>"
+      + "<div style=\"font-size:13px;color:#7A6A50;margin-top:10px\">Chúc anh/chị một ngày mới an lành ☀️</div>";
+    form.parentNode.appendChild(msgBox);
 
     // Gửi data ngầm bằng GET + Image beacon (không block UI, không cần CORS)
     new Image().src = GOOGLE_SCRIPT_URL + "?" + params.toString();
-
-    // Reset button sau 4 giây
-    setTimeout(function() {
-      btn.disabled         = false;
-      btn.innerHTML        = origTxt;
-      btn.style.background = "";
-      btn.style.color      = "";
-    }, 4000);
   });
 </script>
 
