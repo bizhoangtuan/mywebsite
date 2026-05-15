@@ -991,4 +991,106 @@ footer a:hover{color:var(--warm);}
 })();
 </script>
 </body>
+   // ============================================================
+// WEBSITE JS - Gắn vào website nguyenhoangtuan.oneads.vn
+// Dán đoạn này vào cuối thẻ <body> hoặc file JS hiện tại
+// ============================================================
+
+// ⚠️  THAY ĐOẠN NÀY bằng URL sau khi deploy Apps Script
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyJ3yJGVqssFe1mhVZdqmFXS7quU7iY26lo8HvU8qkkQOyVmtE1Iz4DgnqbiJDTtIEA-Q/exec";
+
+(function () {
+  // --- Tìm form liên hệ trong trang ---
+  // Nếu form có id hoặc class riêng, thay selector cho đúng
+  // Ví dụ: document.querySelector("#contact-form") hoặc "#lien-he form"
+  const contactSection = document.querySelector("#contact-section, #contact, .contact-section, [id*='contact']");
+  const form = contactSection
+    ? contactSection.querySelector("form")
+    : document.querySelector("form");
+
+  if (!form) {
+    console.warn("[OneAds Form] Không tìm thấy form. Kiểm tra lại selector.");
+    return;
+  }
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    // --- Lấy giá trị từ các input ---
+    // Selector dưới đây dựa theo tên trường phổ biến.
+    // Nếu form dùng name/id khác, điều chỉnh lại cho khớp.
+    const getValue = (selectors) => {
+      for (const sel of selectors) {
+        const el = form.querySelector(sel);
+        if (el) return el.value.trim();
+      }
+      return "";
+    };
+
+    const payload = {
+      hoTen:    getValue(['[name="name"]', '[name="ho-ten"]', '[name="fullname"]', '[placeholder*="tên"]', '[placeholder*="Tên"]']),
+      sdt:      getValue(['[name="phone"]', '[name="sdt"]', '[name="tel"]', '[type="tel"]', '[placeholder*="điện thoại"]', '[placeholder*="Điện thoại"]']),
+      congTy:   getValue(['[name="company"]', '[name="cong-ty"]', '[placeholder*="công ty"]', '[placeholder*="Công ty"]']),
+      linhVuc:  getValue(['select', '[name="linh-vuc"]', '[name="service"]', '[name="category"]']),
+      noiDung:  getValue(['textarea', '[name="message"]', '[name="noi-dung"]', '[name="content"]']),
+    };
+
+    // --- UI: hiện trạng thái loading ---
+    const submitBtn = form.querySelector('[type="submit"], button[type="submit"], button:last-of-type');
+    const originalText = submitBtn ? submitBtn.innerHTML : "";
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = "Đang gửi...";
+    }
+
+    try {
+      // Gửi qua no-cors vì Apps Script không hỗ trợ CORS preflight
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      // Thành công (no-cors không trả response body — cứ coi là thành công)
+      showMessage(form, "success", "✅ Cảm ơn! Thông tin của bạn đã được gửi. Mình sẽ liên hệ sớm nhé.");
+      form.reset();
+
+    } catch (err) {
+      console.error("[OneAds Form] Lỗi gửi form:", err);
+      showMessage(form, "error", "❌ Có lỗi xảy ra. Vui lòng thử lại hoặc nhắn trực tiếp qua Facebook.");
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+      }
+    }
+  });
+
+  // --- Helper: hiển thị thông báo sau form ---
+  function showMessage(form, type, text) {
+    // Xóa thông báo cũ nếu có
+    const old = form.parentNode.querySelector(".oneads-form-msg");
+    if (old) old.remove();
+
+    const msg = document.createElement("p");
+    msg.className = "oneads-form-msg";
+    msg.textContent = text;
+    msg.style.cssText = [
+      "margin-top: 12px",
+      "padding: 12px 16px",
+      "border-radius: 8px",
+      "font-size: 15px",
+      "font-weight: 500",
+      type === "success"
+        ? "background:#d1fae5; color:#065f46; border:1px solid #6ee7b7"
+        : "background:#fee2e2; color:#991b1b; border:1px solid #fca5a5",
+    ].join(";");
+
+    form.parentNode.insertBefore(msg, form.nextSibling);
+
+    // Tự ẩn sau 6 giây
+    setTimeout(() => msg.remove(), 6000);
+  }
+})();
 </html>
