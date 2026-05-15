@@ -477,7 +477,7 @@ footer a:hover{color:var(--warm);}
 </div><!-- /page -->
 
 <!-- ============================================================
-  SCRIPT — ĐỔ DATA VỀ GOOGLE SHEET
+  SCRIPT — ĐỔ DATA VỀ GOOGLE SHEET (Fire & Forget — ~1s)
   ⚠️ Thay GOOGLE_SCRIPT_URL bằng URL deploy của bạn
 ============================================================ -->
 <script>
@@ -486,50 +486,41 @@ footer a:hover{color:var(--warm);}
   document.getElementById("contact-form").addEventListener("submit", function(e) {
     e.preventDefault();
 
-    var form    = e.target;
-    var btn     = document.getElementById("cf-submit-btn");
+    var form = e.target;
+    var btn  = document.getElementById("cf-submit-btn");
     var origTxt = btn.innerHTML;
 
+    // Validate nhanh
+    var name  = form.querySelector('[name="name"]').value.trim();
+    var phone = form.querySelector('[name="phone"]').value.trim();
+    if (!name || !phone) return;
+
     // Lấy dữ liệu
-    var payload = {
-      hoTen   : form.querySelector('[name="name"]').value.trim(),
-      sdt     : form.querySelector('[name="phone"]').value.trim(),
+    var params = new URLSearchParams({
+      hoTen   : name,
+      sdt     : phone,
       congTy  : form.querySelector('[name="company"]').value.trim(),
-      linhVuc : form.querySelector('[name="service"]').value,
+      linhVuc : form.querySelector('[name="service"]').value || "",
       noiDung : form.querySelector('[name="message"]').value.trim()
-    };
-
-    // Loading state
-    btn.disabled    = true;
-    btn.innerHTML   = "Đang gửi...";
-
-    // Gửi đến Google Apps Script
-    fetch(GOOGLE_SCRIPT_URL, {
-      method  : "POST",
-      mode    : "no-cors",
-      headers : { "Content-Type": "application/json" },
-      body    : JSON.stringify(payload)
-    })
-    .then(function() {
-      // Thành công
-      form.reset();
-      btn.innerHTML = "✓ Đã gửi thành công!";
-      btn.style.background = "rgba(200,164,90,0.2)";
-      btn.style.color      = "var(--gold-lt)";
-
-      // Reset button sau 4 giây
-      setTimeout(function() {
-        btn.disabled         = false;
-        btn.innerHTML        = origTxt;
-        btn.style.background = "";
-        btn.style.color      = "";
-      }, 4000);
-    })
-    .catch(function(err) {
-      btn.disabled  = false;
-      btn.innerHTML = origTxt;
-      alert("Có lỗi xảy ra. Vui lòng thử lại hoặc nhắn trực tiếp qua Facebook.");
     });
+
+    // ✅ HIỆN THÀNH CÔNG NGAY — không chờ server
+    form.reset();
+    btn.disabled         = true;
+    btn.innerHTML        = "✓ Đã gửi thành công!";
+    btn.style.background = "rgba(200,164,90,0.15)";
+    btn.style.color      = "var(--gold-lt)";
+
+    // Gửi data ngầm bằng GET + Image beacon (không block UI, không cần CORS)
+    new Image().src = GOOGLE_SCRIPT_URL + "?" + params.toString();
+
+    // Reset button sau 4 giây
+    setTimeout(function() {
+      btn.disabled         = false;
+      btn.innerHTML        = origTxt;
+      btn.style.background = "";
+      btn.style.color      = "";
+    }, 4000);
   });
 </script>
 
