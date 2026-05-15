@@ -518,8 +518,14 @@ footer a:hover{color:var(--warm);}
       + "<div style=\"font-size:13px;color:#7A6A50;margin-top:10px\">Chúc anh/chị một ngày mới an lành ☀️</div>";
     form.parentNode.appendChild(msgBox);
 
-    // Gửi data ngầm bằng GET + Image beacon (không block UI, không cần CORS)
-    new Image().src = GOOGLE_SCRIPT_URL + "?" + params.toString();
+    // Gửi data ngầm — fetch fire & forget, không await, không block UI
+    try {
+      fetch(GOOGLE_SCRIPT_URL + "?" + params.toString(), {
+        method : "GET",
+        mode   : "no-cors",
+        keepalive: true
+      });
+    } catch(e) {}
   });
 </script>
 
