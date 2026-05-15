@@ -42,6 +42,9 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0
 .nav-links a{font-size:13px;color:var(--warm);text-decoration:none;letter-spacing:.06em;transition:color .2s;}
 .nav-links a:hover{color:var(--gold-lt);}
 
+/* HERO CTA social row — desktop: inline, mobile: full-width row */
+.hero-cta-social{display:contents;} /* desktop: 2 nút hoà vào flex cha */
+
 /* HERO */
 .hero{display:grid;grid-template-columns:1fr 280px;gap:48px;align-items:center;margin-bottom:72px;}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;}
@@ -200,33 +203,63 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0
     margin-bottom:40px;
   }
   .hero-photo-wrap{
-    order:-1;
+    order:1; /* ảnh xuống DƯỚI LinkedIn */
     align-items:center;
     width:100%;
   }
   .photo-frame{
-    width:140px;
-    height:176px;
-    border-radius:70px 70px 14px 14px;
+    width:100%; /* bằng với khung chữ */
+    max-width:100%;
+    height:auto;
+    aspect-ratio:3/2;
+    border-radius:16px;
     margin:0 auto;
+    object-fit:cover;
   }
-  .hero-left{width:100%;}
+  .photo-frame img{
+    object-position:top center;
+  }
+  .hero-left{width:100%;order:0;}
   .hero-name{font-size:36px;line-height:1.05;}
   .hero-role{font-size:13px;}
   .hero-bio{font-size:13px;max-width:100%;}
   .hero-eyebrow{font-size:10px;margin-bottom:12px;}
   .slogan-row{gap:6px;margin-bottom:24px;}
   .slogan-pill{font-size:9px;padding:5px 12px;}
+  /* CTA: Liên hệ full width, FB + LinkedIn cùng 1 hàng */
   .hero-cta{
     display:flex;
     flex-direction:column;
     gap:8px;
   }
-  .hero-cta .btn{
+  .hero-cta .btn:first-child{
     width:100%;
     justify-content:center;
     font-size:13px;
     padding:12px 16px;
+  }
+  .hero-cta .btn-outline{
+    flex:1;
+    justify-content:center;
+    font-size:13px;
+    padding:12px 10px;
+  }
+  /* Wrap 2 nút outline thành 1 hàng */
+  .hero-cta{
+    flex-wrap:nowrap;
+    flex-direction:column;
+  }
+  .hero-cta-social{
+    display:flex !important;
+    flex-direction:row;
+    gap:8px;
+    width:100%;
+  }
+  .hero-cta-social .btn{
+    flex:1;
+    justify-content:center;
+    font-size:13px;
+    padding:12px 10px;
   }
 
   /* STATS — 2 cột cân đối */
@@ -419,7 +452,6 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0
   .page{padding:0 12px;}
   .hero-name{font-size:30px;}
   .stat-num{font-size:22px;}
-  .photo-frame{width:120px;height:150px;}
 }
 </style>
 </head>
@@ -452,9 +484,11 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0
         <span class="slogan-pill">Thực Giá Trị</span>
       </div>
       <div class="hero-cta">
-        <a href="#contact-section" class="btn btn-gold">Liên hệ tư vấn</a>
-        <a href="https://www.facebook.com/biz.nguyenhoangtuan/" target="_blank" class="btn btn-outline">Facebook ↗</a>
-        <a href="https://www.linkedin.com/in/biz-tuannguyenhoang/" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
+        <a href="#contact-section" class="btn btn-gold" style="width:100%;justify-content:center;">Liên hệ tư vấn</a>
+        <div class="hero-cta-social">
+          <a href="https://www.facebook.com/biz.nguyenhoangtuan/" target="_blank" class="btn btn-outline">Facebook ↗</a>
+          <a href="https://www.linkedin.com/in/biz-tuannguyenhoang/" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
+        </div>
       </div>
     </div>
     <div class="hero-photo-wrap">
