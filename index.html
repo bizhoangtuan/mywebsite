@@ -33,7 +33,7 @@
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--cream);font-family:var(--font);font-size:15px;line-height:1.7;overflow-x:hidden;}
 body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5;}
-.page{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:0 20px;}
+.page{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:0 20px;overflow-x:hidden;}
 
 /* NAV */
 nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0;border-bottom:1px solid var(--border);margin-bottom:56px;}
@@ -134,9 +134,10 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0
 
 /* CONTACT */
 #contact-section{margin-bottom:72px;}
-.compact-contact{display:grid;grid-template-columns:1fr 1.6fr;gap:40px;align-items:start;}
+.compact-contact{display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:start;width:100%;}
 .cc-tagline{font-size:14px;color:var(--warm);line-height:1.75;margin-bottom:24px;}
 .cc-tagline strong{color:var(--cream);}
+.cc-info{min-width:0;}
 .cc-links{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
 .cc-link{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;text-decoration:none;transition:all .2s;}
 .cc-link:hover{border-color:var(--border2);background:var(--bg3);}
@@ -144,7 +145,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0
 .cc-link-label{font-size:10px;color:var(--text2);letter-spacing:0.06em;text-transform:uppercase;}
 .cc-link-val{font-size:13px;color:var(--cream);font-weight:500;}
 .cc-address{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--text2);line-height:1.5;}
-.cc-form-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:24px;}
+.cc-form-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:24px;min-width:0;}
 .cc-form{display:flex;flex-direction:column;gap:10px;}
 .cf-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .cf-field input,.cf-field select,.cf-field textarea{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-family:var(--font);font-size:13px;color:var(--cream);outline:none;transition:border-color .2s;-webkit-appearance:none;}
@@ -175,9 +176,18 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0
 .fu2{animation-delay:.1s;}.fu3{animation-delay:.2s;}.fu4{animation-delay:.3s;}
 
 /* ============================================================
-   RESPONSIVE — MOBILE FIXES
+   RESPONSIVE — MOBILE FIXES (áp dụng cho mọi màn hình < 800px)
    ============================================================ */
-@media(max-width:720px){
+
+/* Tablet nhỏ: bắt đầu collapse 3-col grids */
+@media(max-width:800px){
+  .results-grid{grid-template-columns:1fr 1fr;}
+  .compact-contact{grid-template-columns:1fr !important;}
+  .cf-row{grid-template-columns:1fr 1fr;}
+}
+
+/* Mobile chính */
+@media(max-width:600px){
   .page{padding:0 16px;}
 
   /* NAV */
@@ -188,27 +198,27 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0
     margin-bottom:32px;
     padding:16px 0;
   }
-  .nav-links{gap:12px;flex-wrap:wrap;}
+  .nav-links{gap:10px;flex-wrap:wrap;}
   .nav-links a{font-size:12px;}
 
-  /* HERO */
+  /* HERO: stack dọc, ảnh trên */
   .hero{
-    grid-template-columns:1fr;
-    gap:24px;
+    grid-template-columns:1fr !important;
+    gap:20px;
     margin-bottom:40px;
   }
   .hero-photo-wrap{
-    order:-1; /* ảnh lên trên */
+    order:-1;
     align-items:center;
     justify-content:center;
   }
   .photo-frame{
-    width:180px;
-    height:220px;
-    border-radius:90px 90px 16px 16px;
+    width:160px;
+    height:200px;
+    border-radius:80px 80px 14px 14px;
     margin:0 auto;
   }
-  .hero-name{font-size:clamp(32px,9vw,48px);}
+  .hero-name{font-size:clamp(30px,8vw,44px);}
   .hero-role{font-size:13px;}
   .hero-bio{font-size:13px;}
   .hero-eyebrow{font-size:10px;}
@@ -217,23 +227,23 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0
   .hero-cta{gap:8px;}
   .hero-cta .btn{flex:1;min-width:0;justify-content:center;font-size:11px;padding:9px 12px;}
 
-  /* STATS */
+  /* STATS: 2 cột */
   .stats-grid{
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:repeat(2,1fr) !important;
     margin-bottom:40px;
   }
-  .stat-item{padding:16px 14px;}
-  .stat-num{font-size:26px;}
+  .stat-item{padding:16px 12px;}
+  .stat-num{font-size:24px;}
   .stat-label{font-size:10px;}
 
   /* SECTION HEADER */
   .section-header{flex-direction:column;gap:4px;align-items:flex-start;}
   .section-note{font-size:11px;}
 
-  /* PAIN POINTS */
+  /* PAIN POINTS: 1 cột */
   #pain-section{margin-bottom:48px;}
   .pain-grid{
-    grid-template-columns:1fr;
+    grid-template-columns:1fr !important;
     gap:10px;
     margin-bottom:20px;
   }
@@ -246,27 +256,28 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0
     gap:12px;
     padding:16px;
   }
-  .pain-cta-row .btn{text-align:center;justify-content:center;}
+  .pain-cta-row .btn{text-align:center;justify-content:center;width:100%;}
 
-  /* PROCESS */
+  /* PROCESS: 2×2 */
   #process-section{margin-bottom:48px;}
   .process-steps{
-    grid-template-columns:1fr 1fr;
-    gap:20px 12px;
+    grid-template-columns:1fr 1fr !important;
+    gap:20px 10px;
   }
   .process-steps::before{display:none;}
-  .process-step{padding:0 6px;}
-  .step-num{width:44px;height:44px;font-size:12px;}
+  .process-step{padding:0 4px;}
+  .step-num{width:42px;height:42px;font-size:12px;margin-bottom:12px;}
   .step-title{font-size:12px;}
   .step-desc{font-size:11px;}
 
   /* TICKER */
   .ticker-wrap{margin-bottom:48px;}
+  .ticker-item{font-size:12px;padding:0 20px;}
 
-  /* RESULTS */
+  /* RESULTS: 1 cột */
   #results-section{margin-bottom:48px;}
   .results-grid{
-    grid-template-columns:1fr;
+    grid-template-columns:1fr !important;
     gap:10px;
   }
   .result-card{padding:18px 16px;}
@@ -274,55 +285,64 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0
 
   /* QUOTE */
   .quote-section{
-    padding:28px 20px;
+    padding:24px 18px;
     margin-bottom:48px;
   }
   .quote-section blockquote{font-size:15px;}
+  .quote-section::before{font-size:120px;top:-10px;}
 
   /* GRAPH */
   #graph-section{margin-bottom:48px;}
-  #graph-section > div > div:first-child{display:none;} /* ẩn cái box mô tả dài */
+  #graph-section > div > div[style]{
+    flex-direction:column;
+    gap:16px;
+  }
+  #graph-section .btn{width:100%;justify-content:center;}
 
-  /* CONTACT */
+  /* CONTACT: 1 cột hoàn toàn */
   #contact-section{margin-bottom:48px;}
   .compact-contact{
-    grid-template-columns:1fr;
+    grid-template-columns:1fr !important;
     gap:24px;
   }
   .cc-tagline{font-size:13px;margin-bottom:16px;}
   .cc-links{gap:8px;margin-bottom:14px;}
   .cc-link{padding:9px 12px;}
   .cc-link-val{font-size:12px;}
+
+  /* FORM: tất cả 1 cột */
   .cc-form-wrap{padding:18px 16px;}
   .cf-row{
-    grid-template-columns:1fr; /* stack on mobile */
+    grid-template-columns:1fr !important;
     gap:8px;
   }
   .cf-field input,
   .cf-field select,
   .cf-field textarea{
-    font-size:16px; /* prevent iOS zoom */
-    padding:11px 13px;
+    font-size:16px;   /* quan trọng: ngăn iOS auto-zoom */
+    padding:12px 13px;
   }
   .cf-submit{padding:13px;font-size:14px;}
 
   /* FOOTER */
   .simple-footer{
     flex-direction:column;
-    gap:10px;
+    gap:8px;
     text-align:center;
     align-items:center;
-    margin-top:40px;
+    padding:16px 0 28px;
   }
-  .sf-left{justify-content:center;}
-  .sf-right{gap:12px;}
+  .sf-left{justify-content:center;flex-direction:column;gap:4px;}
+  .sf-sep{display:none;}
+  .sf-right{gap:14px;}
 }
 
-@media(max-width:400px){
+/* Màn rất nhỏ (< 380px) */
+@media(max-width:380px){
   .page{padding:0 12px;}
   .hero-name{font-size:28px;}
-  .hero-cta .btn{font-size:11px;}
-  .stat-num{font-size:22px;}
+  .stat-num{font-size:20px;}
+  .nav-links a{font-size:11px;}
 }
 </style>
 </head>
@@ -535,7 +555,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0
   // THAY THẾ GIÁ TRỊ NÀY bằng URL Apps Script mới của bạn
   // (xem hướng dẫn tạo script bên dưới trong comment)
   // ============================================================
-  var GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwgSHacYPKM_sycn2Ul96SAEYukkJF0Tw3we0d3M9LDoUKLGOawbVZ3-Ku_dEPxQVme-g/exec";
+  var GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwvMxMNGK3IOibOGPRGyQnTVkjSITqWaxB5TbM3ZW71Giy_QMb3R7KPSRKWpdlKAw7FpQ/exec";
   // ⬆️ Sau khi tạo Apps Script mới (hướng dẫn bên dưới),
   //    thay URL trên bằng URL deploy của script mới
 
