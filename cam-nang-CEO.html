@@ -43,9 +43,54 @@ body {
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
-  padding: 0 24px;
-  gap: 16px;
+  padding: 0 16px;
+  gap: 12px;
   z-index: 100;
+  overflow: hidden;
+}
+
+.topnav-home-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  cursor: pointer;
+  flex-shrink: 0;
+  color: var(--text-muted);
+  transition: all 0.15s;
+  text-decoration: none;
+}
+.topnav-home-btn:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(201,168,76,0.08);
+}
+
+.tab-bar-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.tab-scroll-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--gold);
+  font-size: 18px;
+  padding: 0 6px;
+  height: 36px;
+  display: none;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .topnav-logo {
@@ -73,6 +118,7 @@ body {
   overflow-x: auto;
   scrollbar-width: none;
   flex: 1;
+  scroll-behavior: smooth;
 }
 .tab-bar::-webkit-scrollbar { display: none; }
 
@@ -655,9 +701,12 @@ strong { color: var(--gold-light); }
 <nav class="topnav">
   <div class="topnav-logo"><span>CEO</span> Handbook</div>
   <div class="topnav-divider"></div>
+  <a href="index.html" class="topnav-home-btn" title="Về trang chủ">🏠</a>
+  <div class="topnav-divider"></div>
+  <button class="tab-scroll-btn" id="scrollLeft" onclick="document.getElementById('tabBar').scrollBy({left:-150,behavior:'smooth'})">‹</button>
   <div class="tab-bar" id="tabBar">
     <button class="tab-btn active" data-tab="home">
-      🏠 <span class="tab-label">Tổng quan</span>
+      <span class="tab-label">Tổng quan</span>
     </button>
     <button class="tab-btn" data-tab="ch1">
       <span class="ch-num">01</span><span class="tab-label">Dòng Tiền</span>
@@ -687,6 +736,7 @@ strong { color: var(--gold-light); }
       ✦ <span class="tab-label">Checklist</span>
     </button>
   </div>
+  <button class="tab-scroll-btn" id="scrollRight" onclick="document.getElementById('tabBar').scrollBy({left:150,behavior:'smooth'})">›</button>
 </nav>
 
 <div class="layout">
@@ -708,7 +758,7 @@ strong { color: var(--gold-light); }
     <!-- ══════════════ HOME / OVERVIEW ══════════════ -->
     <div class="tab-panel active" id="panel-home">
       <div class="hero">
-        <div class="hero-badge">Ebook Kinh Doanh - Thực Học - Thực Làm - Thực Giá Trị · 2026</div>
+        <div class="hero-badge">Ebook Kinh Doanh · 2024</div>
         <h1><span>Cẩm Nang</span><br>Học Làm CEO</h1>
         <p class="hero-subtitle">Tư duy chiến lược – Quản trị toàn diện – Tạo giá trị bền vững</p>
         <div class="hero-divider"></div>
@@ -1534,6 +1584,20 @@ window.addEventListener('scroll', () => {
 const tabBar = document.getElementById('tabBar');
 const activeBtn = tabBar.querySelector('.active');
 if (activeBtn) activeBtn.scrollIntoView({ inline: 'center', behavior: 'smooth' });
+
+// Show/hide scroll arrows
+const scrollLeft = document.getElementById('scrollLeft');
+const scrollRight = document.getElementById('scrollRight');
+function updateScrollBtns() {
+  if (!tabBar) return;
+  const canScrollLeft = tabBar.scrollLeft > 4;
+  const canScrollRight = tabBar.scrollLeft < tabBar.scrollWidth - tabBar.clientWidth - 4;
+  scrollLeft.style.display = canScrollLeft ? 'flex' : 'none';
+  scrollRight.style.display = canScrollRight ? 'flex' : 'none';
+}
+tabBar.addEventListener('scroll', updateScrollBtns);
+window.addEventListener('resize', updateScrollBtns);
+setTimeout(updateScrollBtns, 100);
 </script>
 </body>
 </html>
