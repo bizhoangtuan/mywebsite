@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cẩm Nang Làm CEO</title>
+<style>
+:root {
+  --gold: #C9A84C;
+  --gold-light: #E8C97A;
+  --gold-dark: #A07830;
+  --bg-dark: #0D0D0D;
+  --bg-card: #1A1A1A;
+  --bg-section: #141414;
+  --text-main: #F0E6CC;
+  --text-muted: #A09070;
+  --text-white: #FFFFFF;
+  --border: #2A2A2A;
+  --border-gold: #C9A84C40;
+  --accent-red: #E05050;
+  --accent-green: #50C878;
+  --nav-height: 60px;
+  --sidebar-width: 260px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.7;
+  font-size: 15px;
+  overflow-x: hidden;
+}
+
+/* ── TOP NAV ── */
+.topnav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--nav-height);
+  background: #080808;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  gap: 16px;
+  z-index: 100;
+}
+
+.topnav-logo {
+  font-family: Georgia, serif;
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--gold);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  margin-right: 8px;
+}
+
+.topnav-logo span { color: var(--text-white); }
+
+.topnav-divider {
+  width: 1px;
+  height: 28px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+.tab-bar {
+  display: flex;
+  gap: 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  flex: 1;
+}
+.tab-bar::-webkit-scrollbar { display: none; }
+
+.tab-btn {
+  background: none;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.18s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: inherit;
+}
+.tab-btn:hover { background: #1A1A1A; color: var(--text-main); }
+.tab-btn.active {
+  background: var(--gold-dark);
+  color: #000;
+  font-weight: 700;
+}
+.tab-btn .ch-num {
+  font-size: 10px;
+  opacity: 0.7;
+  font-family: 'Courier New', monospace;
+}
+
+/* ── LAYOUT ── */
+.layout {
+  margin-top: var(--nav-height);
+  display: flex;
+  min-height: calc(100vh - var(--nav-height));
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: var(--sidebar-width);
+  background: #0A0A0A;
+  border-right: 1px solid var(--border);
+  position: fixed;
+  top: var(--nav-height);
+  bottom: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+  display: none;
+}
+.sidebar.visible { display: block; }
+.sidebar-section { padding: 20px 16px 8px; }
+.sidebar-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.sidebar-link {
+  display: block;
+  padding: 7px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+  margin-bottom: 2px;
+}
+.sidebar-link:hover { background: #1A1A1A; color: var(--text-main); }
+.sidebar-link.active { background: var(--border-gold); color: var(--gold); }
+
+/* ── MAIN CONTENT ── */
+.main {
+  flex: 1;
+  margin-left: 0;
+  min-height: calc(100vh - var(--nav-height));
+}
+.main.with-sidebar { margin-left: var(--sidebar-width); }
+
+/* ── TABS ── */
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ── OVERVIEW / HOME ── */
+.hero {
+  min-height: 420px;
+  background: linear-gradient(160deg, #0D0D0D 0%, #1A1200 50%, #0D0D0D 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 40px 50px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, #C9A84C12 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero-badge {
+  background: var(--gold);
+  color: #000;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 6px 18px;
+  border-radius: 20px;
+  margin-bottom: 28px;
+  position: relative;
+}
+.hero h1 {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(30px, 5vw, 58px);
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1.15;
+  margin-bottom: 14px;
+  position: relative;
+}
+.hero h1 span { color: var(--text-white); }
+.hero-subtitle {
+  font-size: 16px;
+  color: var(--text-muted);
+  margin-bottom: 36px;
+  max-width: 560px;
+  font-style: italic;
+  position: relative;
+}
+.hero-divider {
+  width: 60px; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 0 auto 36px;
+  position: relative;
+}
+.hero-tagline {
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  position: relative;
+}
+
+/* OVERVIEW CARDS */
+.overview-wrap {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 50px 40px 60px;
+}
+
+.ov-desc {
+  background: var(--bg-card);
+  border: 1px solid var(--border-gold);
+  border-radius: 12px;
+  padding: 28px 32px;
+  margin-bottom: 40px;
+  line-height: 1.9;
+  color: var(--text-main);
+}
+.ov-desc p { margin-bottom: 10px; }
+.ov-desc p:last-child { margin-bottom: 0; }
+
+.ov-section-title {
+  font-family: Georgia, serif;
+  font-size: 20px;
+  color: var(--gold-light);
+  margin-bottom: 20px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.chapter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.chapter-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.chapter-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.chapter-card:hover { border-color: var(--border-gold); transform: translateY(-2px); }
+.chapter-card:hover::before { opacity: 1; }
+
+.ch-number {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+  font-family: 'Courier New', monospace;
+}
+.ch-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-white);
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+.ch-subtitle { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+.ch-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 12px;
+}
+.ch-tag {
+  border: 1px solid var(--border-gold);
+  color: var(--gold);
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.quote-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+.quote-card {
+  border: 1px solid var(--border-gold);
+  border-radius: 12px;
+  padding: 24px 28px;
+  background: #C9A84C08;
+  text-align: center;
+}
+.quote-card p {
+  font-family: Georgia, serif;
+  font-size: 15px;
+  color: var(--gold-light);
+  font-style: italic;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+.quote-card cite {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-style: normal;
+}
+
+.kpi-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.kpi-s-card {
+  background: #0A0A0A;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+}
+.kpi-s-num {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--gold);
+  font-family: Georgia, serif;
+}
+.kpi-s-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+  letter-spacing: 0.5px;
+}
+
+/* ── CHAPTER CONTENT ── */
+.chapter-wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 50px 40px 70px;
+}
+
+.chapter-header {
+  margin-bottom: 44px;
+  padding-bottom: 28px;
+  border-bottom: 2px solid var(--border-gold);
+}
+.chapter-number {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+  font-family: 'Courier New', monospace;
+}
+.chapter-title {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(26px, 4vw, 42px);
+  font-weight: 900;
+  color: var(--text-white);
+  line-height: 1.2;
+}
+.chapter-title span { color: var(--gold); }
+.chapter-tagline {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 10px;
+  font-style: italic;
+}
+
+.section { margin-bottom: 44px; }
+.section-title {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 20px;
+  color: var(--gold-light);
+  margin-bottom: 18px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 22px;
+  margin-bottom: 18px;
+}
+.card.gold-border { border-color: var(--border-gold); }
+.card-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-body { color: var(--text-main); font-size: 14px; line-height: 1.8; }
+
+.formula-box {
+  background: #0A0A0A;
+  border: 1px solid var(--gold-dark);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin: 10px 0;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  color: var(--gold-light);
+  text-align: center;
+}
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
+@media (max-width: 720px) {
+  .grid-2, .grid-3, .grid-4, .quote-grid, .kpi-summary { grid-template-columns: 1fr; }
+  .chapter-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.example {
+  background: linear-gradient(135deg, #0A1A0A, #141A0A);
+  border: 1px solid #50C87840;
+  border-left: 4px solid var(--accent-green);
+  border-radius: 0 8px 8px 0;
+  padding: 18px 22px;
+  margin: 18px 0;
+}
+.example-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent-green);
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+.example p { font-size: 14px; line-height: 1.8; color: var(--text-main); margin: 0; }
+
+.warning {
+  background: linear-gradient(135deg, #1A0A0A, #1A0A00);
+  border: 1px solid #E0505040;
+  border-left: 4px solid var(--accent-red);
+  border-radius: 0 8px 8px 0;
+  padding: 18px 22px;
+  margin: 18px 0;
+}
+.warning-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent-red);
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.blockquote {
+  border: 1px solid var(--border-gold);
+  border-radius: 12px;
+  padding: 26px 32px;
+  margin: 26px 0;
+  text-align: center;
+  background: #C9A84C08;
+}
+.blockquote p {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 18px;
+  color: var(--gold-light);
+  font-style: italic;
+  line-height: 1.6;
+}
+.blockquote cite { display: block; margin-top: 10px; font-size: 13px; color: var(--text-muted); font-style: normal; }
+
+.checklist { list-style: none; }
+.checklist li {
+  padding: 5px 0 5px 24px;
+  position: relative;
+  font-size: 14px;
+  color: var(--text-main);
+}
+.checklist li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--accent-green);
+  font-weight: 700;
+}
+.checklist li.bad::before { content: '✗'; color: var(--accent-red); }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+  font-size: 13px;
+}
+th {
+  background: var(--gold-dark);
+  color: #000;
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 700;
+}
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-main);
+}
+tr:nth-child(even) td { background: #1A1A1A; }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+.kpi-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+}
+.kpi-name {
+  font-size: 11px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.kpi-formula {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  color: var(--gold-light);
+  background: #0A0A0A;
+  padding: 7px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+.kpi-desc { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+
+.flow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 14px 0;
+}
+.flow-step {
+  background: var(--bg-card);
+  border: 1px solid var(--border-gold);
+  border-radius: 8px;
+  padding: 9px 14px;
+  font-size: 12px;
+  color: var(--gold-light);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.flow-arrow { color: var(--gold); font-size: 16px; }
+
+p { margin-bottom: 10px; }
+strong { color: var(--gold-light); }
+
+.dashboard {
+  background: var(--bg-card);
+  border: 2px solid var(--border-gold);
+  border-radius: 16px;
+  padding: 28px;
+  margin: 20px 0;
+}
+.dashboard-title {
+  font-family: Georgia, serif;
+  font-size: 17px;
+  color: var(--gold);
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.mind-map-center {
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+  color: #000;
+  font-weight: 900;
+  font-size: 18px;
+  font-family: Georgia, serif;
+  padding: 20px 36px;
+  border-radius: 12px;
+  text-align: center;
+  margin: 18px auto;
+  max-width: 280px;
+}
+
+/* ── FINAL SECTION ── */
+.final-hero {
+  text-align: center;
+  padding: 60px 40px;
+  border-top: 1px solid var(--border);
+  margin-top: 20px;
+}
+
+/* ── PROGRESS BAR ── */
+.read-progress {
+  position: fixed;
+  top: var(--nav-height);
+  left: 0; right: 0;
+  height: 2px;
+  background: var(--border);
+  z-index: 99;
+}
+.read-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold-dark), var(--gold));
+  width: 0%;
+  transition: width 0.1s;
+}
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  .sidebar { display: none !important; }
+  .main.with-sidebar { margin-left: 0; }
+  .chapter-wrap, .overview-wrap { padding: 30px 20px 50px; }
+  .tab-btn .tab-label { display: none; }
+  .tab-btn .ch-num { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="read-progress"><div class="read-progress-bar" id="progressBar"></div></div>
+
+<!-- TOP NAV -->
+<nav class="topnav">
+  <div class="topnav-logo"><span>CEO</span> Handbook</div>
+  <div class="topnav-divider"></div>
+  <div class="tab-bar" id="tabBar">
+    <button class="tab-btn active" data-tab="home">
+      🏠 <span class="tab-label">Tổng quan</span>
+    </button>
+    <button class="tab-btn" data-tab="ch1">
+      <span class="ch-num">01</span><span class="tab-label">Dòng Tiền</span>
+    </button>
+    <button class="tab-btn" data-tab="ch2">
+      <span class="ch-num">02</span><span class="tab-label">Lợi Nhuận</span>
+    </button>
+    <button class="tab-btn" data-tab="ch3">
+      <span class="ch-num">03</span><span class="tab-label">Định Giá</span>
+    </button>
+    <button class="tab-btn" data-tab="ch4">
+      <span class="ch-num">04</span><span class="tab-label">Rủi Ro</span>
+    </button>
+    <button class="tab-btn" data-tab="ch5">
+      <span class="ch-num">05</span><span class="tab-label">KPI CEO</span>
+    </button>
+    <button class="tab-btn" data-tab="ch6">
+      <span class="ch-num">06</span><span class="tab-label">Nhân Sự</span>
+    </button>
+    <button class="tab-btn" data-tab="ch7">
+      <span class="ch-num">07</span><span class="tab-label">CX Metrics</span>
+    </button>
+    <button class="tab-btn" data-tab="ch8">
+      <span class="ch-num">08</span><span class="tab-label">Não Bộ CEO</span>
+    </button>
+    <button class="tab-btn" data-tab="final">
+      ✦ <span class="tab-label">Checklist</span>
+    </button>
+  </div>
+</nav>
+
+<div class="layout">
+  <!-- SIDEBAR (shows for chapter tabs) -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Chương 01 – Dòng Tiền</div>
+      <span class="sidebar-link" data-section="s1-1">1.1 Các Loại Dòng Tiền</span>
+      <span class="sidebar-link" data-section="s1-2">1.2 Chu Kỳ CCC</span>
+      <span class="sidebar-link" data-section="s1-3">1.3 Burn Rate & Runway</span>
+      <span class="sidebar-link" data-section="s1-4">1.4 Phân Tích 4 Dòng Tiền</span>
+      <span class="sidebar-link" data-section="s1-5">1.5 Dấu Hiệu Nguy Hiểm</span>
+      <span class="sidebar-link" data-section="s1-6">1.6 Quy Tắc Vàng</span>
+    </div>
+  </aside>
+
+  <main class="main" id="mainContent">
+
+    <!-- ══════════════ HOME / OVERVIEW ══════════════ -->
+    <div class="tab-panel active" id="panel-home">
+      <div class="hero">
+        <div class="hero-badge">Ebook Kinh Doanh - Thực Học - Thực Làm - Thực Giá Trị · 2026</div>
+        <h1><span>Cẩm Nang</span><br>Học Làm CEO</h1>
+        <p class="hero-subtitle">Tư duy chiến lược – Quản trị toàn diện – Tạo giá trị bền vững</p>
+        <div class="hero-divider"></div>
+        <p class="hero-tagline">Dành cho Solopreneur · Manager · C-Level · Người muốn trở thành CEO</p>
+      </div>
+
+      <div class="overview-wrap">
+        <div class="kpi-summary">
+          <div class="kpi-s-card">
+            <div class="kpi-s-num">8</div>
+            <div class="kpi-s-label">Chương học</div>
+          </div>
+          <div class="kpi-s-card">
+            <div class="kpi-s-num">60+</div>
+            <div class="kpi-s-label">Chỉ số KPI</div>
+          </div>
+          <div class="kpi-s-card">
+            <div class="kpi-s-num">30+</div>
+            <div class="kpi-s-label">Ví dụ thực tế</div>
+          </div>
+          <div class="kpi-s-card">
+            <div class="kpi-s-num">∞</div>
+            <div class="kpi-s-label">Giá trị áp dụng</div>
+          </div>
+        </div>
+
+        <div class="ov-desc">
+          <p>Cuốn cẩm nang này được thiết kế cho những ai muốn hiểu cách một CEO thực sự <strong>đọc số, phân tích dữ liệu và ra quyết định</strong> dựa trên bằng chứng — không phải cảm tính.</p>
+          <p>Từ dòng tiền đến lợi nhuận, từ định giá doanh nghiệp đến quản trị nhân sự và trải nghiệm khách hàng — đây là <strong>bộ công cụ tư duy tổng thể</strong> của người dẫn dắt tổ chức.</p>
+          <p>Mỗi chương bao gồm: công thức, ví dụ thực tế, cảnh báo rủi ro và nguyên tắc hành động. Học xong là dùng được ngay.</p>
+        </div>
+
+        <div class="ov-section-title">8 Chương Học — Chọn Bất Kỳ Để Bắt Đầu</div>
+        <div class="chapter-grid">
+          <div class="chapter-card" data-goto="ch1">
+            <div class="ch-number">Chương 01</div>
+            <div class="ch-title">Dòng Tiền & Sức Khỏe Doanh Nghiệp</div>
+            <div class="ch-subtitle">Tiền mặt là máu — Dòng tiền là sự sống</div>
+            <div class="ch-tags">
+              <span class="ch-tag">CFO</span><span class="ch-tag">FCFF</span><span class="ch-tag">CCC</span><span class="ch-tag">Burn Rate</span>
+            </div>
+          </div>
+          <div class="chapter-card" data-goto="ch2">
+            <div class="ch-number">Chương 02</div>
+            <div class="ch-title">Hiệu Quả Kinh Doanh & Lợi Nhuận</div>
+            <div class="ch-subtitle">Hiểu đúng hiệu quả — Tối ưu giá trị</div>
+            <div class="ch-tags">
+              <span class="ch-tag">ROE</span><span class="ch-tag">ROA</span><span class="ch-tag">DuPont</span><span class="ch-tag">EBITDA</span>
+            </div>
+          </div>
+          <div class="chapter-card" data-goto="ch3">
+            <div class="ch-number">Chương 03</div>
+            <div class="ch-title">Định Giá & Góc Nhìn Nhà Đầu Tư</div>
+            <div class="ch-subtitle">Giá trị doanh nghiệp — Dòng tiền tương lai</div>
+            <div class="ch-tags">
+              <span class="ch-tag">DCF</span><span class="ch-tag">P/E</span><span class="ch-tag">WACC</span><span class="ch-tag">IRR</span>
+            </div>
+          </div>
+          <div class="chapter-card" data-goto="ch4">
+            <div class="ch-number">Chương 04</div>
+            <div class="ch-title">Rủi Ro & Đòn Bẩy Tài Chính</div>
+            <div class="ch-subtitle">Tăng trưởng nhanh — Rủi ro càng cao</div>
+            <div class="ch-tags">
+              <span class="ch-tag">D/E</span><span class="ch-tag">DOL</span><span class="ch-tag">DFL</span><span class="ch-tag">BEP</span>
+            </div>
+          </div>
+          <div class="chapter-card" data-goto="ch5">
+            <div class="ch-number">Chương 05</div>
+            <div class="ch-title">KPI CEO & Quản Trị Hệ Thống</div>
+            <div class="ch-subtitle">Đo lường đúng — Quản trị đúng</div>
+            <div class="ch-tags">
+              <span class="ch-tag">CAC</span><span class="ch-tag">LTV</span><span class="ch-tag">Churn</span><span class="ch-tag">CVR</span>
+            </div>
+          </div>
+          <div class="chapter-card" data-goto="ch6">
+            <div class="ch-number">Chương 06</div>
+            <div class="ch-title">Chỉ Số Nhân Sự</div>
+            <div class="ch-subtitle">Đo lường — Tối ưu — Giữ chân nhân tài</div>
+            <div class="ch-tags">
+              <span class="ch-tag">TTF</span><span class="ch-tag">EES</span><span class="ch-tag">Turnover</span><span class="ch-tag">GAR</span>
+            </div>
+          </div>
+          <div class="chapter-card" data-goto="ch7">
+            <div class="ch-number">Chương 07</div>
+            <div class="ch-title">Chỉ Số Trải Nghiệm Khách Hàng</div>
+            <div class="ch-subtitle">Đo trải nghiệm — Tạo lòng trung thành</div>
+            <div class="ch-tags">
+              <span class="ch-tag">NPS</span><span class="ch-tag">CSAT</span><span class="ch-tag">CES</span><span class="ch-tag">CLV</span>
+            </div>
+          </div>
+          <div class="chapter-card" data-goto="ch8">
+            <div class="ch-number">Chương 08</div>
+            <div class="ch-title">Bản Đồ Não Bộ CEO</div>
+            <div class="ch-subtitle">Tư duy tổng thể — 4 góc nhìn quản trị</div>
+            <div class="ch-tags">
+              <span class="ch-tag">Chiến Lược</span><span class="ch-tag">Hệ Thống</span><span class="ch-tag">Quyết Định</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ov-section-title">Kim Chỉ Nam CEO</div>
+        <div class="quote-grid">
+          <div class="quote-card">
+            <p>"Tiền mặt là máu. Dòng tiền là sự sống. Không có dòng tiền, không có doanh nghiệp."</p>
+          </div>
+          <div class="quote-card">
+            <p>"Không có KPI, bạn không thể quản trị. Không có hệ thống, bạn không thể mở rộng."</p>
+          </div>
+          <div class="quote-card">
+            <p>"Giá cả là những gì bạn trả. Giá trị là những gì bạn nhận được."</p>
+            <cite>— Warren Buffett</cite>
+          </div>
+          <div class="quote-card">
+            <p>"Tăng trưởng giúp doanh nghiệp lớn lên, nhưng quản trị rủi ro giúp doanh nghiệp tồn tại và bền vững."</p>
+          </div>
+        </div>
+
+        <div class="ov-section-title">Chuỗi Giá Trị CEO</div>
+        <div class="flow" style="justify-content:center; flex-wrap:wrap; gap:10px; margin-bottom:8px">
+          <div class="flow-step">Dữ Liệu</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">Phân Tích</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">Hành Động</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">Kết Quả</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step" style="background:var(--gold-dark);color:#000;border-color:var(--gold)">Tăng Trưởng</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ CHAPTER 1: DÒNG TIỀN ══════════════ -->
+    <div class="tab-panel" id="panel-ch1">
+      <div class="chapter-wrap">
+        <div class="chapter-header">
+          <div class="chapter-number">Chương 01</div>
+          <div class="chapter-title">Dòng Tiền &<br><span>Sức Khỏe Doanh Nghiệp</span></div>
+          <div class="chapter-tagline">Tiền mặt là máu – Dòng tiền là sự sống</div>
+        </div>
+
+        <div class="blockquote">
+          <p>"Doanh nghiệp có thể tồn tại mà không có lợi nhuận, nhưng không thể tồn tại nếu không có dòng tiền."</p>
+        </div>
+
+        <div class="section" id="s1-1">
+          <div class="section-title">1.1 Các Loại Dòng Tiền</div>
+          <p>Có 3 dòng tiền chính mà mọi CEO phải nắm vững. Mỗi loại phản ánh một khía cạnh khác nhau của sức khỏe tài chính doanh nghiệp.</p>
+          <div class="grid-3" style="margin-top:18px">
+            <div class="card gold-border">
+              <div class="card-title">💼 CFO – Dòng Tiền Hoạt Động</div>
+              <div class="formula-box">CFO = LNST + Khấu hao<br>+/– Thay đổi vốn lưu động</div>
+              <div class="card-body">Dòng tiền từ hoạt động kinh doanh cốt lõi. Nếu CFO âm liên tục → doanh nghiệp không tạo được tiền từ bán hàng.</div>
+            </div>
+            <div class="card gold-border">
+              <div class="card-title">🏭 FCFF – Dòng Tiền Tự Do Cho DN</div>
+              <div class="formula-box">FCFF = CFO – CAPEX<br>+/– Thay đổi NWC</div>
+              <div class="card-body">Tiền còn lại sau khi đầu tư vào tài sản. Dành cho tất cả nhà cung vốn (cổ đông + chủ nợ).</div>
+            </div>
+            <div class="card gold-border">
+              <div class="card-title">📈 FCFE – Dòng Tiền Cho Cổ Đông</div>
+              <div class="formula-box">FCFE = FCFF – Lãi vay(1–T)<br>– Trả nợ gốc + Vay ròng mới</div>
+              <div class="card-body">Tiền thực sự thuộc về cổ đông sau khi trừ chi phí nợ vay. Là cơ sở chia cổ tức.</div>
+            </div>
+          </div>
+          <div class="example">
+            <div class="example-label">📖 Ví dụ thực tế</div>
+            <p>Công ty A báo lợi nhuận 5 tỷ/năm. Nhưng CFO chỉ đạt 1 tỷ vì phải thu tiền chậm từ đại lý (khoản phải thu tăng 4 tỷ). Dù trên giấy tờ "lãi 5 tỷ", thực tế công ty gần như không có tiền mặt để hoạt động. Đây là lý do CEO phải xem CFO, không chỉ xem LNST.</p>
+          </div>
+        </div>
+
+        <div class="section" id="s1-2">
+          <div class="section-title">1.2 Chu Kỳ Chuyển Đổi Tiền Mặt (CCC)</div>
+          <div class="formula-box" style="font-size:15px">CCC = DSO + DIO – DPO</div>
+          <div class="grid-3">
+            <div class="card">
+              <div class="card-title">DSO – Days Sales Outstanding</div>
+              <div class="formula-box">DSO = Khoản phải thu / (Doanh thu / 365)</div>
+              <div class="card-body">Số ngày trung bình để thu tiền từ khách hàng. DSO thấp = thu tiền nhanh.</div>
+            </div>
+            <div class="card">
+              <div class="card-title">DIO – Days Inventory Outstanding</div>
+              <div class="formula-box">DIO = Tồn kho / (Giá vốn / 365)</div>
+              <div class="card-body">Số ngày hàng nằm trong kho. DIO thấp = luân chuyển hàng nhanh.</div>
+            </div>
+            <div class="card">
+              <div class="card-title">DPO – Days Payables Outstanding</div>
+              <div class="formula-box">DPO = Phải trả NCC / (Giá vốn / 365)</div>
+              <div class="card-body">Số ngày trả tiền cho nhà cung cấp. DPO cao = giữ tiền lâu hơn → tốt hơn.</div>
+            </div>
+          </div>
+          <div class="example">
+            <div class="example-label">📖 Ví dụ CCC</div>
+            <p>Startup F&B: DSO = 0 ngày, DIO = 7 ngày, DPO = 30 ngày. <strong>CCC = 0 + 7 – 30 = –23 ngày.</strong> Nghĩa là doanh nghiệp nhận tiền từ khách hàng TRƯỚC khi phải trả tiền cho nhà cung cấp — đây là mô hình dòng tiền lý tưởng, điển hình như McDonald's, Vinamilk.</p>
+          </div>
+        </div>
+
+        <div class="section" id="s1-3">
+          <div class="section-title">1.3 Burn Rate & Runway</div>
+          <div class="grid-2">
+            <div class="card gold-border">
+              <div class="card-title">🔥 Burn Rate</div>
+              <div class="formula-box">Burn Rate = Chi phí hoạt động ròng / tháng</div>
+              <div class="card-body">Tốc độ đốt tiền mỗi tháng. Quan trọng đặc biệt với startup. Burn Rate = 500 triệu/tháng nghĩa là mỗi tháng công ty tiêu 500 triệu nhiều hơn thu vào.</div>
+            </div>
+            <div class="card gold-border">
+              <div class="card-title">⏱️ Runway (tháng còn lại)</div>
+              <div class="formula-box">Runway = Tiền mặt hiện có / Burn Rate mỗi tháng</div>
+              <div class="card-body">Số tháng doanh nghiệp còn có thể tồn tại. Runway = 6 tháng → đây là báo động đỏ, cần gọi vốn hoặc cắt giảm ngay.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section" id="s1-4">
+          <div class="section-title">1.4 Phân Tích Chi Tiết 4 Dòng Tiền</div>
+          <div class="grid-2">
+            <div class="card"><div class="card-title">1. Dòng Tiền Hoạt Động (CFO)</div><div class="card-body"><ul class="checklist"><li>= LNST + Khấu hao + Các khoản điều chỉnh</li><li>Điều chỉnh: Dự phòng, Lãi/lỗ chênh lệch tỷ giá</li><li>+/– Thay đổi vốn lưu động</li></ul></div></div>
+            <div class="card"><div class="card-title">2. Dòng Tiền Đầu Tư (CFI)</div><div class="card-body"><ul class="checklist"><li>– Chi mua tài sản cố định</li><li>– Chi đầu tư dài hạn</li><li>+ Thu từ thanh lý tài sản</li><li>+ Thu hồi đầu tư</li></ul></div></div>
+            <div class="card"><div class="card-title">3. Dòng Tiền Tài Chính (CFF)</div><div class="card-body"><ul class="checklist"><li>+ Thu từ vay</li><li>– Trả nợ gốc, trả cổ tức</li><li>+ Thu từ phát hành cổ phiếu</li><li>– Mua lại cổ phiếu</li></ul></div></div>
+            <div class="card"><div class="card-title">4. Dòng Tiền Thuần</div><div class="formula-box">Net Cash Flow = CFO + CFI + CFF<br>Tiền cuối kỳ = Tiền đầu kỳ + Net Cash Flow</div></div>
+          </div>
+        </div>
+
+        <div class="section" id="s1-5">
+          <div class="section-title">1.5 Dấu Hiệu Dòng Tiền Nguy Hiểm</div>
+          <div class="warning">
+            <div class="warning-label">⚠️ Cảnh báo đỏ – Cần hành động ngay</div>
+            <div class="grid-2" style="margin-top:12px">
+              <ul class="checklist"><li class="bad">CFO âm liên tục</li><li class="bad">LNST dương nhưng CFO âm</li><li class="bad">CCC quá dài (&gt; 90 ngày)</li><li class="bad">Phải thu tăng nhanh hơn doanh thu</li></ul>
+              <ul class="checklist"><li class="bad">Hàng tồn kho tăng ứ đọng</li><li class="bad">Phụ thuộc vào vay nợ ngắn hạn</li><li class="bad">Burn Rate cao, Runway ngắn</li></ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="section" id="s1-6">
+          <div class="section-title">1.6 Quy Tắc Vàng về Dòng Tiền</div>
+          <div class="card gold-border">
+            <ul class="checklist" style="font-size:15px">
+              <li>Ưu tiên dòng tiền hơn lợi nhuận kế toán</li>
+              <li>Bán hàng để thu tiền, không phải để ghi nhận doanh thu</li>
+              <li>Kiểm soát vốn lưu động là kiểm soát sự sống doanh nghiệp</li>
+              <li>Dòng tiền mạnh → Doanh nghiệp tự do | Dòng tiền yếu → Doanh nghiệp lệ thuộc</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ CHAPTER 2: LỢI NHUẬN ══════════════ -->
+    <div class="tab-panel" id="panel-ch2">
+      <div class="chapter-wrap">
+        <div class="chapter-header">
+          <div class="chapter-number">Chương 02</div>
+          <div class="chapter-title">Hiệu Quả Kinh Doanh &<br><span>Lợi Nhuận</span></div>
+          <div class="chapter-tagline">Hiểu đúng hiệu quả – Tối ưu giá trị</div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">2.1 Bộ Tứ Tỷ Suất Sinh Lời</div>
+          <div class="grid-2">
+            <div class="kpi-card"><div class="kpi-name">ROE – Tỷ Suất LN Trên VCSH</div><div class="kpi-formula">ROE = LNST / Vốn chủ sở hữu</div><div class="kpi-desc">Đo khả năng tạo lợi nhuận trên vốn của chủ sở hữu. ROE &gt; 15% được coi là tốt ở hầu hết ngành.</div></div>
+            <div class="kpi-card"><div class="kpi-name">ROA – Tỷ Suất LN Trên Tài Sản</div><div class="kpi-formula">ROA = LNST / Tổng tài sản</div><div class="kpi-desc">Đo hiệu quả sử dụng toàn bộ tài sản để tạo lợi nhuận. Thường từ 5-15% là khỏe mạnh.</div></div>
+            <div class="kpi-card"><div class="kpi-name">ROI – Tỷ Suất LN Trên Vốn ĐT</div><div class="kpi-formula">ROI = LNST / Tổng vốn đầu tư</div><div class="kpi-desc">Đánh giá hiệu quả sinh lời của từng khoản đầu tư cụ thể.</div></div>
+            <div class="kpi-card"><div class="kpi-name">ROCE – Trên VCSH & Nợ Dài Hạn</div><div class="kpi-formula">ROCE = EBIT / (Vốn CSH + Nợ dài hạn)</div><div class="kpi-desc">Phản ánh hiệu quả sử dụng toàn bộ vốn dài hạn, phổ biến trong ngành vốn nặng.</div></div>
+          </div>
+          <div class="example">
+            <div class="example-label">📖 Ví dụ ROE vs ROA</div>
+            <p>Công ty B: LNST = 10 tỷ, Vốn CSH = 50 tỷ, Tổng TS = 100 tỷ. <strong>ROE = 10/50 = 20%</strong>. <strong>ROA = 10/100 = 10%</strong>. ROE cao gấp đôi ROA vì doanh nghiệp dùng đòn bẩy nợ.</p>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">2.2 Các Biên Lợi Nhuận</div>
+          <div class="grid-2">
+            <div class="card"><div class="card-title">Gross Margin (Biên LN gộp)</div><div class="formula-box">GM = Lãi gộp / Doanh thu thuần</div><div class="card-body">Phản ánh hiệu quả sản xuất/kinh doanh cốt lõi. GM cao = sản phẩm có giá trị gia tăng lớn. SaaS thường &gt;70%, sản xuất thường 20-40%.</div></div>
+            <div class="card"><div class="card-title">Operating Margin / EBIT Margin</div><div class="formula-box">OM = EBIT / Doanh thu thuần</div><div class="card-body">Hiệu quả hoạt động kinh doanh thuần túy, trước lãi vay và thuế. Cho thấy năng lực quản lý chi phí vận hành.</div></div>
+            <div class="card"><div class="card-title">EBITDA Margin</div><div class="formula-box">EBITDA Margin = EBITDA / Doanh thu thuần</div><div class="card-body">Phổ biến để so sánh doanh nghiệp vì loại bỏ ảnh hưởng của cấu trúc vốn, khấu hao và thuế. Hay dùng trong M&A.</div></div>
+            <div class="card"><div class="card-title">Net Margin (Biên LN ròng)</div><div class="formula-box">NM = LNST / Doanh thu thuần</div><div class="card-body">Hiệu quả cuối cùng sau tất cả chi phí và thuế. Cứ 100 đồng doanh thu, doanh nghiệp giữ lại bao nhiêu đồng lãi thực.</div></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">2.3 Phân Tích DuPont – Mô Hình Toàn Diện</div>
+          <div class="card gold-border">
+            <div class="formula-box" style="font-size:14px">ROE = (LNST/Doanh thu) × (Doanh thu/Tổng TS) × (Tổng TS/Vốn CSH)<br>= Net Margin × Asset Turnover × Financial Leverage</div>
+          </div>
+          <div class="grid-3" style="margin-top:18px">
+            <div class="card"><div class="card-title">1. Net Margin</div><div class="card-body">Khả năng kiểm soát chi phí. Bao gồm: giá vốn, chi phí bán hàng, chi phí QLDN, LNST.</div></div>
+            <div class="card"><div class="card-title">2. Asset Turnover</div><div class="card-body">Hiệu quả dùng tài sản để tạo doanh thu. Doanh thu tăng / Tổng TS giảm → Hiệu quả tăng.</div></div>
+            <div class="card"><div class="card-title">3. Financial Leverage</div><div class="card-body">Mức độ dùng nợ để khuếch đại lợi nhuận. Đòn bẩy cao = ROE cao hơn nhưng rủi ro hơn.</div></div>
+          </div>
+          <div class="example">
+            <div class="example-label">📖 Ví dụ DuPont</div>
+            <p>Công ty C có ROE = 24%. Nhờ DuPont ta thấy: Net Margin = 8%, Asset Turnover = 1.5, Leverage = 2.0 → ROE = 8% × 1.5 × 2 = 24%. Muốn tăng ROE lên 30%: hoặc tăng biên lợi nhuận, tăng vòng quay tài sản, hoặc tăng đòn bẩy (nhưng rủi ro hơn).</p>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">2.4 Dấu Hiệu Cảnh Báo</div>
+          <div class="warning">
+            <div class="warning-label">⚠️ Nguy hiểm khi thấy</div>
+            <ul class="checklist">
+              <li class="bad">Doanh thu tăng nhưng LNST giảm</li>
+              <li class="bad">Biên lợi nhuận ròng giảm liên tục</li>
+              <li class="bad">Vòng quay tài sản chậm lại</li>
+              <li class="bad">Chi phí bán hàng & QLDN tăng nhanh hơn doanh thu</li>
+              <li class="bad">Hàng tồn kho ứ động – vốn bị chiếm dụng</li>
+              <li class="bad">Công nợ khó thu kéo dài</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ CHAPTER 3: ĐỊNH GIÁ ══════════════ -->
+    <div class="tab-panel" id="panel-ch3">
+      <div class="chapter-wrap">
+        <div class="chapter-header">
+          <div class="chapter-number">Chương 03</div>
+          <div class="chapter-title">Định Giá &<br><span>Góc Nhìn Nhà Đầu Tư</span></div>
+          <div class="chapter-tagline">Giá trị doanh nghiệp – Giá trị dòng tiền tương lai</div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">3.1 Phương Pháp DCF – Chiết Khấu Dòng Tiền</div>
+          <div class="card gold-border">
+            <div class="formula-box">V = Σ [FCFF_t / (1+WACC)^t] + TV/(1+WACC)^n</div>
+            <div class="card-body" style="margin-top:10px">
+              <strong>FCFF</strong> = Dòng tiền tự do cho doanh nghiệp<br>
+              <strong>TV (Terminal Value)</strong> = FCFF_{n+1} / (WACC – g)<br>
+              <strong>WACC</strong> = Chi phí sử dụng vốn bình quân | <strong>g</strong> = Tốc độ tăng trưởng dài hạn
+            </div>
+          </div>
+          <div class="flow" style="margin-top:18px">
+            <div class="flow-step">1. Dự báo dòng tiền</div><div class="flow-arrow">→</div>
+            <div class="flow-step">2. Xác định WACC</div><div class="flow-arrow">→</div>
+            <div class="flow-step">3. Chiết khấu CF</div><div class="flow-arrow">→</div>
+            <div class="flow-step">4. Tính TV</div><div class="flow-arrow">→</div>
+            <div class="flow-step">5. Xác định giá trị DN</div>
+          </div>
+          <div class="example">
+            <div class="example-label">📖 Ví dụ DCF đơn giản</div>
+            <p>Startup X dự báo FCFF: Năm 1 = 2 tỷ, Năm 2 = 3 tỷ, Năm 3 = 4 tỷ. WACC = 15%, g = 3%. TV = 4 tỷ × (1+3%) / (15%–3%) = 34.3 tỷ. Giá trị DN ≈ 30+ tỷ đồng. Đây là cơ sở để nhà đầu tư đàm phán định giá khi rót vốn.</p>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">3.2 Chi Phí Vốn WACC & CAPM</div>
+          <div class="grid-2">
+            <div class="card"><div class="card-title">WACC – Chi Phí Vốn Bình Quân</div><div class="formula-box">WACC = E/(D+E) × Re + D/(D+E) × Rd × (1–T)</div><div class="card-body">E = Vốn CSH, D = Nợ vay, Re = Chi phí vốn CSH, Rd = Chi phí nợ, T = Thuế suất</div></div>
+            <div class="card"><div class="card-title">CAPM – Mô Hình Định Giá Tài Sản Vốn</div><div class="formula-box">Re = Rf + β × (Rm – Rf)</div><div class="card-body">Rf = Lãi suất phi rủi ro (TP Chính phủ), Rm = Lợi nhuận thị trường, β = Độ biến động so với thị trường</div></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">3.3 Các Chỉ Số Định Giá Phổ Biến</div>
+          <div class="kpi-grid">
+            <div class="kpi-card"><div class="kpi-name">P/E – Price to Earnings</div><div class="kpi-formula">P/E = Giá cổ phiếu / EPS</div><div class="kpi-desc">P/E cao = kỳ vọng tăng trưởng cao. So sánh P/E với ngành để đánh giá đắt/rẻ.</div></div>
+            <div class="kpi-card"><div class="kpi-name">P/B – Price to Book</div><div class="kpi-formula">P/B = Giá CP / BVPS</div><div class="kpi-desc">P/B &lt; 1 → có thể bị định giá thấp. Dùng nhiều cho ngân hàng, tài chính.</div></div>
+            <div class="kpi-card"><div class="kpi-name">EV/EBITDA</div><div class="kpi-formula">EV/EBITDA = EV / EBITDA</div><div class="kpi-desc">Loại bỏ ảnh hưởng cấu trúc vốn. Phổ biến trong M&A và so sánh quốc tế.</div></div>
+            <div class="kpi-card"><div class="kpi-name">PEG – Price/Earnings to Growth</div><div class="kpi-formula">PEG = P/E / Tỷ lệ tăng trưởng EPS</div><div class="kpi-desc">PEG ≈ 1 = định giá hợp lý. PEG &lt; 1 = có thể bị định giá thấp so với tăng trưởng.</div></div>
+            <div class="kpi-card"><div class="kpi-name">NPV – Giá Trị Hiện Tại Ròng</div><div class="kpi-formula">NPV = Σ CF_t / (1+r)^t</div><div class="kpi-desc">NPV &gt; 0 → dự án tạo giá trị. NPV &lt; 0 → dự án phá hủy giá trị.</div></div>
+            <div class="kpi-card"><div class="kpi-name">IRR – Tỷ Suất Hoàn Vốn</div><div class="kpi-formula">IRR = r khi NPV = 0</div><div class="kpi-desc">IRR &gt; WACC → dự án hấp dẫn. So sánh các dự án thay thế bằng IRR.</div></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">3.4 Nguyên Tắc Đầu Tư Giá Trị</div>
+          <div class="blockquote">
+            <p>"Giá cả là những gì bạn trả. Giá trị là những gì bạn nhận được."</p>
+            <cite>— Warren Buffett</cite>
+          </div>
+          <div class="card gold-border">
+            <ul class="checklist">
+              <li>Mua khi Giá &lt; Giá trị nội tại (Intrinsic Value)</li>
+              <li>Biên an toàn (Margin of Safety) – luôn giữ khoảng đệm</li>
+              <li>Tập trung vào chất lượng doanh nghiệp (ROE, FCF, lợi thế cạnh tranh)</li>
+              <li>Kiên nhẫn chờ đợi cơ hội – không mua vì FOMO</li>
+              <li>Tư duy dài hạn – không bị nhiễu loạn ngắn hạn</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ CHAPTER 4: RỦI RO ══════════════ -->
+    <div class="tab-panel" id="panel-ch4">
+      <div class="chapter-wrap">
+        <div class="chapter-header">
+          <div class="chapter-number">Chương 04</div>
+          <div class="chapter-title">Rủi Ro &<br><span>Đòn Bẩy Tài Chính</span></div>
+          <div class="chapter-tagline">Tăng trưởng nhanh – Rủi ro càng cao</div>
+        </div>
+
+        <div class="blockquote">
+          <p>"Rủi ro lớn nhất không phải là thị trường, mà là mất khả năng trả nợ khi thị trường xấu đi."</p>
+        </div>
+
+        <div class="section">
+          <div class="section-title">4.1 Các Chỉ Số Rủi Ro Tài Chính</div>
+          <div class="grid-2">
+            <div class="kpi-card"><div class="kpi-name">D/E – Tỷ Lệ Nợ/Vốn Chủ</div><div class="kpi-formula">D/E = Nợ phải trả / Vốn chủ sở hữu</div><div class="kpi-desc">D/E càng cao → rủi ro tài chính càng lớn. D/E &gt; 2 là ngưỡng cảnh báo với nhiều ngành.</div></div>
+            <div class="kpi-card"><div class="kpi-name">Debt Ratio – Tỷ Lệ Nợ</div><div class="kpi-formula">Debt Ratio = Tổng nợ / Tổng tài sản</div><div class="kpi-desc">Phản ánh mức độ tài trợ bằng nợ. &gt;60% là khá rủi ro.</div></div>
+            <div class="kpi-card"><div class="kpi-name">ICR – Khả Năng Trả Lãi Vay</div><div class="kpi-formula">ICR = EBIT / Chi phí lãi vay</div><div class="kpi-desc">ICR &lt; 1 → không đủ khả năng trả lãi. ICR &gt; 3 là khỏe mạnh.</div></div>
+            <div class="kpi-card"><div class="kpi-name">Debt/EBITDA – Khả Năng Trả Nợ</div><div class="kpi-formula">Debt/EBITDA &lt; 3: An toàn | &gt;5: Rủi ro cao</div><div class="kpi-desc">Đo số năm cần để trả hết nợ bằng EBITDA. Phổ biến trong định giá và cho vay doanh nghiệp.</div></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">4.2 Đòn Bẩy Hoạt Động (DOL) & Tài Chính (DFL)</div>
+          <div class="grid-2">
+            <div class="card gold-border">
+              <div class="card-title">DOL – Đòn Bẩy Hoạt Động</div>
+              <div class="formula-box">DOL = %ΔEBIT / %ΔDoanh thu</div>
+              <div class="card-body">DOL cao = Chi phí cố định chiếm tỷ lệ lớn. Khi doanh thu tăng 10%, EBIT có thể tăng 20-30%. Ngược lại khi doanh thu giảm, EBIT giảm mạnh hơn.
+                <div class="example" style="margin-top:12px"><div class="example-label">Ví dụ</div><p>Nhà máy sản xuất: Doanh thu tăng 20%, EBIT tăng 40% → DOL = 2. Mỗi 1% tăng doanh thu sẽ kéo EBIT tăng 2%.</p></div>
+              </div>
+            </div>
+            <div class="card gold-border">
+              <div class="card-title">DFL – Đòn Bẩy Tài Chính</div>
+              <div class="formula-box">DFL = %ΔEPS / %ΔEBIT</div>
+              <div class="card-body">DFL cao = Nợ vay lớn. Khi EBIT tăng, EPS tăng mạnh hơn nhờ đòn bẩy nợ — nhưng khi EBIT giảm, EPS giảm còn mạnh hơn.</div>
+            </div>
+          </div>
+          <div class="card" style="margin-top:14px">
+            <div class="card-title">DTL – Tổng Đòn Bẩy</div>
+            <div class="formula-box">DTL = DOL × DFL</div>
+            <div class="card-body">DTL càng cao → rủi ro tổng thể càng lớn, nhưng cũng khuếch đại lợi nhuận khi kinh doanh tốt.</div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">4.3 Điểm Hòa Vốn (BEP)</div>
+          <div class="card gold-border">
+            <div class="formula-box">BEP (Doanh thu) = Chi phí cố định / (1 – Chi phí biến đổi/Doanh thu)</div>
+            <div class="card-body" style="margin-top:10px">Biên an toàn: <strong>SM = (Doanh thu – BEP) / Doanh thu × 100%</strong> — Biên an toàn càng cao → doanh nghiệp càng an toàn trước biến động.</div>
+          </div>
+          <div class="example">
+            <div class="example-label">📖 Ví dụ BEP</div>
+            <p>Quán cà phê: Chi phí cố định = 60 triệu/tháng. Tỷ lệ chi phí biến đổi = 40% doanh thu. BEP = 60 triệu / (1 – 0.4) = <strong>100 triệu/tháng</strong>. Nếu đang đạt 150 triệu/tháng → Biên an toàn = (150–100)/150 = 33%.</p>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">4.4 Nguyên Tắc Kiểm Soát Rủi Ro</div>
+          <div class="card gold-border">
+            <ul class="checklist">
+              <li>Giữ đòn bẩy ở mức an toàn (D/E &lt; 1.5 với hầu hết ngành)</li>
+              <li>Duy trì dòng tiền dương từ hoạt động kinh doanh</li>
+              <li>Đa dạng hóa nguồn vốn (không phụ thuộc 1 chủ nợ)</li>
+              <li>Dự phòng kịch bản xấu và có kế hoạch ứng phó</li>
+              <li>Không tăng nợ để trả nợ cũ (đảo nợ liên tục = bẫy)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ CHAPTER 5: KPI CEO ══════════════ -->
+    <div class="tab-panel" id="panel-ch5">
+      <div class="chapter-wrap">
+        <div class="chapter-header">
+          <div class="chapter-number">Chương 05</div>
+          <div class="chapter-title">KPI CEO &<br><span>Quản Trị Hệ Thống</span></div>
+          <div class="chapter-tagline">Đo lường đúng – Quản trị đúng – Tăng trưởng bền vững</div>
+        </div>
+
+        <div class="blockquote">
+          <p>"Không có KPI, bạn không thể quản trị. Không có hệ thống, bạn không thể mở rộng."</p>
+        </div>
+
+        <div class="section">
+          <div class="section-title">5.1 Bộ 3 KPI Vàng: CAC – LTV – LTV/CAC</div>
+          <div class="grid-3">
+            <div class="card gold-border">
+              <div class="card-title">CAC – Chi Phí Thu Hút KH</div>
+              <div class="formula-box">CAC = Tổng chi phí marketing & sales / Số KH mới</div>
+              <div class="card-body">CAC càng thấp càng tốt — nhưng phải đi kèm chất lượng khách hàng. CAC thấp mà KH bỏ đi nhanh thì vô nghĩa.</div>
+            </div>
+            <div class="card gold-border">
+              <div class="card-title">LTV – Lifetime Value</div>
+              <div class="formula-box">LTV = Doanh thu TB/KH × Thời gian gắn bó × Tỷ suất lợi nhuận gộp</div>
+              <div class="card-body">Giá trị vòng đời của một khách hàng. LTV càng cao → mô hình kinh doanh càng mạnh.</div>
+            </div>
+            <div class="card gold-border">
+              <div class="card-title">LTV/CAC Ratio – Tỷ Lệ Vàng</div>
+              <div class="formula-box">LTV/CAC ≥ 3: Rất tốt | ≥ 1: Chấp nhận | &lt;1: Nguy hiểm!</div>
+              <div class="card-body">LTV/CAC &lt; 1 nghĩa là mỗi khách hàng thu hút về đang LỖ. Cần sửa ngay mô hình kinh doanh.</div>
+            </div>
+          </div>
+          <div class="example">
+            <div class="example-label">📖 Ví dụ LTV/CAC</div>
+            <p>App học tiếng Anh: CAC = 200.000đ. LTV = 99.000đ/tháng × 18 tháng × 70% margin = 1.247.400đ. LTV/CAC ≈ <strong>6.2 → Rất tốt!</strong> Có thể tăng ngân sách marketing thoải mái vì mỗi đồng chi ra thu về 6 đồng giá trị.</p>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">5.2 Churn Rate & Retention Rate</div>
+          <div class="grid-2">
+            <div class="card"><div class="card-title">Churn Rate – Tỷ Lệ Rời Bỏ</div><div class="formula-box">Churn Rate = Số KH mất đi / Số KH đầu kỳ × 100%</div><div class="card-body">Churn &lt; 5%/năm là lý tưởng. Churn cao phá hủy LTV. Giữ khách cũ rẻ hơn 5-7 lần so với tìm khách mới.</div></div>
+            <div class="card"><div class="card-title">Retention Rate – Giữ Chân KH</div><div class="formula-box">Retention = (KH cuối kỳ – KH mới) / KH đầu kỳ × 100%</div><div class="card-body">Retention Rate + Churn Rate = 100%. Target: Retention &gt; 85%/năm với SaaS B2B, &gt;40%/năm với eCommerce.</div></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">5.3 Các KPI Vận Hành Quan Trọng</div>
+          <div class="kpi-grid">
+            <div class="kpi-card"><div class="kpi-name">Conversion Rate</div><div class="kpi-formula">CVR = Số KH mua / Số lượt truy cập × 100%</div><div class="kpi-desc">Tỷ lệ chuyển đổi. Tối ưu CVR giúp tăng doanh thu mà không cần tăng chi phí marketing.</div></div>
+            <div class="kpi-card"><div class="kpi-name">GPO – LN Gộp/Đơn Hàng</div><div class="kpi-formula">GPO = (Doanh thu – Giá vốn) / Số đơn hàng</div><div class="kpi-desc">Biết lãi gộp từng đơn để tối ưu mix sản phẩm và giá bán.</div></div>
+            <div class="kpi-card"><div class="kpi-name">R/E – Revenue per Employee</div><div class="kpi-formula">R/E = Doanh thu thuần / Số nhân viên</div><div class="kpi-desc">Đo năng suất và hiệu quả sử dụng nhân sự. Chỉ số này càng cao càng tốt.</div></div>
+            <div class="kpi-card"><div class="kpi-name">Cost Ratio – Tỷ Lệ Chi Phí</div><div class="kpi-formula">Cost Ratio = Tổng chi phí / Doanh thu × 100%</div><div class="kpi-desc">Dưới 70% là mức khỏe mạnh với nhiều ngành. Kiểm soát tốt giúp tăng lợi nhuận.</div></div>
+            <div class="kpi-card"><div class="kpi-name">Utilization Rate</div><div class="kpi-formula">UR = Thời gian sử dụng thực tế / Tổng công suất khả dụng × 100%</div><div class="kpi-desc">Đo mức độ khai thác tài sản, nhân sự, máy móc.</div></div>
+            <div class="kpi-card"><div class="kpi-name">EBITDA Margin</div><div class="kpi-formula">EBITDA Margin = EBITDA / Doanh thu × 100%</div><div class="kpi-desc">KPI được dùng nhiều nhất trong định giá M&A. Đo hiệu quả hoạt động cốt lõi.</div></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">5.4 CEO Dashboard – Nhìn Nhanh Toàn Bộ</div>
+          <div class="dashboard">
+            <div class="dashboard-title">📊 CEO Dashboard Tổng Hợp</div>
+            <div class="grid-4" style="gap:10px">
+              <div style="text-align:center;padding:12px;background:#0A0A0A;border-radius:8px;border:1px solid #2A2A2A"><div style="font-size:10px;color:var(--gold);letter-spacing:1px">DOANH THU</div><div style="font-size:12px;color:var(--text-main);margin-top:5px">Tăng trưởng doanh số</div></div>
+              <div style="text-align:center;padding:12px;background:#0A0A0A;border-radius:8px;border:1px solid #2A2A2A"><div style="font-size:10px;color:var(--gold);letter-spacing:1px">LỢI NHUẬN</div><div style="font-size:12px;color:var(--text-main);margin-top:5px">Tối ưu biên lợi nhuận</div></div>
+              <div style="text-align:center;padding:12px;background:#0A0A0A;border-radius:8px;border:1px solid #2A2A2A"><div style="font-size:10px;color:var(--gold);letter-spacing:1px">DÒNG TIỀN</div><div style="font-size:12px;color:var(--text-main);margin-top:5px">Duy trì dòng tiền lành mạnh</div></div>
+              <div style="text-align:center;padding:12px;background:#0A0A0A;border-radius:8px;border:1px solid #2A2A2A"><div style="font-size:10px;color:var(--gold);letter-spacing:1px">KHÁCH HÀNG</div><div style="font-size:12px;color:var(--text-main);margin-top:5px">Tăng KH & giữ chân</div></div>
+              <div style="text-align:center;padding:12px;background:#0A0A0A;border-radius:8px;border:1px solid #2A2A2A"><div style="font-size:10px;color:var(--gold);letter-spacing:1px">VẬN HÀNH</div><div style="font-size:12px;color:var(--text-main);margin-top:5px">Hiệu quả quy trình</div></div>
+              <div style="text-align:center;padding:12px;background:#0A0A0A;border-radius:8px;border:1px solid #2A2A2A"><div style="font-size:10px;color:var(--gold);letter-spacing:1px">NHÂN SỰ</div><div style="font-size:12px;color:var(--text-main);margin-top:5px">Năng suất & gắn kết</div></div>
+              <div style="text-align:center;padding:12px;background:#0A0A0A;border-radius:8px;border:1px solid #2A2A2A;grid-column:span 2"><div style="font-size:10px;color:var(--gold);letter-spacing:1px">TĂNG TRƯỞNG</div><div style="font-size:12px;color:var(--text-main);margin-top:5px">Mở rộng bền vững & cải thiện lợi nhuận</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ CHAPTER 6: NHÂN SỰ ══════════════ -->
+    <div class="tab-panel" id="panel-ch6">
+      <div class="chapter-wrap">
+        <div class="chapter-header">
+          <div class="chapter-number">Chương 06</div>
+          <div class="chapter-title">Chỉ Số<br><span>Nhân Sự</span></div>
+          <div class="chapter-tagline">Đo lường hiệu quả – Tối ưu năng suất – Giữ chân nhân tài</div>
+        </div>
+
+        <div class="blockquote">
+          <p>"Đầu tư vào con người là khoản đầu tư sinh lời cao nhất."</p>
+        </div>
+
+        <div class="section">
+          <div class="section-title">6.1 Chỉ Số Thu Hút Nhân Tài</div>
+          <div class="kpi-grid">
+            <div class="kpi-card"><div class="kpi-name">TTF – Time to Fill</div><div class="kpi-formula">TTF = Tổng ngày tuyển dụng / Số vị trí thành công</div><div class="kpi-desc">Thời gian tuyển dụng thấp → quy trình tuyển dụng hiệu quả và hấp dẫn ứng viên.</div></div>
+            <div class="kpi-card"><div class="kpi-name">CPH – Cost per Hire</div><div class="kpi-formula">CPH = Tổng chi phí tuyển dụng / Số nhân sự thành công</div><div class="kpi-desc">Chi phí tuyển dụng trên mỗi nhân sự. So sánh với giá trị mà nhân sự đó mang lại.</div></div>
+            <div class="kpi-card"><div class="kpi-name">OAR – Offer Acceptance Rate</div><div class="kpi-formula">OAR = Offer được chấp nhận / Tổng offer gửi đi × 100%</div><div class="kpi-desc">OAR thấp → công ty kém cạnh tranh về lương/thương hiệu. Cần xem lại EVP.</div></div>
+            <div class="kpi-card"><div class="kpi-name">QoH – Quality of Hire</div><div class="kpi-formula">QoH = Hiệu suất nhân sự mới sau thời gian thử việc</div><div class="kpi-desc">Chất lượng tuyển dụng - quan trọng hơn tốc độ. Nhân sự giỏi mà onboarding kém = lãng phí.</div></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">6.2 Chỉ Số Phát Triển & Năng Suất</div>
+          <div class="grid-2">
+            <div class="kpi-card"><div class="kpi-name">LP – Labor Productivity</div><div class="kpi-formula">LP = Doanh thu / Tổng số nhân sự</div><div class="kpi-desc">Năng suất lao động bình quân. So sánh theo quý/năm để đo tiến bộ. Mục tiêu: LP tăng 10-20%/năm.</div></div>
+            <div class="kpi-card"><div class="kpi-name">GAR – Goal Achievement Rate</div><div class="kpi-formula">GAR = Số mục tiêu hoàn thành / Tổng số mục tiêu × 100%</div><div class="kpi-desc">Tỷ lệ hoàn thành mục tiêu. Liên kết với OKR/KPI cá nhân. GAR &gt; 70% là tốt.</div></div>
+            <div class="kpi-card"><div class="kpi-name">TE – Training Effectiveness</div><div class="kpi-formula">TE = Cải thiện hiệu suất sau đào tạo / Trước đào tạo</div><div class="kpi-desc">Đo lường ROI của đầu tư đào tạo. Quan trọng để quyết định ngân sách L&D.</div></div>
+            <div class="kpi-card"><div class="kpi-name">CI – Competency Index</div><div class="kpi-formula">CI = Tổng điểm năng lực / Số nhân sự</div><div class="kpi-desc">Năng lực trung bình tổ chức. Tăng CI = tổ chức ngày càng mạnh về năng lực cốt lõi.</div></div>
+          </div>
+          <div class="example">
+            <div class="example-label">📖 Ví dụ Labor Productivity</div>
+            <p>Công ty Tech 50 người, doanh thu 25 tỷ/năm. LP = 25 tỷ / 50 = 500 triệu/người/năm. Năm sau 30 tỷ với 52 người → LP = 576 triệu/người/năm (+15%). Mỗi nhân sự tạo ra giá trị ngày càng cao hơn — dấu hiệu tăng trưởng hiệu quả, không chỉ tăng trưởng quy mô.</p>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">6.3 Chỉ Số Gắn Kết & Giữ Chân</div>
+          <div class="grid-3">
+            <div class="kpi-card"><div class="kpi-name">TR – Turnover Rate</div><div class="kpi-formula">TR = Số nghỉ việc / Tổng nhân sự bình kỳ × 100%</div><div class="kpi-desc">Tỷ lệ nghỉ việc. &lt;10%/năm là tốt. Nghỉ việc cao = chi phí ẩn rất lớn (tuyển, đào tạo lại).</div></div>
+            <div class="kpi-card"><div class="kpi-name">EES – Employee Engagement Score</div><div class="kpi-formula">EES = Điểm khảo sát gắn kết / Số người tham gia</div><div class="kpi-desc">Mức độ gắn kết của nhân viên. EES cao → nhân viên tự nguyện nỗ lực hơn mức yêu cầu.</div></div>
+            <div class="kpi-card"><div class="kpi-name">WI – Wellbeing Index</div><div class="kpi-formula">WI = Điểm khảo sát hạnh phúc / Số người tham gia</div><div class="kpi-desc">Sức khỏe tinh thần của tổ chức. WI cao → ít burnout, ít nghỉ ốm, ít nghỉ việc.</div></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">6.4 Công Thức Giá Trị Nhân Sự</div>
+          <div class="card gold-border" style="text-align:center; padding:28px">
+            <div style="font-size:22px;color:var(--gold);margin-bottom:14px;font-family:Georgia,serif">ĐÚNG NGƯỜI × ĐÚNG VIỆC = HIỆU SUẤT CAO</div>
+            <div style="font-size:13px;color:var(--text-muted)">Đúng người = Đúng năng lực + Đúng văn hóa | Đúng việc = Phù hợp vai trò + Mục tiêu rõ ràng</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ CHAPTER 7: CX METRICS ══════════════ -->
+    <div class="tab-panel" id="panel-ch7">
+      <div class="chapter-wrap">
+        <div class="chapter-header">
+          <div class="chapter-number">Chương 07</div>
+          <div class="chapter-title">Chỉ Số Trải Nghiệm<br><span>Khách Hàng (CX Metrics)</span></div>
+          <div class="chapter-tagline">Đo lường trải nghiệm – Hiểu khách hàng – Tạo lòng trung thành</div>
+        </div>
+
+        <div class="blockquote">
+          <p>"Khách hàng không kỳ vọng bạn hoàn hảo. Họ chỉ kỳ vọng bạn luôn lắng nghe và ngày càng tốt hơn."</p>
+        </div>
+
+        <div class="section">
+          <div class="section-title">7.1 Bộ 5 Chỉ Số CX Cốt Lõi</div>
+          <div class="kpi-grid">
+            <div class="kpi-card"><div class="kpi-name">NPS – Net Promoter Score</div><div class="kpi-formula">NPS = % Promoters (9-10) – % Detractors (0-6)</div><div class="kpi-desc">Đo mức độ sẵn sàng giới thiệu. NPS &gt; 50 = xuất sắc. Apple/Amazon thường &gt;70.</div></div>
+            <div class="kpi-card"><div class="kpi-name">CSAT – Customer Satisfaction</div><div class="kpi-formula">CSAT = Tổng số hài lòng / Tổng số phản hồi × 100%</div><div class="kpi-desc">Đo mức độ hài lòng sau mỗi tương tác. Mục tiêu: ≥ 90% hàng tháng.</div></div>
+            <div class="kpi-card"><div class="kpi-name">CES – Customer Effort Score</div><div class="kpi-formula">CES = Tổng điểm nỗ lực (nghịch đảo) / Tổng phản hồi × 100%</div><div class="kpi-desc">Đo độ dễ dàng khi giải quyết vấn đề. CES cao = khách hàng ít phải cố gắng → tốt.</div></div>
+            <div class="kpi-card"><div class="kpi-name">CRR – Customer Retention Rate</div><div class="kpi-formula">CRR = Số KH quay lại / Số KH đầu kỳ × 100%</div><div class="kpi-desc">Tỷ lệ khách hàng quay lại. Mục tiêu: ≥ 70% tùy ngành.</div></div>
+            <div class="kpi-card"><div class="kpi-name">CLV – Customer Lifetime Value</div><div class="kpi-formula">CLV = (AOV × Tần suất mua × Thời gian gắn bó) – Chi phí phục vụ</div><div class="kpi-desc">Tổng giá trị vòng đời khách hàng. Nền tảng để quyết định ngân sách CAC.</div></div>
+            <div class="kpi-card"><div class="kpi-name">Churn Rate – Tỷ Lệ Rời Bỏ</div><div class="kpi-formula">Churn = Số KH rời bỏ / Tổng số KH đầu kỳ × 100%</div><div class="kpi-desc">Mục tiêu: ≤ 5% hàng tháng. Churn cao hủy hoại CLV và LTV/CAC ratio.</div></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">7.2 Hành Trình Trải Nghiệm Khách Hàng</div>
+          <div class="flow" style="flex-direction:column;align-items:flex-start;gap:10px">
+            <div style="display:flex;align-items:flex-start;gap:14px;width:100%"><div class="flow-step" style="min-width:130px;text-align:center">1. NHẬN BIẾT<br><small style="font-weight:400;opacity:0.7">Awareness</small></div><div style="font-size:13px;color:var(--text-muted);padding-top:8px">Reach, Impression, Brand Mention, Website Traffic</div></div>
+            <div style="display:flex;align-items:flex-start;gap:14px;width:100%"><div class="flow-step" style="min-width:130px;text-align:center">2. TÌM HIỂU<br><small style="font-weight:400;opacity:0.7">Consideration</small></div><div style="font-size:13px;color:var(--text-muted);padding-top:8px">Website Time on Page, Bounce Rate, Lead Conversion Rate</div></div>
+            <div style="display:flex;align-items:flex-start;gap:14px;width:100%"><div class="flow-step" style="min-width:130px;text-align:center">3. MUA HÀNG<br><small style="font-weight:400;opacity:0.7">Purchase</small></div><div style="font-size:13px;color:var(--text-muted);padding-top:8px">Conversion Rate, Shopping Cart Abandonment, Order Accuracy</div></div>
+            <div style="display:flex;align-items:flex-start;gap:14px;width:100%"><div class="flow-step" style="min-width:130px;text-align:center">4. SỬ DỤNG<br><small style="font-weight:400;opacity:0.7">Usage</small></div><div style="font-size:13px;color:var(--text-muted);padding-top:8px">Product Usage Rate, Feature Adoption, Customer Support Rate</div></div>
+            <div style="display:flex;align-items:flex-start;gap:14px;width:100%"><div class="flow-step" style="min-width:130px;text-align:center">5. HÀI LÒNG<br><small style="font-weight:400;opacity:0.7">Satisfaction</small></div><div style="font-size:13px;color:var(--text-muted);padding-top:8px">CSAT, CES, NPS, Review & Rating, Complaint Rate</div></div>
+            <div style="display:flex;align-items:flex-start;gap:14px;width:100%"><div class="flow-step" style="min-width:130px;text-align:center;background:var(--gold-dark);color:#000;border-color:var(--gold)">6. TRUNG THÀNH<br><small style="font-weight:400">Loyalty</small></div><div style="font-size:13px;color:var(--text-muted);padding-top:8px">Retention Rate, Repeat Purchase Rate, Referral Rate</div></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">7.3 CX Scorecard – Bảng Điểm Tổng Hợp</div>
+          <table>
+            <thead><tr><th>Nhóm chỉ số</th><th>Chỉ số</th><th>Mục tiêu</th><th>Tần suất đo</th></tr></thead>
+            <tbody>
+              <tr><td>Hài lòng</td><td>CSAT</td><td>≥ 90%</td><td>Hàng tháng</td></tr>
+              <tr><td>Trung thành</td><td>NPS</td><td>≥ 50</td><td>Hàng quý</td></tr>
+              <tr><td>Nỗ lực</td><td>CES</td><td>≥ 80%</td><td>Hàng tháng</td></tr>
+              <tr><td>Duy trì</td><td>Retention Rate</td><td>≥ 70%</td><td>Hàng tháng</td></tr>
+              <tr><td>Rời bỏ</td><td>Churn Rate</td><td>≤ 5%</td><td>Hàng tháng</td></tr>
+              <tr><td>Giá trị</td><td>CLV</td><td>Tăng</td><td>Hàng quý</td></tr>
+              <tr><td>Phục vụ</td><td>FRT (First Response Time)</td><td>≤ 24h</td><td>Hàng tháng</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="section">
+          <div class="section-title">7.4 Chuỗi Giá Trị CX → Lợi Nhuận</div>
+          <div class="flow">
+            <div class="flow-step">CX Tốt</div><div class="flow-arrow">→</div>
+            <div class="flow-step">KH Trung Thành</div><div class="flow-arrow">→</div>
+            <div class="flow-step">Doanh Thu Tăng</div><div class="flow-arrow">→</div>
+            <div class="flow-step">Chi Phí Giảm</div><div class="flow-arrow">→</div>
+            <div class="flow-step" style="background:var(--gold-dark);color:#000;border-color:var(--gold)">Lợi Nhuận Tăng</div>
+          </div>
+          <div class="example">
+            <div class="example-label">📖 Ví dụ NPS thực tế</div>
+            <p>Công ty D khảo sát 1000 khách: 600 người chấm 9-10 (Promoters), 300 người chấm 7-8 (Passives), 100 người chấm 0-6 (Detractors). <strong>NPS = 60% – 10% = 50</strong>. Đây là mức xuất sắc. Mỗi Promoter trung bình giới thiệu 2-3 người mới → kênh marketing miễn phí rất mạnh mẽ.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ CHAPTER 8: NÃO BỘ CEO ══════════════ -->
+    <div class="tab-panel" id="panel-ch8">
+      <div class="chapter-wrap">
+        <div class="chapter-header">
+          <div class="chapter-number">Chương 08</div>
+          <div class="chapter-title">Bản Đồ Não Bộ<br><span>CEO</span></div>
+          <div class="chapter-tagline">Tư duy chiến lược – Quản trị toàn diện – Tạo giá trị bền vững</div>
+        </div>
+
+        <div class="mind-map-center">CEO<br><small style="font-size:13px;font-weight:400">Tầm nhìn · Chiến lược · Giá trị dài hạn</small></div>
+
+        <div class="section">
+          <div class="section-title">8.1 Mục Tiêu Cốt Lõi của CEO</div>
+          <div class="kpi-grid">
+            <div class="kpi-card" style="text-align:center"><div style="font-size:26px;margin-bottom:6px">📈</div><div class="kpi-name">Tăng Trưởng</div><div class="kpi-desc">Mở rộng thị phần, doanh thu, quy mô doanh nghiệp bền vững</div></div>
+            <div class="kpi-card" style="text-align:center"><div style="font-size:26px;margin-bottom:6px">💰</div><div class="kpi-name">Lợi Nhuận</div><div class="kpi-desc">Tối ưu biên lợi nhuận và hiệu quả sử dụng vốn</div></div>
+            <div class="kpi-card" style="text-align:center"><div style="font-size:26px;margin-bottom:6px">⚙️</div><div class="kpi-name">Hiệu Quả</div><div class="kpi-desc">Vận hành hệ thống trơn tru, loại bỏ lãng phí, chuẩn hóa quy trình</div></div>
+            <div class="kpi-card" style="text-align:center"><div style="font-size:26px;margin-bottom:6px">💧</div><div class="kpi-name">Dòng Tiền</div><div class="kpi-desc">Duy trì sức khỏe tài chính và khả năng thanh toán</div></div>
+            <div class="kpi-card" style="text-align:center"><div style="font-size:26px;margin-bottom:6px">🌱</div><div class="kpi-name">Bền Vững</div><div class="kpi-desc">Tạo giá trị dài hạn cho cổ đông, khách hàng và xã hội</div></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">8.2 Bốn Góc Nhìn Quản Trị Cốt Lõi</div>
+          <div class="grid-2">
+            <div class="card gold-border"><div class="card-title">💰 Tài Chính</div><div class="card-body">Các chỉ số tài chính cốt lõi: Current Ratio, Quick Ratio, D/E, ROA, ROE, ROIC, Vòng quay HTK, Vòng quay TS, GPM, NPM, EBITDA Margin, ICR, DSCR</div></div>
+            <div class="card gold-border"><div class="card-title">⚙️ Vận Hành</div><div class="card-body">Quy trình chuẩn hóa (SOP), hiệu suất hệ thống, quản lý chất lượng, tự động hóa, chỉ số vận hành trọng yếu, liên tục cải tiến (Kaizen)</div></div>
+            <div class="card gold-border"><div class="card-title">👥 Khách Hàng</div><div class="card-body">NPS, CSAT, CES, CLV, Retention Rate, Churn Rate. Khách hàng là trung tâm của mọi chiến lược</div></div>
+            <div class="card gold-border"><div class="card-title">🌟 Con Người</div><div class="card-body">Văn hóa doanh nghiệp, giá trị cốt lõi, giao tiếp minh bạch, trao quyền & trách nhiệm, gắn kết & phát triển nhân tài</div></div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">8.3 Quy Trình Ra Quyết Định</div>
+          <div class="flow" style="flex-wrap:wrap">
+            <div class="flow-step">Thu thập thông tin</div><div class="flow-arrow">→</div>
+            <div class="flow-step">Phân tích – Đánh giá</div><div class="flow-arrow">→</div>
+            <div class="flow-step">Lựa chọn phương án</div><div class="flow-arrow">→</div>
+            <div class="flow-step">Ra quyết định nhanh & dứt khoát</div><div class="flow-arrow">→</div>
+            <div class="flow-step">Đo lường & điều chỉnh</div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">8.4 Nguyên Tắc Vàng của CEO</div>
+          <div class="card gold-border">
+            <ul class="checklist" style="font-size:15px;line-height:2.1">
+              <li>Tư duy hệ thống – Nhìn bức tranh lớn, không sa vào chi tiết vụn vặt</li>
+              <li>Dựa trên dữ liệu – Không cảm tính. Mỗi quyết định phải có số liệu</li>
+              <li>Tập trung vào giá trị – Kết quả, không chỉ hoạt động</li>
+              <li>Linh hoạt – Thích nghi nhanh với thay đổi thị trường</li>
+              <li>Liên tục học hỏi – Đổi mới tư duy và phương pháp</li>
+              <li>Kỷ luật – Kiên trì – Trách nhiệm với tổ chức và cộng đồng</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">8.5 Marketing & Sales – Động Cơ Tăng Trưởng</div>
+          <div class="grid-2">
+            <div class="card"><div class="card-title">Phễu Thu Hút Khách Hàng</div><ul class="checklist" style="margin-top:8px"><li>Traffic → Reach → Impression</li><li>Lead → Conversion Rate</li><li>Cost per Lead (CPL)</li><li>Customer Acquisition Cost (CAC)</li><li>Conversion Rate – Win Rate</li><li>Average Order Value (AOV)</li></ul></div>
+            <div class="card"><div class="card-title">Quản Trị Tăng Trưởng</div><ul class="checklist" style="margin-top:8px"><li>Chiến lược tăng trưởng rõ ràng</li><li>Phát triển sản phẩm liên tục</li><li>M&A – Hợp tác chiến lược</li><li>Đổi mới sáng tạo (Innovation)</li><li>Đo lường tăng trưởng bằng số liệu</li></ul></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ FINAL: CHECKLIST ══════════════ -->
+    <div class="tab-panel" id="panel-final">
+      <div class="chapter-wrap">
+        <div class="chapter-header">
+          <div class="chapter-number">Tổng Kết</div>
+          <div class="chapter-title">Checklist<br><span>CEO Hoàn Chỉnh</span></div>
+          <div class="chapter-tagline">Từ Dữ Liệu → Phân Tích → Hành Động → Kết Quả → Tăng Trưởng</div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Bảng Tổng Hợp Chỉ Số CEO Cần Theo Dõi</div>
+          <table>
+            <thead><tr><th>Lĩnh vực</th><th>Chỉ số ưu tiên</th><th>Tần suất</th><th>Mục tiêu lý tưởng</th></tr></thead>
+            <tbody>
+              <tr><td>Dòng tiền</td><td>CFO, FCF, Runway, CCC</td><td>Hàng tuần</td><td>CFO dương, CCC &lt; 60 ngày</td></tr>
+              <tr><td>Lợi nhuận</td><td>Gross Margin, EBITDA, Net Margin</td><td>Hàng tháng</td><td>GM &gt; 40%, EBITDA Margin &gt; 15%</td></tr>
+              <tr><td>Hiệu quả vốn</td><td>ROE, ROA, Asset Turnover</td><td>Hàng quý</td><td>ROE &gt; 15%, ROA &gt; 8%</td></tr>
+              <tr><td>Tăng trưởng KH</td><td>CAC, LTV, LTV/CAC</td><td>Hàng tháng</td><td>LTV/CAC ≥ 3</td></tr>
+              <tr><td>Giữ chân KH</td><td>Retention Rate, Churn Rate, NPS</td><td>Hàng tháng</td><td>Retention &gt; 80%, NPS &gt; 40</td></tr>
+              <tr><td>Vận hành</td><td>Cost Ratio, Productivity, Utilization</td><td>Hàng tháng</td><td>Cost Ratio &lt; 70%</td></tr>
+              <tr><td>Nhân sự</td><td>Turnover Rate, EES, GAR</td><td>Hàng quý</td><td>TR &lt; 10%/năm, GAR &gt; 70%</td></tr>
+              <tr><td>Rủi ro tài chính</td><td>D/E, ICR, Debt/EBITDA</td><td>Hàng quý</td><td>D/E &lt; 1.5, ICR &gt; 2.5</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Kim Chỉ Nam CEO</div>
+          <div class="quote-grid">
+            <div class="quote-card"><p>"Tiền mặt là máu. Dòng tiền là sự sống. Không có dòng tiền, không có doanh nghiệp."</p></div>
+            <div class="quote-card"><p>"Lợi nhuận không chỉ đến từ bán nhiều hơn, mà từ quản trị tốt hơn và hiệu quả hơn."</p></div>
+            <div class="quote-card"><p>"Giá cả là những gì bạn trả. Giá trị là những gì bạn nhận được."<br><cite style="margin-top:8px;display:block">— Warren Buffett</cite></p></div>
+            <div class="quote-card"><p>"Tăng trưởng giúp doanh nghiệp lớn lên, nhưng quản trị rủi ro giúp doanh nghiệp tồn tại và bền vững."</p></div>
+          </div>
+        </div>
+
+        <div class="final-hero">
+          <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:14px">Cẩm Nang Học Làm CEO</div>
+          <div style="font-family:Georgia,serif;font-size:26px;color:var(--gold);margin-bottom:10px">Từ Dữ Liệu đến Quyết Định</div>
+          <div style="font-size:14px;color:var(--text-muted)">Đo lường đúng · Quản trị đúng · Tăng trưởng bền vững</div>
+          <div style="margin:24px auto 0;width:50px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)"></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+const tabBtns = document.querySelectorAll('.tab-btn');
+const panels = document.querySelectorAll('.tab-panel');
+const sidebar = document.getElementById('sidebar');
+const mainContent = document.getElementById('mainContent');
+
+function switchTab(tabId) {
+  tabBtns.forEach(b => b.classList.remove('active'));
+  panels.forEach(p => p.classList.remove('active'));
+
+  const btn = document.querySelector(`[data-tab="${tabId}"]`);
+  const panel = document.getElementById(`panel-${tabId}`);
+  if (btn) btn.classList.add('active');
+  if (panel) panel.classList.add('active');
+
+  const showSidebar = tabId === 'ch1';
+  sidebar.classList.toggle('visible', showSidebar);
+  mainContent.classList.toggle('with-sidebar', showSidebar);
+
+  window.scrollTo({ top: 0 });
+}
+
+tabBtns.forEach(btn => {
+  btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+});
+
+document.querySelectorAll('[data-goto]').forEach(card => {
+  card.addEventListener('click', () => switchTab(card.dataset.goto));
+});
+
+document.querySelectorAll('.sidebar-link').forEach(link => {
+  link.addEventListener('click', () => {
+    const el = document.getElementById(link.dataset.section);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+    link.classList.add('active');
+  });
+});
+
+window.addEventListener('scroll', () => {
+  const el = document.documentElement;
+  const scrolled = el.scrollTop || document.body.scrollTop;
+  const total = el.scrollHeight - el.clientHeight;
+  const pct = total > 0 ? (scrolled / total) * 100 : 0;
+  document.getElementById('progressBar').style.width = pct + '%';
+});
+
+const tabBar = document.getElementById('tabBar');
+const activeBtn = tabBar.querySelector('.active');
+if (activeBtn) activeBtn.scrollIntoView({ inline: 'center', behavior: 'smooth' });
+</script>
+</body>
+</html>
