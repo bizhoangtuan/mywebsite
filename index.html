@@ -29,6 +29,12 @@
    INDEX.HTML — SOURCE CODE
    Không chỉnh nội dung ở đây. Mọi nội dung chỉnh trong config.js
    ============================================================ */
+/* Framework + Case Study responsive */
+@media(max-width:720px){
+  #framework-section > div { grid-template-columns: 1fr; }
+  #casestudy-section .cs-card { grid-template-columns: 1fr !important; }
+  #casestudy-section [style*="border-right"] { border-right: none !important; border-bottom: 1px solid var(--border); padding-right: 0 !important; padding-bottom: 20px; }
+}
 :root {
   --bg:      #1C1712;
   --bg2:     #231E17;
