@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog - Góc nhìn quản trị & Framework kinh doanh</title>
+<meta name="description" content="Blog của Nguyễn Hoàng Tuấn gồm Góc nhìn quản trị và Framework kinh doanh cho SME, Sales B2B, vận hành, marketing và phát triển bản thân.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="blog">
+<header class="topbar">
+  <nav class="nav">
+    <a class="brand" href="index.html"><span class="brand-mark">N</span><span>Nguyễn Hoàng Tuấn</span></a>
+    <div class="nav-links">
+      <a href="blog.html">Blog</a>
+      <a href="services.html">Dịch vụ</a>
+      <a href="knowledge-graph-dynamic.html">Knowledge Graph</a>
+      <a class="nav-cta" href="index.html#contact">Liên hệ</a>
+    </div>
+  </nav>
+</header>
+
+<main class="site-shell">
+  <section class="page-hero">
+    <div class="eyebrow">Content hub</div>
+    <h1>Góc nhìn quản trị & <span>Framework kinh doanh</span></h1>
+    <p>Trang này tách rõ hai loại nội dung: bài sharing thực tế và bài framework/SEO. Sau này Tuấn chỉ prompt, mình thêm đúng collection là web tự hiển thị đúng vị trí.</p>
+  </section>
+
+  <div class="tabs" data-content-tabs>
+    <button class="tab is-active" data-filter="all">Tất cả</button>
+    <button class="tab" data-filter="article">Góc nhìn quản trị</button>
+    <button class="tab" data-filter="framework">Framework kinh doanh</button>
+  </div>
+
+  <section id="articles">
+    <div class="section-head">
+      <h2 class="section-title">Góc nhìn quản trị</h2>
+      <div class="section-note">Sharing từ thực tế làm việc</div>
+    </div>
+    <div class="article-list" data-articles-list></div>
+  </section>
+
+  <section id="frameworks">
+    <div class="section-head">
+      <h2 class="section-title">Framework kinh doanh</h2>
+      <div class="section-note">Bài SEO và khung tư duy hệ thống</div>
+    </div>
+    <div class="article-list" data-frameworks-list></div>
+  </section>
+
+  <footer class="footer">
+    <div>Blog data: data/articles.json + data/frameworks.json</div>
+    <div><a href="index.html">Về trang chủ</a></div>
+  </footer>
+</main>
+
+<script src="config.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

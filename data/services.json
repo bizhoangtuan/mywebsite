@@ -1,0 +1,46 @@
+[
+  {
+    "name": "Tư vấn triển khai Haravan Omnichannel",
+    "slug": "haravan-omnichannel",
+    "category": "TMĐT & BÁN ĐA KÊNH",
+    "summary": "Quy hoạch website, sàn, social commerce, POS, kho và đơn hàng về một hệ thống quản trị tập trung.",
+    "pain": "Bán nhiều kênh nhưng kho loạn, đơn thất lạc, không biết doanh thu và lợi nhuận thật.",
+    "outcome": "Đồng bộ dữ liệu bán hàng, tồn kho, đơn hàng và báo cáo để chủ doanh nghiệp kiểm soát bằng số.",
+    "tags": ["Haravan", "Shopee", "TikTok Shop", "POS", "CRM"],
+    "formTopic": "Haravan Omnichannel",
+    "status": "published"
+  },
+  {
+    "name": "Chuẩn hóa vận hành với Lark Suite",
+    "slug": "lark-suite-operations",
+    "category": "VẬN HÀNH NỘI BỘ",
+    "summary": "Thiết kế SOP, phê duyệt, OKR, quản lý công việc và dữ liệu đội ngũ trên Lark Suite.",
+    "pain": "Sếp phải xử lý mọi thứ, nhân sự làm theo thói quen, quy trình không đo được.",
+    "outcome": "Doanh nghiệp có quy trình rõ, trách nhiệm rõ, dữ liệu rõ và giảm phụ thuộc vào một cá nhân.",
+    "tags": ["Lark Suite", "SOP", "Approval", "OKR", "Bitable"],
+    "formTopic": "Lark Suite",
+    "status": "published"
+  },
+  {
+    "name": "Performance Marketing & Tracking",
+    "slug": "performance-marketing-tracking",
+    "category": "MARKETING HIỆU SUẤT",
+    "summary": "Thiết lập tracking, phân tích phễu, tối ưu kênh quảng cáo và đo hiệu quả theo dữ liệu.",
+    "pain": "Chạy quảng cáo có lead nhưng không biết kênh nào ra khách thật, ngân sách đang rơi ở đâu.",
+    "outcome": "Có dashboard đo lường, biết kênh nào hiệu quả và tối ưu ngân sách theo ROI.",
+    "tags": ["GA4", "Meta Ads", "Google Ads", "TikTok Ads", "ROI"],
+    "formTopic": "Performance Marketing",
+    "status": "published"
+  },
+  {
+    "name": "AI & Automation cho SME",
+    "slug": "ai-automation-sme",
+    "category": "AI & TỰ ĐỘNG HÓA",
+    "summary": "Dùng AI, Apps Script và workflow automation để giảm thao tác thủ công, chuẩn hóa báo cáo và xử lý dữ liệu.",
+    "pain": "Đội ngũ mất quá nhiều thời gian vào việc lặp lại, báo cáo thủ công và xử lý file rời rạc.",
+    "outcome": "Giảm giờ làm tay, tăng tốc xử lý dữ liệu và giúp đội ngũ tập trung vào việc tạo giá trị.",
+    "tags": ["AI", "Apps Script", "Automation", "Workflow", "Reporting"],
+    "formTopic": "AI & Automation",
+    "status": "published"
+  }
+]

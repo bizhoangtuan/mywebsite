@@ -1,116 +1,217 @@
-// Khởi tạo các hàm cơ bản render từ config
-(function(){
-  var C = CONFIG, P = C.profile;
+(function () {
+  const C = typeof CONFIG !== 'undefined' ? CONFIG : (window.CONFIG || {});
+  const profile = C.profile || {};
+  const links = C.links || {};
 
-  // Meta
-  document.title = C.meta.title;
-  document.getElementById('meta-title').textContent = C.meta.title;
-  document.getElementById('meta-desc').setAttribute('content', C.meta.description);
-  document.getElementById('og-title').setAttribute('content', C.meta.title);
-  document.getElementById('og-desc').setAttribute('content', C.meta.description);
-  if (C.meta.ogImage) document.getElementById('og-image').setAttribute('content', C.meta.ogImage);
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
 
-  // Nav
-  document.getElementById('nav-logo').textContent = P.firstName + ' ' + P.lastName;
-  var navSite = document.getElementById('nav-website');
-  if (navSite) navSite.href = C.links.website;
+  function escapeHtml(value) {
+    return String(value || '')
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;')
+      .replaceAll("'", '&#039;');
+  }
 
-  // Hero
-  document.getElementById('hero-eyebrow').textContent = P.eyebrow;
-  document.getElementById('hero-firstname').textContent = P.firstName;
-  document.getElementById('hero-lastname').textContent = P.lastName;
-  document.getElementById('hero-role').textContent = P.role + ' · ' + P.company;
-  document.getElementById('hero-bio').innerHTML = P.bio;
+  function initMeta() {
+    if (!C.meta) return;
+    document.title = C.meta.title || document.title;
+    const metaDesc = $('#meta-desc');
+    const ogTitle = $('#og-title');
+    const ogDesc = $('#og-desc');
+    const ogImage = $('#og-image');
+    const metaTitle = $('#meta-title');
+    if (metaTitle) metaTitle.textContent = C.meta.title || '';
+    if (metaDesc) metaDesc.setAttribute('content', C.meta.description || '');
+    if (ogTitle) ogTitle.setAttribute('content', C.meta.title || '');
+    if (ogDesc) ogDesc.setAttribute('content', C.meta.description || '');
+    if (ogImage && C.meta.ogImage) ogImage.setAttribute('content', C.meta.ogImage);
+  }
 
-  var sloganRow = document.getElementById('slogan-row');
-  if (sloganRow) P.pillars.forEach(function(p) {
-    var s = document.createElement('span');
-    s.className = 'slogan-pill';
-    s.textContent = p;
-    sloganRow.appendChild(s);
-  });
+  function initProfile() {
+    const navLogo = $('#nav-logo');
+    if (navLogo && profile.firstName) navLogo.textContent = `${profile.firstName} ${profile.lastName || ''}`.trim();
 
-  var fbBtn = document.getElementById('btn-facebook');
-  if (fbBtn) fbBtn.href = C.links.facebook;
-  var liBtn = document.getElementById('btn-linkedin');
-  if (liBtn) liBtn.href = C.links.linkedin;
+    const eyebrow = $('#hero-eyebrow');
+    if (eyebrow && profile.eyebrow) eyebrow.textContent = profile.eyebrow;
 
-  // Stats
-  var statsGrid = document.getElementById('stats-grid');
-  if (statsGrid) C.stats.forEach(function(s) {
-    var d = document.createElement('div');
-    d.className = 'stat-item';
-    d.innerHTML = '<div class="stat-num">' + s.number + '</div><div class="stat-label">' + s.label + '</div>';
-    statsGrid.appendChild(d);
-  });
+    const role = $('#hero-role');
+    if (role && profile.role) role.textContent = `${profile.role} · ${profile.company || ''}`.trim();
 
-  // Service options
-  var svcSel = document.getElementById('service-select');
-  if (svcSel) C.services.forEach(function(s) {
-    var o = document.createElement('option');
-    o.value = s.name;
-    o.textContent = s.name;
-    svcSel.appendChild(o);
-  });
+    const bio = $('#hero-bio');
+    if (bio && profile.bio) bio.innerHTML = profile.bio;
 
-  // Form submit handler
-  window.handleSubmit = function(e) {
-    e.preventDefault();
-    var form = e.target;
-    var payload = {};
-    new FormData(form).forEach(function(v, k) { payload[k] = v; });
-    fetch(C.form.webhookUrl, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    }).catch(function() {});
-    form.style.display = 'none';
-    var ok = document.getElementById('form-success');
-    if (ok) ok.style.display = 'block';
-  };
-})();
+    const sloganRow = $('#slogan-row');
+    if (sloganRow && Array.isArray(profile.pillars)) {
+      sloganRow.innerHTML = profile.pillars.map((pillar) => `<span class="pill">${escapeHtml(pillar)}</span>`).join('');
+    }
 
-// Fetch API bài viết JSON
-fetch('posts.json')
-  .then(res => res.json())
-  .then(posts => {
-    const iconMap = {
-      'Vận hành': '⚙️',
-      'Tư duy quản lý': '🧩',
-      'TMĐT': '📊',
-      'AI & Automation': '🤖',
-    };
+    $$('[data-link="facebook"]').forEach((node) => node.href = links.facebook || '#');
+    $$('[data-link="linkedin"]').forEach((node) => node.href = links.linkedin || '#');
+  }
 
-    const rows = posts.map(post => {
-      const icon = iconMap[post.category] || '📝';
-      return `
-        <a href="content/${post.slug}.html" style="display:flex;align-items:flex-start;gap:16px;padding:18px 20px;background:var(--bg2);border-bottom:1px solid var(--border);text-decoration:none;transition:background .2s;"
-           onmouseenter="this.style.background='var(--bg3)'"
-           onmouseleave="this.style.background='var(--bg2)'">
-          <div style="flex-shrink:0;width:38px;height:38px;border-radius:8px;background:rgba(200,164,90,0.1);border:1px solid rgba(200,164,90,0.2);display:flex;align-items:center;justify-content:center;font-size:17px;margin-top:1px;">
-            ${icon}
-          </div>
-          <div style="flex:1;min-width:0;">
-            <div style="font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:4px;">
-              ${post.category} · ${post.readTime}
-            </div>
-            <div style="font-size:13px;font-weight:700;color:var(--cream);line-height:1.4;">
-              ${post.title}
-            </div>
-          </div>
-          <div style="flex-shrink:0;color:var(--text3);font-size:16px;margin-top:8px;">→</div>
-        </a>
-      `;
-    }).join('');
-
-    document.getElementById('blog-container').innerHTML = `
-      <div style="border:1px solid var(--border);border-radius:14px;overflow:hidden;">
-        ${rows}
+  function initStats() {
+    const grid = $('#stats-grid');
+    if (!grid || !Array.isArray(C.stats)) return;
+    grid.innerHTML = C.stats.map((item) => `
+      <div class="stat">
+        <div class="stat-num">${escapeHtml(item.number)}</div>
+        <div class="stat-label">${escapeHtml(item.label)}</div>
       </div>
+    `).join('');
+  }
+
+  async function loadJson(url, fallback = []) {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error(`Cannot load ${url}`);
+      const data = await response.json();
+      return Array.isArray(data) ? data.filter((item) => item.status !== 'draft') : fallback;
+    } catch (error) {
+      return fallback;
+    }
+  }
+
+  function iconLabel(item, fallback = 'N') {
+    if (item.category) {
+      const parts = item.category.split(/\s+/).filter(Boolean);
+      if (parts.length >= 2) return `${parts[0][0] || ''}${parts[1][0] || ''}`.toUpperCase();
+      return item.category.slice(0, 3).toUpperCase();
+    }
+    return fallback;
+  }
+
+  function articleCard(item, type = 'article') {
+    const url = item.url || `content/${item.slug}.html`;
+    const label = type === 'framework' ? 'FW' : iconLabel(item, 'BL');
+    return `
+      <a class="card article-card" href="${escapeHtml(url)}" data-content-type="${escapeHtml(type)}">
+        <div class="article-icon">${escapeHtml(label)}</div>
+        <div>
+          <div class="article-meta">${escapeHtml(item.category)} · ${escapeHtml(item.readTime || '')}</div>
+          <div class="article-title">${escapeHtml(item.title)}</div>
+          ${item.excerpt ? `<div class="article-excerpt">${escapeHtml(item.excerpt)}</div>` : ''}
+        </div>
+        <div class="arrow">→</div>
+      </a>
     `;
-  })
-  .catch(() => {
-    document.getElementById('blog-container').innerHTML =
-      '<p style="color:var(--text2);font-size:13px;">Chưa có bài viết nào.</p>';
-  });
+  }
+
+  function serviceCard(item, compact = false) {
+    const topic = item.formTopic || item.name;
+    const serviceHref = `services.html?service=${encodeURIComponent(topic)}#contact`;
+    return `
+      <article class="card service-card" id="${escapeHtml(item.slug)}">
+        <div class="service-category">${escapeHtml(item.category)}</div>
+        <h3>${escapeHtml(item.name)}</h3>
+        <p>${escapeHtml(compact ? item.summary : item.pain)}</p>
+        ${!compact ? `<p><strong>Kết quả mong muốn:</strong> ${escapeHtml(item.outcome)}</p>` : ''}
+        <div class="tag-row">
+          ${(item.tags || []).map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}
+        </div>
+        <div class="service-actions">
+          <a class="btn btn-primary" href="${escapeHtml(serviceHref)}" data-service-cta="${escapeHtml(topic)}">Nhận tư vấn</a>
+        </div>
+      </article>
+    `;
+  }
+
+  function renderList(container, items, renderer, emptyText) {
+    if (!container) return;
+    container.innerHTML = items.length ? items.map(renderer).join('') : `<div class="empty-state">${escapeHtml(emptyText)}</div>`;
+  }
+
+  function initTabs() {
+    const tabs = $('[data-content-tabs]');
+    if (!tabs) return;
+    tabs.addEventListener('click', (event) => {
+      const button = event.target.closest('[data-filter]');
+      if (!button) return;
+      const filter = button.dataset.filter;
+      $$('[data-filter]', tabs).forEach((tab) => tab.classList.toggle('is-active', tab === button));
+      $$('[data-content-type]').forEach((card) => {
+        card.style.display = filter === 'all' || card.dataset.contentType === filter ? '' : 'none';
+      });
+    });
+  }
+
+  function populateServiceSelect(services) {
+    $$('[data-service-select]').forEach((select) => {
+      const current = select.value;
+      const first = select.querySelector('option[value=""]')?.outerHTML || '<option value="" disabled selected>Dịch vụ quan tâm *</option>';
+      select.innerHTML = first + services.map((service) => `
+        <option value="${escapeHtml(service.formTopic || service.name)}">${escapeHtml(service.name)}</option>
+      `).join('');
+      if (current) select.value = current;
+      const requestedService = new URLSearchParams(window.location.search).get('service');
+      if (requestedService) select.value = requestedService;
+    });
+  }
+
+  function initServiceCtas() {
+    document.addEventListener('click', (event) => {
+      const cta = event.target.closest('[data-service-cta]');
+      if (!cta) return;
+      const topic = cta.dataset.serviceCta;
+      window.setTimeout(() => {
+        const select = $('[data-service-select]');
+        if (select && topic) select.value = topic;
+      }, 50);
+    });
+  }
+
+  function initForms() {
+    $$('[data-lead-form]').forEach((form) => {
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const payload = {};
+        new FormData(form).forEach((value, key) => { payload[key] = value; });
+        payload.page = document.body.dataset.page || 'website';
+        payload.submittedAt = new Date().toISOString();
+
+        if (C.form?.webhookUrl) {
+          fetch(C.form.webhookUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          }).catch(() => {});
+        }
+
+        const success = $('[data-form-success]', form);
+        if (success) success.style.display = 'block';
+        form.reset();
+      });
+    });
+  }
+
+  async function initContent() {
+    const [articles, frameworks, services] = await Promise.all([
+      loadJson('data/articles.json'),
+      loadJson('data/frameworks.json'),
+      loadJson('data/services.json')
+    ]);
+
+    renderList($('[data-articles-list]'), articles, (item) => articleCard(item, 'article'), 'Chưa có bài Góc nhìn quản trị.');
+    renderList($('[data-frameworks-list]'), frameworks, (item) => articleCard(item, 'framework'), 'Chưa có bài Framework kinh doanh.');
+    renderList($('[data-services-list]'), services, (item) => serviceCard(item), 'Chưa có dịch vụ nào.');
+    renderList($('[data-services-preview]'), services.slice(0, 3), (item) => serviceCard(item, true), 'Chưa có dịch vụ nào.');
+
+    const latest = [...articles.map((item) => ({ ...item, type: 'article' })), ...frameworks.map((item) => ({ ...item, type: 'framework' }))]
+      .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')))
+      .slice(0, 4);
+    renderList($('[data-latest-content]'), latest, (item) => articleCard(item, item.type), 'Chưa có nội dung nào.');
+
+    populateServiceSelect(services);
+  }
+
+  initMeta();
+  initProfile();
+  initStats();
+  initForms();
+  initTabs();
+  initServiceCtas();
+  initContent();
+})();
