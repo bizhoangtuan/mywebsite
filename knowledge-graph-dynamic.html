@@ -11,24 +11,24 @@
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #161410; --bg2: #1E1B14; --border: rgba(200,164,90,0.15); --border2: rgba(200,164,90,0.30);
-  --gold: #C8A45A; --gold-lt: #E8C87A; --gold-dim: #7A6030; --cream: #F0E6D0; --warm: #A89070;
-  --text2: #7A6A50; --font: 'Be Vietnam Pro', sans-serif;
+  --bg: #fbf3ea; --bg2: #fff8f1; --bg3: #f8eadf; --border: rgba(143,96,73,0.18); --border2: rgba(198,111,78,0.28);
+  --gold: #e65f35; --gold-lt: #c66f4e; --gold-dim: #8f6049; --cream: #2e241f; --warm: #7b6a60;
+  --text2: #8f6049; --font: 'Be Vietnam Pro', sans-serif;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: var(--bg); color: var(--cream); font-family: var(--font); display: flex; height: 100vh; overflow: hidden; }
 
 /* ── GRAPH PANE ── */
 #graph-pane { flex: 1; height: 100%; position: relative; min-width: 0; }
-#network { width: 100%; height: 100%; }
+#network { width: 100%; height: 100%; background: radial-gradient(circle at 35% 25%, rgba(244,183,189,.22), transparent 32%), var(--bg); }
 
 /* ── HEADER OVERLAY ── */
 .graph-header { position: absolute; top: 24px; left: 28px; z-index: 10; pointer-events: none; }
-.graph-header h1 { font-size: 22px; font-weight: 800; color: var(--gold); text-shadow: 0 2px 12px rgba(0,0,0,0.8); }
+.graph-header h1 { font-size: 22px; font-weight: 800; color: var(--gold); text-shadow: none; }
 .graph-header p { font-size: 12px; color: var(--text2); margin-top: 4px; letter-spacing: 0.04em; }
 
 /* ── SIDE PANEL ── */
-#sidepanel { width: 420px; flex-shrink: 0; height: 100%; background: var(--bg2); border-left: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; box-shadow: -8px 0 32px rgba(0,0,0,0.5); }
+#sidepanel { width: 420px; flex-shrink: 0; height: 100%; background: var(--bg2); border-left: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; box-shadow: -12px 0 34px rgba(91,54,35,.08); }
 .panel-topbar { padding: 24px 28px 0; flex-shrink: 0; }
 .panel-eyebrow { font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text2); margin-bottom: 8px; }
 #node-title { font-size: 24px; font-weight: 800; color: var(--gold-lt); letter-spacing: -0.01em; line-height: 1.2; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
@@ -41,11 +41,11 @@ body { background: var(--bg); color: var(--cream); font-family: var(--font); dis
 .panel-body ul li { font-size: 13px; color: var(--warm); line-height: 1.65; margin-bottom: 8px; padding-left: 16px; position: relative; }
 .panel-body ul li::before { content: '›'; position: absolute; left: 0; color: var(--gold-dim); font-weight: 700; }
 .panel-body strong { color: var(--cream); font-weight: 600; }
-.quote { font-style: italic; border-left: 2px solid var(--gold-dim); padding: 10px 16px; color: var(--text2); font-size: 13px; line-height: 1.7; margin: 16px 0; background: rgba(200,164,90,0.04); border-radius: 0 6px 6px 0; }
+.quote { font-style: italic; border-left: 2px solid var(--gold); padding: 10px 16px; color: var(--text2); font-size: 13px; line-height: 1.7; margin: 16px 0; background: #ffe1e4; border-radius: 0 8px 8px 0; }
 
 /* Tags */
 .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
-.tag { font-size: 10px; font-weight: 500; letter-spacing: 0.07em; padding: 3px 10px; border-radius: 10px; border: 1px solid rgba(200,164,90,0.35); color: var(--gold-lt); background: rgba(200,164,90,0.08); }
+.tag { font-size: 10px; font-weight: 700; letter-spacing: 0.07em; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--border2); color: var(--gold-lt); background: #fff; }
 
 /* ── FOOTER CTA ── */
 .panel-footer { flex-shrink: 0; padding: 16px 28px 20px; border-top: 1px solid var(--border); background: var(--bg2); }
@@ -55,10 +55,10 @@ body { background: var(--bg); color: var(--cream); font-family: var(--font); dis
   font-family: var(--font); font-size: 12px; font-weight: 600; letter-spacing: 0.04em;
   padding: 10px 16px; border-radius: 7px; text-decoration: none; transition: all .2s; cursor: pointer; border: none;
 }
-.panel-cta-primary { background: var(--gold); color: #1C1712; }
+.panel-cta-primary { background: var(--gold); color: #fff; }
 .panel-cta-primary:hover { background: var(--gold-lt); transform: translateY(-1px); }
 .panel-cta-secondary { background: transparent; color: var(--warm); border: 1px solid var(--border2); }
-.panel-cta-secondary:hover { border-color: var(--gold); color: var(--gold-lt); background: rgba(200,164,90,.06); }
+.panel-cta-secondary:hover { border-color: var(--gold); color: var(--gold-lt); background: rgba(255,255,255,.56); }
 
 .loading-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 9999; display: flex; justify-content: center; align-items: center; color: var(--gold); }
 
@@ -92,7 +92,7 @@ body { background: var(--bg); color: var(--cream); font-family: var(--font); dis
     height: 55vh; /* Panel chiếm 55% chiều cao màn hình dưới */
     border-left: none;
     border-top: 1px solid var(--border); /* Chuyển viền từ trái lên trên */
-    box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
+    box-shadow: 0 -10px 26px rgba(91,54,35,.08);
   }
 
   .panel-topbar {
@@ -154,7 +154,7 @@ let contentMap = {};
 function initNetwork() {
     const container = document.getElementById('network');
     network = new vis.Network(container, { nodes: nodesData, edges: edgesData }, {
-        nodes: { borderWidth: 2, font: { face: 'Be Vietnam Pro', color: '#D4A870' } },
+        nodes: { borderWidth: 2, font: { face: 'Be Vietnam Pro', color: '#8f6049' } },
         edges: { smooth: { type: 'continuous' } },
         physics: {
             barnesHut: { gravitationalConstant: -30000, centralGravity: 0.3, springLength: 250, springConstant: 0.04 },
@@ -195,7 +195,7 @@ function loadData() {
                     shape: (row.Node_Type === 'Hub' || row.Node_Type === 'Main') ? 'circle' : 'dot',
                     size: parseInt(row.Node_Size) || (isHub ? 80 : 30), // TĂNG LÊN 80
                     x: isHub ? 0 : undefined, y: isHub ? 0 : undefined, fixed: isHub,
-                    color: { background: isHub ? '#2C2318' : (row.Node_Color || '#1E1B14'), border: '#C8A45A' },
+                    color: { background: isHub ? '#f8eadf' : '#fff8f1', border: '#e65f35' },
                     font: { size: isHub ? 20 : 12, bold: isHub } // TĂNG CỠ CHỮ HUB
                 });
                 
@@ -204,7 +204,7 @@ function loadData() {
                         from: row.Parent_ID.trim(), 
                         to: row.Node_ID, 
                         width: 2, 
-                        color: 'rgba(200,164,90,0.3)',
+                        color: 'rgba(230,95,53,0.28)',
                         smooth: { type: 'continuous' }
                     });
                 }
@@ -219,7 +219,7 @@ function loadData() {
                                 dashes: true, 
                                 physics: false,
                                 smooth: { type: 'curvedCW', roundness: 0.2 },
-                                color: 'rgba(200,164,90,0.2)' 
+                                color: 'rgba(198,111,78,0.22)' 
                             });
                         }
                     });

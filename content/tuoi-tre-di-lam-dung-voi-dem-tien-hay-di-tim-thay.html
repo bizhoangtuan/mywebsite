@@ -47,16 +47,16 @@
 
 <style>
 :root {
-  --bg: #1C1712;
-  --bg2: #231E17;
-  --bg3: #2B2318;
-  --border: rgba(200,164,90,0.14);
-  --border2: rgba(200,164,90,0.28);
-  --gold: #C8A45A;
-  --gold-lt: #E8C87A;
-  --cream: #F0E6D0;
-  --warm: #A89070;
-  --muted: #7A6A50;
+  --bg: #fbf3ea;
+  --bg2: #fff8f1;
+  --bg3: #f8eadf;
+  --border: rgba(143,96,73,0.18);
+  --border2: rgba(198,111,78,0.28);
+  --gold: #e65f35;
+  --gold-lt: #c66f4e;
+  --cream: #2e241f;
+  --warm: #7b6a60;
+  --muted: #8f6049;
   --font: 'Be Vietnam Pro', sans-serif;
 }
 
@@ -76,7 +76,7 @@ body::after {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 0;
-  opacity: .5;
+  opacity: .12;
 }
 .page {
   position: relative;
@@ -104,7 +104,8 @@ body::after {
 .back {
   color: var(--warm);
   border: 1px solid var(--border2);
-  border-radius: 7px;
+  background: rgba(255,255,255,.54);
+  border-radius: 999px;
   padding: 8px 14px;
   font-size: 12px;
   letter-spacing: .05em;
@@ -161,6 +162,7 @@ h1 {
   border-radius: 12px;
   padding: 22px;
   margin-bottom: 40px;
+  box-shadow: 0 12px 34px rgba(91,54,35,.07);
 }
 .toc-title {
   color: var(--gold-lt);
@@ -199,7 +201,7 @@ h3 {
   margin: 28px 0 10px;
 }
 .note {
-  background: var(--bg2);
+  background: #ffe1e4;
   border-left: 3px solid var(--gold);
   border-radius: 0 10px 10px 0;
   padding: 16px 18px;
@@ -216,6 +218,7 @@ h3 {
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 16px 18px;
+  box-shadow: 0 12px 34px rgba(91,54,35,.05);
 }
 .loop-card strong {
   display: block;
@@ -252,7 +255,7 @@ h3 {
 <div class="page">
   <nav class="topbar" aria-label="Điều hướng bài viết">
     <a class="brand" href="../index.html">Nguyễn Hoàng Tuấn</a>
-    <a class="back" href="../index.html#blog-section">Về Góc Nhìn Quản Trị</a>
+    <a class="back" href="../blog.html#articles">Về Góc nhìn quản trị</a>
   </nav>
 
   <header class="article-head">
