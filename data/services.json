@@ -8,7 +8,6 @@
     "outcome": "Tạo một hệ thống bán hàng thống nhất, giúp chủ doanh nghiệp kiểm soát trải nghiệm khách hàng, chuyển đổi và dữ liệu vận hành theo thời gian thực.",
     "tags": ["Haravan", "Website", "Landing Page", "Shopee", "TikTok Shop", "CRM"],
     "formTopic": "Haravan Omnichannel",
-    "detailUrl": "content/services/haravan-omnichannel.html",
     "status": "published"
   },
   {
@@ -20,7 +19,6 @@
     "outcome": "Doanh nghiệp có quy trình rõ, trách nhiệm rõ, dữ liệu rõ và giảm lỗi do con người trong vận hành hằng ngày.",
     "tags": ["Lark Suite", "Larkbase", "SOP", "Approval", "CRM B2B", "Automation"],
     "formTopic": "Lark Suite",
-    "detailUrl": "content/services/lark-suite-operations.html",
     "status": "published"
   },
   {
@@ -32,7 +30,6 @@
     "outcome": "Xây được chiến lược nội dung, tracking, remarketing và phân bổ ngân sách dựa trên pain/gain thật của khách hàng mục tiêu.",
     "tags": ["Customer Journey", "Tracking", "Remarketing", "Content Strategy", "Performance"],
     "formTopic": "Integrated Growth Strategy",
-    "detailUrl": "content/services/integrated-growth-strategy.html",
     "status": "published"
   },
   {
@@ -44,7 +41,6 @@
     "outcome": "Giảm giờ làm tay, tăng tốc xử lý dữ liệu, tự động hóa báo cáo GA4/GSC và giúp đội ngũ tập trung vào việc tạo giá trị.",
     "tags": ["AI Agent", "Apps Script", "N8n", "Make", "GA4", "GSC"],
     "formTopic": "AI & Automation",
-    "detailUrl": "content/services/ai-automation-sme.html",
     "status": "published"
   }
 ]

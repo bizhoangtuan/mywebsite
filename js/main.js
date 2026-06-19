@@ -103,7 +103,7 @@
   function serviceCard(item, compact = false) {
     const topic = item.formTopic || item.name;
     const consultHref = `https://zalo.me/0919073456`;
-    const detailHref = item.detailUrl || `services.html?service=${encodeURIComponent(topic)}#contact`;
+    const formHref = `services.html?service=${encodeURIComponent(topic)}#contact`;
     return `
       <article class="card service-card" id="${escapeHtml(item.slug)}">
         <div class="service-category">${escapeHtml(item.category)}</div>
@@ -115,7 +115,7 @@
         </div>
         <div class="service-actions">
           <a class="btn btn-primary" href="${escapeHtml(consultHref)}" target="_blank" rel="noopener">Nhận tư vấn Zalo</a>
-          <a class="btn btn-secondary" href="${escapeHtml(detailHref)}">Xem chi tiết</a>
+          <a class="btn btn-secondary" href="${escapeHtml(formHref)}">Điền form</a>
         </div>
       </article>
     `;
