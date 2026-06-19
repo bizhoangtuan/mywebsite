@@ -46,7 +46,8 @@
 
     const sloganRow = $('#slogan-row');
     if (sloganRow && Array.isArray(profile.pillars)) {
-      sloganRow.innerHTML = profile.pillars.map((pillar) => `<span class="pill">${escapeHtml(pillar)}</span>`).join('');
+      const pillars = profile.pillars.map((pillar) => `<span class="pill">${escapeHtml(pillar)}</span>`).join('');
+      sloganRow.innerHTML = `<div class="marquee-track">${pillars}${pillars}</div>`;
     }
 
     $$('[data-link="facebook"]').forEach((node) => node.href = links.facebook || '#');
@@ -103,7 +104,8 @@
   function serviceCard(item, compact = false) {
     const topic = item.formTopic || item.name;
     const consultHref = `https://zalo.me/0919073456`;
-    const formHref = `services.html?service=${encodeURIComponent(topic)}#contact`;
+    const isServicesPage = document.body.dataset.page === 'services';
+    const formHref = isServicesPage ? '#contact' : `services.html?service=${encodeURIComponent(topic)}#contact`;
     return `
       <article class="card service-card" id="${escapeHtml(item.slug)}">
         <div class="service-category">${escapeHtml(item.category)}</div>
@@ -114,8 +116,8 @@
           ${(item.tags || []).map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}
         </div>
         <div class="service-actions">
-          <a class="btn btn-primary" href="${escapeHtml(consultHref)}" target="_blank" rel="noopener">Nhận tư vấn Zalo</a>
-          <a class="btn btn-secondary" href="${escapeHtml(formHref)}">Điền form</a>
+          <a class="btn btn-primary" href="${escapeHtml(consultHref)}" target="_blank" rel="noopener">Trao đổi qua Zalo</a>
+          <a class="btn btn-secondary" href="${escapeHtml(formHref)}" data-service-form="${escapeHtml(topic)}">Gửi bài toán</a>
         </div>
       </article>
     `;
@@ -143,7 +145,7 @@
   function populateServiceSelect(services) {
     $$('[data-service-select]').forEach((select) => {
       const current = select.value;
-      const first = select.querySelector('option[value=""]')?.outerHTML || '<option value="" disabled selected>Dịch vụ quan tâm *</option>';
+      const first = select.querySelector('option[value=""]')?.outerHTML || '<option value="" disabled selected>Bài toán muốn trao đổi *</option>';
       select.innerHTML = first + services.map((service) => `
         <option value="${escapeHtml(service.formTopic || service.name)}">${escapeHtml(service.name)}</option>
       `).join('');
@@ -153,15 +155,39 @@
     });
   }
 
+  function scrollToContact() {
+    const contact = $('#contact');
+    if (!contact) return;
+    const top = contact.getBoundingClientRect().top + window.scrollY - 92;
+    window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
+  }
+
+  function applyRequestedService() {
+    const requestedService = new URLSearchParams(window.location.search).get('service');
+    if (requestedService) {
+      const select = $('[data-service-select]');
+      if (select) select.value = requestedService;
+    }
+    if (window.location.hash === '#contact') {
+      window.setTimeout(scrollToContact, 80);
+    }
+  }
+
   function initServiceCtas() {
     document.addEventListener('click', (event) => {
-      const cta = event.target.closest('[data-service-cta]');
+      const cta = event.target.closest('[data-service-form]');
       if (!cta) return;
-      const topic = cta.dataset.serviceCta;
-      window.setTimeout(() => {
-        const select = $('[data-service-select]');
-        if (select && topic) select.value = topic;
-      }, 50);
+      if (document.body.dataset.page !== 'services') return;
+      const topic = cta.dataset.serviceForm;
+      const select = $('[data-service-select]');
+      if (!select) return;
+      event.preventDefault();
+      if (topic) select.value = topic;
+      const url = new URL(window.location.href);
+      url.searchParams.set('service', topic || '');
+      url.hash = 'contact';
+      window.history.pushState({}, '', url);
+      scrollToContact();
     });
   }
 
@@ -199,8 +225,8 @@
 
     renderList($('[data-articles-list]'), articles, (item) => articleCard(item, 'article'), 'Chưa có bài Góc nhìn quản trị.');
     renderList($('[data-frameworks-list]'), frameworks, (item) => articleCard(item, 'framework'), 'Chưa có bài Framework kinh doanh.');
-    renderList($('[data-services-list]'), services, (item) => serviceCard(item), 'Chưa có dịch vụ nào.');
-    renderList($('[data-services-preview]'), services.slice(0, 3), (item) => serviceCard(item, true), 'Chưa có dịch vụ nào.');
+    renderList($('[data-services-list]'), services, (item) => serviceCard(item), 'Chưa có hướng đồng hành nào.');
+    renderList($('[data-services-preview]'), services.slice(0, 3), (item) => serviceCard(item, true), 'Chưa có hướng đồng hành nào.');
 
     const latest = [...articles.map((item) => ({ ...item, type: 'article' })), ...frameworks.map((item) => ({ ...item, type: 'framework' }))]
       .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')))
@@ -208,6 +234,7 @@
     renderList($('[data-latest-content]'), latest, (item) => articleCard(item, item.type), 'Chưa có nội dung nào.');
 
     populateServiceSelect(services);
+    applyRequestedService();
   }
 
   initMeta();

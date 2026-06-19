@@ -18,7 +18,7 @@ const CONFIG = {
     company:    "OneAds Digital",
     eyebrow:    "BDM · ONEADS DIGITAL",  // Nhãn nhỏ phía trên tên
 
-    bio: "Là người đồng hành thiết lập hệ thống quản trị bài bản, giúp doanh nghiệp SME chuyển đổi số và tăng trưởng từ gốc rễ. Điểm giao thoa giữa <strong>Công nghệ</strong> – <strong>Vận hành</strong> – <strong>Marketing</strong>.",
+    bio: "Mình đồng hành cùng anh/chị chủ doanh nghiệp thiết lập hệ thống quản trị bài bản, chuyển đổi số và tăng trưởng từ gốc rễ. Điểm giao thoa giữa <strong>Công nghệ</strong> – <strong>Vận hành</strong> – <strong>Marketing</strong>.",
 
     // 3 giá trị cốt lõi hiển thị dạng pill
     pillars: ["Thực Học", "Thực Làm", "Thực Giá Trị"],
@@ -217,7 +217,7 @@ const CONFIG = {
    * ────────────────────────────────────────── */
   meta: {
     title:       "Nguyễn Hoàng Tuấn – BDM · OneAds Digital",
-    description: "Business Development Manager tại OneAds Digital. Tư vấn giải pháp TMĐT, Haravan, Lark Suite, Performance Marketing cho doanh nghiệp SME.",
+    description: "Business Development Manager tại OneAds Digital. Đồng hành cùng SME trong TMĐT, Haravan, Lark Suite, Performance Marketing và AI Automation.",
     ogImage:     "", // URL ảnh thumbnail khi share link (để trống nếu chưa có)
   },
 
