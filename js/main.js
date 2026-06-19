@@ -158,7 +158,9 @@
   function scrollToContact() {
     const contact = $('#contact');
     if (!contact) return;
-    const top = contact.getBoundingClientRect().top + window.scrollY - 92;
+    const topbar = $('.topbar');
+    const offset = (topbar?.offsetHeight || 76) + 16;
+    const top = contact.getBoundingClientRect().top + window.scrollY - offset;
     window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
   }
 
