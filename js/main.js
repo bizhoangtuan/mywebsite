@@ -2,6 +2,7 @@
   const C = typeof CONFIG !== 'undefined' ? CONFIG : (window.CONFIG || {});
   const profile = C.profile || {};
   const links = C.links || {};
+  const rootPath = window.location.pathname.includes('/content/') ? '../../' : '';
 
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
@@ -101,7 +102,8 @@
 
   function serviceCard(item, compact = false) {
     const topic = item.formTopic || item.name;
-    const serviceHref = `services.html?service=${encodeURIComponent(topic)}#contact`;
+    const consultHref = `https://zalo.me/0919073456`;
+    const detailHref = item.detailUrl || `services.html?service=${encodeURIComponent(topic)}#contact`;
     return `
       <article class="card service-card" id="${escapeHtml(item.slug)}">
         <div class="service-category">${escapeHtml(item.category)}</div>
@@ -112,7 +114,8 @@
           ${(item.tags || []).map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}
         </div>
         <div class="service-actions">
-          <a class="btn btn-primary" href="${escapeHtml(serviceHref)}" data-service-cta="${escapeHtml(topic)}">Nhận tư vấn</a>
+          <a class="btn btn-primary" href="${escapeHtml(consultHref)}" target="_blank" rel="noopener">Nhận tư vấn Zalo</a>
+          <a class="btn btn-secondary" href="${escapeHtml(detailHref)}">Xem chi tiết</a>
         </div>
       </article>
     `;
@@ -189,9 +192,9 @@
 
   async function initContent() {
     const [articles, frameworks, services] = await Promise.all([
-      loadJson('data/articles.json'),
-      loadJson('data/frameworks.json'),
-      loadJson('data/services.json')
+      loadJson(`${rootPath}data/articles.json`),
+      loadJson(`${rootPath}data/frameworks.json`),
+      loadJson(`${rootPath}data/services.json`)
     ]);
 
     renderList($('[data-articles-list]'), articles, (item) => articleCard(item, 'article'), 'Chưa có bài Góc nhìn quản trị.');
