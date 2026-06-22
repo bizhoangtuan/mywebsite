@@ -17,6 +17,8 @@
 <meta name="twitter:title" content="Tuổi trẻ đi làm: Đừng vội đếm tiền, hãy đi tìm Thầy">
 <meta name="twitter:description" content="Một bài sharing thực chiến về công việc, mentor, kỷ luật và phát triển bản thân.">
 
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="apple-touch-icon" href="../assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -95,11 +97,19 @@ body::after {
   margin-bottom: 54px;
 }
 .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   color: var(--gold);
   font-size: 14px;
   font-weight: 700;
   letter-spacing: .08em;
   text-decoration: none;
+}
+.brand img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
 }
 .back {
   color: var(--warm);
@@ -254,7 +264,7 @@ h3 {
 <body>
 <div class="page">
   <nav class="topbar" aria-label="Điều hướng bài viết">
-    <a class="brand" href="../index.html">Nguyễn Hoàng Tuấn</a>
+    <a class="brand" href="../index.html"><img src="../assets/logo.png" alt="">Nguyễn Hoàng Tuấn</a>
     <a class="back" href="../blog.html#articles">Về Góc nhìn quản trị</a>
   </nav>
 
