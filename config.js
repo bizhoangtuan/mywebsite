@@ -216,9 +216,9 @@ const CONFIG = {
    * 7. META (SEO & Tab trình duyệt)
    * ────────────────────────────────────────── */
   meta: {
-    title:       "Nguyễn Hoàng Tuấn – BDM · OneAds Digital",
-    description: "Business Development Manager tại OneAds Digital. Đồng hành cùng SME trong TMĐT, Haravan, Lark Suite, Performance Marketing và AI Automation.",
-    ogImage:     "", // URL ảnh thumbnail khi share link (để trống nếu chưa có)
+    title:       "Nguyễn Hoàng Tuấn | Giải pháp Vận hành & Tăng trưởng số",
+    description: "Đồng hành cùng SME thiết lập hệ thống quản trị và chuyển đổi số. Tư vấn Haravan, Lark Suite, Digital Marketing và AI Automation để chuẩn hóa quy trình, dữ liệu và vận hành hiệu quả.",
+    ogImage:     "https://mywebsite.biz-hoangtuan.workers.dev/assets/share-image.png",
   },
 
 };
