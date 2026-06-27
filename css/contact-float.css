@@ -1,0 +1,63 @@
+.floating-contact {
+  position: fixed !important;
+  right: 18px !important;
+  bottom: 18px !important;
+  z-index: 80 !important;
+  display: grid !important;
+  gap: 10px;
+}
+
+.floating-contact a {
+  width: 52px !important;
+  height: 52px !important;
+  border-radius: 50% !important;
+  display: grid !important;
+  place-items: center !important;
+  background: #fff8f1 !important;
+  color: #2e241f !important;
+  border: 1px solid rgba(143, 96, 73, .18) !important;
+  box-shadow: 0 14px 34px rgba(91, 54, 35, .16) !important;
+  text-decoration: none !important;
+  font-family: 'Be Vietnam Pro', system-ui, sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 800 !important;
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+
+.floating-contact a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 42px rgba(91, 54, 35, .22);
+}
+
+.floating-contact .phone {
+  background: #e65f35 !important;
+  color: #fff !important;
+}
+
+.floating-contact .zalo {
+  background: #fff !important;
+  color: #0068ff !important;
+}
+
+.floating-contact .messenger {
+  background: #ffe1e4 !important;
+  color: #c66f4e !important;
+}
+
+.floating-contact .icon {
+  line-height: 1;
+}
+
+@media (max-width: 680px) {
+  .floating-contact {
+    right: 12px;
+    bottom: 12px;
+    gap: 8px;
+  }
+
+  .floating-contact a {
+    width: 46px;
+    height: 46px;
+    font-size: 12px;
+  }
+}
