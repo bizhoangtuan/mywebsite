@@ -42,5 +42,27 @@
     "tags": ["AI Agent", "Apps Script", "N8n", "Make", "GA4", "GSC"],
     "formTopic": "AI & Automation",
     "status": "published"
+  },
+  {
+    "name": "Đăng ký thông báo website với Bộ Công Thương",
+    "slug": "thong-bao-website-bo-cong-thuong",
+    "category": "PHÁP LÝ WEBSITE",
+    "summary": "Hỗ trợ chuẩn bị thông tin, kiểm tra website và thực hiện hồ sơ thông báo website bán hàng với Bộ Công Thương.",
+    "pain": "Anh/chị đã có website bán hàng nhưng chưa rõ website cần thông báo hay đăng ký, hồ sơ cần chuẩn bị gì và thao tác trên cổng Bộ Công Thương ra sao.",
+    "outcome": "Mình cùng anh/chị rà soát website, chuẩn bị thông tin doanh nghiệp/hộ kinh doanh và theo dõi hồ sơ để website vận hành chỉn chu hơn về mặt pháp lý.",
+    "tags": ["Bộ Công Thương", "Website", "Thông báo website", "Hồ sơ", "TMĐT"],
+    "formTopic": "Thông báo website Bộ Công Thương",
+    "status": "published"
+  },
+  {
+    "name": "Đăng ký Zalo OA & xác minh tích vàng doanh nghiệp",
+    "slug": "dang-ky-zalo-oa-xac-minh-tich-vang",
+    "category": "ZALO OA",
+    "summary": "Hỗ trợ tạo Zalo OA, chuẩn hóa thông tin doanh nghiệp và chuẩn bị hồ sơ xác minh để tăng độ tin cậy khi chăm sóc khách hàng.",
+    "pain": "Anh/chị muốn dùng Zalo OA để tư vấn, chăm sóc khách hàng hoặc gửi thông báo nhưng chưa rõ cách đăng ký, xác minh hồ sơ và tối ưu thông tin hiển thị.",
+    "outcome": "Mình cùng anh/chị thiết lập Zalo OA đúng thông tin thương hiệu, chuẩn bị hồ sơ xác minh doanh nghiệp và định hướng cách dùng OA cho chăm sóc khách hàng.",
+    "tags": ["Zalo OA", "Tích vàng", "Xác minh", "Doanh nghiệp", "CSKH"],
+    "formTopic": "Đăng ký Zalo OA và tích vàng",
+    "status": "published"
   }
 ]
