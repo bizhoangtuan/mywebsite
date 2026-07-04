@@ -290,11 +290,50 @@ section { margin-bottom: 78px; }
   font-size: clamp(28px, 4vw, 42px);
   line-height: 1.15;
   letter-spacing: -.04em;
+  transition: color .25s ease;
 }
 .section-note {
   color: var(--earth);
   font-size: 13px;
   font-weight: 800;
+}
+
+/* Hover: tiêu đề đổi màu khi rê chuột */
+.hero h1,
+.section-title,
+.card h3,
+.service-card h3,
+.workflow-step h3,
+.article-title,
+.feature-band h3 {
+  transition: color .25s ease;
+}
+.hero h1:hover,
+.section-title:hover,
+.card h3:hover,
+.service-card h3:hover,
+.workflow-step h3:hover,
+.article-title:hover,
+.feature-band h3:hover {
+  color: var(--terracotta);
+}
+
+/* Scroll reveal: section xuất hiện dần khi cuộn tới */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity .8s cubic-bezier(.16, .84, .44, 1), transform .8s cubic-bezier(.16, .84, .44, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
 
 .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
