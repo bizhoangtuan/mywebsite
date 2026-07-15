@@ -57,12 +57,51 @@
   function initStats() {
     const grid = $('#stats-grid');
     if (!grid || !Array.isArray(C.stats)) return;
-    grid.innerHTML = C.stats.map((item) => `
-      <div class="stat">
-        <div class="stat-num">${escapeHtml(item.number)}</div>
-        <div class="stat-label">${escapeHtml(item.label)}</div>
-      </div>
-    `).join('');
+    grid.innerHTML = C.stats.map((item) => {
+      const match = /^(\d+)(.*)$/.exec(String(item.number || ''));
+      const target = match ? match[1] : '';
+      const suffix = match ? match[2] : '';
+      const initial = target ? '0' : escapeHtml(item.number);
+      return `
+        <div class="stat">
+          <div class="stat-num" data-count-target="${escapeHtml(target)}" data-count-suffix="${escapeHtml(suffix)}">${initial}${escapeHtml(suffix)}</div>
+          <div class="stat-label">${escapeHtml(item.label)}</div>
+        </div>
+      `;
+    }).join('');
+
+    const nums = $$('.stat-num[data-count-target]', grid).filter((el) => el.dataset.countTarget);
+    if (!nums.length) return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      nums.forEach((el) => { el.textContent = `${el.dataset.countTarget}${el.dataset.countSuffix}`; });
+      return;
+    }
+
+    const animateCount = (el) => {
+      const target = parseInt(el.dataset.countTarget, 10);
+      const suffix = el.dataset.countSuffix || '';
+      const duration = 1200;
+      const start = performance.now();
+      const step = (now) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = `${Math.round(target * eased)}${suffix}`;
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animateCount(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    nums.forEach((el) => observer.observe(el));
   }
 
   async function loadJson(url, fallback = []) {
