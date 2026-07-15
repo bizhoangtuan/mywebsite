@@ -239,6 +239,80 @@
     applyRequestedService();
   }
 
+  function formatDate(value) {
+    const match = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(value || ''));
+    return match ? `${match[3]}/${match[2]}/${match[1]}` : (value || '');
+  }
+
+  async function initJourney() {
+    const container = $('[data-journey-timeline]');
+    if (!container) return;
+
+    const statsEl = $('[data-journey-stats]');
+    const entries = await loadJson(`${rootPath}data/ceosg11-journey.json`);
+    const sorted = [...entries].sort((a, b) => String(a.date || '').localeCompare(String(b.date || '')));
+
+    if (statsEl && sorted.length) {
+      const topics = new Set();
+      sorted.forEach((item) => (item.tags || []).forEach((tag) => topics.add(tag)));
+      const latest = sorted[sorted.length - 1];
+      statsEl.innerHTML = `
+        <div class="stat"><div class="stat-num">${sorted.length}</div><div class="stat-label">Buổi đã ghi nhận</div></div>
+        <div class="stat"><div class="stat-num">${topics.size}</div><div class="stat-label">Chủ đề đã học</div></div>
+        <div class="stat"><div class="stat-num">${escapeHtml(formatDate(latest.date))}</div><div class="stat-label">Buổi gần nhất</div></div>
+      `;
+    }
+
+    if (!sorted.length) {
+      container.innerHTML = '<div class="empty-state">Buổi học đầu tiên sắp bắt đầu. Quay lại đây sau mỗi buổi để xem hành trình CEOSG11 nhé.</div>';
+      return;
+    }
+
+    container.innerHTML = `
+      <div class="timeline-fill" data-timeline-fill></div>
+      ${sorted.map((item, index) => `
+        <div class="timeline-item reveal" style="transition-delay:${Math.min(index, 6) * 80}ms">
+          <div class="timeline-marker">${escapeHtml(item.session ?? index + 1)}</div>
+          <div class="timeline-card">
+            <div class="timeline-date">${escapeHtml(formatDate(item.date))}${index === sorted.length - 1 ? ' · MỚI NHẤT' : ''}</div>
+            <h3>${escapeHtml(item.title)}</h3>
+            <div class="timeline-tags">${(item.tags || []).map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}</div>
+            <p class="timeline-recap">${escapeHtml(item.recap)}</p>
+            ${item.takeaway ? `<div class="timeline-takeaway"><span>Takeaway</span>${escapeHtml(item.takeaway)}</div>` : ''}
+          </div>
+        </div>
+      `).join('')}
+    `;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const items = $$('.timeline-item', container);
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      items.forEach((el) => el.classList.add('is-visible'));
+    } else {
+      const observer = new IntersectionObserver((entries2) => {
+        entries2.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2, rootMargin: '0px 0px -60px 0px' });
+      items.forEach((el) => observer.observe(el));
+    }
+
+    const fillEl = $('[data-timeline-fill]', container);
+    if (fillEl && !reduceMotion) {
+      const updateFill = () => {
+        const rect = container.getBoundingClientRect();
+        const visible = Math.min(Math.max(window.innerHeight * 0.5 - rect.top, 0), rect.height);
+        fillEl.style.height = `${rect.height ? (visible / rect.height) * 100 : 0}%`;
+      };
+      updateFill();
+      window.addEventListener('scroll', updateFill, { passive: true });
+      window.addEventListener('resize', updateFill);
+    }
+  }
+
   function initScrollReveal() {
     const sections = $$('.site-shell > section');
     if (!sections.length) return;
@@ -266,5 +340,6 @@
   initTabs();
   initServiceCtas();
   initScrollReveal();
+  initJourney();
   initContent();
 })();
