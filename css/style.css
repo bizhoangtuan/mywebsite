@@ -18,7 +18,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
-  background: var(--paper);
+  background: linear-gradient(135deg, var(--rose-2) 0%, var(--paper) 55%, var(--paper-3) 100%);
   color: var(--ink);
   font-family: var(--font);
   font-size: 15px;
