@@ -49,6 +49,7 @@ Mỗi bài viết phải:
 * Có meta description
 * Có ngày đăng
 * Có mục lục nếu bài dài hơn 1000 từ
+* Có đoạn mã Google Analytics (gtag.js, ID: G-CBQ8Z5CDSE) ngay sau thẻ `<head>` mở đầu — copy y nguyên từ một file HTML có sẵn trong content/
 
 ## Workflow
 
