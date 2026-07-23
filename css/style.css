@@ -721,6 +721,17 @@ textarea.field { min-height: 110px; resize: vertical; }
   text-transform: uppercase;
   margin-bottom: 5px;
 }
+.timeline-link {
+  display: inline-block;
+  margin-top: 14px;
+  color: var(--terracotta);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.timeline-link:hover {
+  text-decoration: underline;
+}
 
 @media (max-width: 680px) {
   .timeline {

@@ -318,6 +318,7 @@
             <div class="timeline-tags">${(item.tags || []).map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}</div>
             <p class="timeline-recap">${escapeHtml(item.recap)}</p>
             ${item.takeaway ? `<div class="timeline-takeaway"><span>Takeaway</span>${escapeHtml(item.takeaway)}</div>` : ''}
+            ${item.url ? `<a class="timeline-link" href="${rootPath}${escapeHtml(item.url)}">Đọc bài recap đầy đủ →</a>` : ''}
           </div>
         </div>
       `).join('')}
