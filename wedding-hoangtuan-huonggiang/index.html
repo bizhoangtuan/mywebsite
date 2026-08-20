@@ -1,6 +1,7 @@
 <!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="color-scheme" content="light only">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23D6283C' d='M12 20.5s-7.2-4.5-9.4-9C1 8 2.6 4.8 6 4.4c2-.2 3.5.7 6 3.1 2.5-2.4 4-3.3 6-3.1 3.4.4 5 3.6 3.4 7.1-2.2 4.5-9.4 9-9.4 9Z'/%3E%3C/svg%3E">
 <title>Thiệp cưới Hoàng Tuấn &amp; Hương Giang – 20.09.2026</title>
 <meta name="description" content="Sau hơn 7 năm yêu thương, Nguyễn Hoàng Tuấn &amp; Đào Thị Hương Giang trân trọng kính mời bạn đến chung vui trong ngày trọng đại 20.09.2026. Bấm xem thiệp mời và gửi lời chúc nhé!">
@@ -76,33 +77,10 @@
   --gold-line:rgba(46,36,31,.12);
   --shadow:rgba(46,36,31,.16);
 }
-@media (prefers-color-scheme: dark){
-  :root{
-    --rice:#211A16;
-    --rice-panel:#2B2119;
-    --ink:#FBF0E6;
-    --ink-soft:#CBB6A8;
-    --claret:#FF6F61;
-    --claret-deep:#FF8A75;
-    --gold:#E3A98A;
-    --gold-pale:#7A4A3E;
-    --gold-line:rgba(251,240,230,.14);
-    --shadow:rgba(0,0,0,.5);
-  }
-}
-:root[data-theme="dark"]{
-  --rice:#211A16; --rice-panel:#2B2119; --ink:#FBF0E6; --ink-soft:#CBB6A8;
-  --claret:#FF6F61; --claret-deep:#FF8A75; --gold:#E3A98A; --gold-pale:#7A4A3E;
-  --gold-line:rgba(251,240,230,.14); --shadow:rgba(0,0,0,.5);
-}
-:root[data-theme="light"]{
-  --rice:#FBF3EA; --rice-panel:#FFFFFF; --ink:#2E241F; --ink-soft:#7B6A60;
-  --claret:#D6283C; --claret-deep:#B01E2E; --gold:#8F6049; --gold-pale:#F4B7BD;
-  --gold-line:rgba(46,36,31,.12); --shadow:rgba(46,36,31,.16);
-}
+/* Light theme is forced site-wide — no dark mode variant on purpose. */
 
 *{box-sizing:border-box;}
-html{scroll-behavior:smooth;}
+html{scroll-behavior:smooth; color-scheme:light;}
 body{
   margin:0;
   background:var(--rice);
