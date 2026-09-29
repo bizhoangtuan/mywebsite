@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CBQ8Z5CDSE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CBQ8Z5CDSE');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tư duy dùng AI: đừng chọn model, hãy xây quy trình Input - Process - Output</title>
+<meta name="description" content="Mindset dùng AI có hệ thống cho doanh nghiệp: xây quy trình rõ ràng với Input, Process, Output. Tư duy nằm ở dữ liệu và kiến thức, không nằm ở model hay công cụ AI.">
+<meta name="author" content="Nguyễn Hoàng Tuấn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tư duy dùng AI: đừng chọn model, hãy xây quy trình Input - Process - Output">
+<meta property="og:description" content="Vì sao mindset dùng AI quan trọng hơn việc chọn công cụ nào: một quy trình Input - Process - Output rõ ràng, và tư duy nằm ở dữ liệu, kiến thức của chính mình.">
+<meta property="og:locale" content="vi_VN">
+<meta property="article:author" content="Nguyễn Hoàng Tuấn">
+<meta property="article:published_time" content="2026-09-29">
+<meta property="article:section" content="AI & Automation">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tư duy dùng AI: đừng chọn model, hãy xây quy trình">
+<meta name="twitter:description" content="Mindset dùng AI có hệ thống: Input - Process - Output, và vì sao tư duy nằm ở dữ liệu chứ không nằm ở công cụ.">
+
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="apple-touch-icon" href="../assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/contact-float.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Tư duy dùng AI: đừng chọn model, hãy xây quy trình Input - Process - Output",
+  "description": "Mindset dùng AI có hệ thống cho doanh nghiệp: xây quy trình rõ ràng với Input, Process, Output. Tư duy nằm ở dữ liệu và kiến thức, không nằm ở model hay công cụ AI.",
+  "author": {
+    "@type": "Person",
+    "name": "Nguyễn Hoàng Tuấn"
+  },
+  "datePublished": "2026-09-29",
+  "dateModified": "2026-09-29",
+  "inLanguage": "vi-VN",
+  "articleSection": "AI & Automation",
+  "keywords": [
+    "tư duy dùng AI",
+    "AI mindset",
+    "Input Process Output",
+    "quy trình làm việc với AI",
+    "AI Automation",
+    "dữ liệu và kiến thức"
+  ]
+}
+</script>
+
+<style>
+:root {
+  --bg: #fbf3ea;
+  --bg2: #fff8f1;
+  --bg3: #f8eadf;
+  --border: rgba(143,96,73,0.18);
+  --border2: rgba(198,111,78,0.28);
+  --gold: #e65f35;
+  --gold-lt: #c66f4e;
+  --cream: #2e241f;
+  --warm: #7b6a60;
+  --muted: #8f6049;
+  --font: 'Be Vietnam Pro', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.8;
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: .12;
+}
+a { color: inherit; }
+.page {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 28px 64px;
+}
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 54px;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--gold);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-decoration: none;
+}
+.brand img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+.back {
+  color: var(--warm);
+  border: 1px solid var(--border2);
+  background: rgba(255,255,255,.54);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 12px;
+  letter-spacing: .05em;
+  text-decoration: none;
+}
+.back:hover {
+  color: var(--gold-lt);
+  border-color: var(--gold);
+}
+.article-head {
+  padding-bottom: 36px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 36px;
+}
+.eyebrow {
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+h1 {
+  color: var(--cream);
+  font-size: clamp(34px, 6vw, 58px);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  margin-bottom: 18px;
+}
+.lead {
+  color: var(--warm);
+  font-size: 17px;
+  line-height: 1.85;
+  max-width: 760px;
+  margin-bottom: 22px;
+}
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.meta span {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 4px 9px;
+}
+.toc {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 22px;
+  margin-bottom: 40px;
+  box-shadow: 0 12px 34px rgba(91,54,35,.07);
+}
+.toc-title {
+  color: var(--gold-lt);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.toc a {
+  display: block;
+  color: var(--warm);
+  text-decoration: none;
+  font-size: 14px;
+  padding: 5px 0;
+}
+.toc a:hover { color: var(--gold-lt); }
+article { max-width: 760px; }
+article p {
+  color: var(--warm);
+  margin-bottom: 18px;
+}
+article strong {
+  color: var(--cream);
+  font-weight: 700;
+}
+article ul, article ol {
+  color: var(--warm);
+  margin: 0 0 18px 20px;
+}
+article li {
+  margin-bottom: 8px;
+}
+h2 {
+  color: var(--gold);
+  font-size: 24px;
+  line-height: 1.35;
+  margin: 42px 0 14px;
+}
+h3 {
+  color: var(--gold-lt);
+  font-size: 17px;
+  margin: 28px 0 10px;
+}
+.note {
+  background: #ffe1e4;
+  border-left: 3px solid var(--gold);
+  border-radius: 0 10px 10px 0;
+  padding: 16px 18px;
+  color: var(--warm);
+  margin: 26px 0;
+}
+.quote {
+  background: var(--bg2);
+  border-left: 3px solid var(--gold-lt);
+  border-radius: 0 10px 10px 0;
+  padding: 16px 18px;
+  color: var(--cream);
+  font-weight: 600;
+  font-style: italic;
+  margin: 26px 0;
+}
+.flow {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin: 22px 0 34px;
+  color: var(--warm);
+  font-size: 14.5px;
+  line-height: 2;
+}
+.flow strong { color: var(--cream); }
+.lesson-grid {
+  display: grid;
+  gap: 12px;
+  margin: 22px 0 34px;
+}
+.lesson-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 18px;
+  box-shadow: 0 12px 34px rgba(91,54,35,.05);
+}
+.lesson-card strong {
+  display: block;
+  color: var(--gold-lt);
+  margin-bottom: 5px;
+}
+.lesson-card span {
+  color: var(--warm);
+  font-size: 14px;
+}
+.checklist {
+  margin: 18px 0 28px;
+}
+.checklist li {
+  color: var(--warm);
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+.question-box {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px;
+  margin: 30px 0;
+  box-shadow: 0 12px 34px rgba(91,54,35,.07);
+}
+.closing {
+  margin-top: 46px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 26px;
+}
+.tags span {
+  border: 1px solid var(--border2);
+  background: #fff;
+  color: var(--gold-lt);
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+@media (max-width: 720px) {
+  .page { padding: 0 20px 48px; }
+  .topbar { align-items: flex-start; flex-direction: column; margin-bottom: 38px; }
+  .article-head { margin-bottom: 28px; }
+  article { max-width: none; }
+  h1 { font-size: 36px; }
+  h2 { font-size: 21px; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <nav class="topbar" aria-label="Điều hướng bài viết">
+    <a class="brand" href="../index.html"><img src="../assets/logo.png" alt="">Nguyễn Hoàng Tuấn</a>
+    <a class="back" href="../blog.html#articles">Về Góc nhìn quản trị</a>
+  </nav>
+
+  <header class="article-head">
+    <div class="eyebrow">Góc nhìn quản trị · AI & Automation</div>
+    <h1>Tư duy dùng AI: đừng chọn model, hãy xây quy trình Input - Process - Output</h1>
+    <p class="lead">
+      Rất nhiều người hỏi mình nên dùng ChatGPT, Claude hay Gemini. Câu hỏi đó, với mình, đặt sai trọng tâm ngay từ đầu. Model nào cũng chỉ là công cụ. Thứ quyết định AI có giúp được việc hay không, không nằm ở cái tên công cụ, mà nằm ở việc mình có một quy trình rõ ràng để đưa dữ liệu vào, xử lý và lấy ra kết quả dùng được hay không.
+    </p>
+    <div class="meta">
+      <span>Nguyễn Hoàng Tuấn</span>
+      <span>29/09/2026</span>
+      <span>9 phút đọc</span>
+    </div>
+  </header>
+
+  <div class="toc" aria-label="Mục lục">
+    <div class="toc-title">Nội dung chính</div>
+    <a href="#sai-lam-pho-bien">1. Sai lầm phổ biến: đi tìm công cụ trước khi có quy trình</a>
+    <a href="#tu-duy-la-du-lieu">2. Tư duy là dữ liệu và kiến thức, không phải model</a>
+    <a href="#input-process-output">3. Mọi tiến trình làm việc với AI đều có 3 phần: Input - Process - Output</a>
+    <a href="#input">4. Input: nạp đúng dữ liệu và đúng ngữ cảnh</a>
+    <a href="#process">5. Process: quy trình xử lý, không phải một câu prompt ngẫu hứng</a>
+    <a href="#output">6. Output: kết quả phải kiểm chứng được, không phải chỉ nghe hay</a>
+    <a href="#ap-dung">7. Cách bắt đầu xây mindset này cho công việc của bạn</a>
+  </div>
+
+  <article>
+    <h2 id="sai-lam-pho-bien">Sai lầm phổ biến: đi tìm công cụ trước khi có quy trình</h2>
+    <p>
+      Mình gặp rất nhiều chủ doanh nghiệp và nhân sự đi học AI theo kiểu: hôm nay nghe ai đó khen công cụ A, mai lại thấy công cụ B ra mắt tính năng mới, thế là chuyển qua chuyển lại, dùng thử vài ngày rồi bỏ. Cuối cùng, sau vài tháng, họ có một danh sách tài khoản AI đã đăng ký, nhưng công việc thực tế vẫn chưa nhanh hơn bao nhiêu.
+    </p>
+    <p>
+      Vấn đề không nằm ở việc họ chọn sai công cụ. Vấn đề nằm ở việc họ chưa từng có một quy trình làm việc rõ ràng trước khi đưa AI vào. Khi không có quy trình, AI chỉ là một công cụ trả lời câu hỏi ngẫu nhiên, dùng xong việc nào biết việc đó, không tích lũy được gì cho lần sau.
+    </p>
+    <div class="note">
+      Đổi công cụ liên tục mà không có quy trình, cũng giống như đổi phần mềm kế toán liên tục mà không có quy trình ghi sổ. Phần mềm nào cũng chạy được, nhưng dữ liệu vẫn rối như cũ.
+    </div>
+
+    <h2 id="tu-duy-la-du-lieu">Tư duy là dữ liệu và kiến thức, không phải model</h2>
+    <p>
+      Đây là điều mình muốn nhấn mạnh nhất trong bài này: cái làm nên chất lượng của một kết quả AI, không phải là model bạn dùng mạnh cỡ nào, mà là dữ liệu và kiến thức bạn đưa vào tiến trình đó.
+    </p>
+    <p>
+      Hai người cùng dùng chung một model AI, nhưng một người ra được kết quả sắc bén, người kia chỉ ra được câu trả lời chung chung. Khác biệt không nằm ở model, vì họ dùng chung một cái. Khác biệt nằm ở việc người thứ nhất hiểu rõ ngành nghề của mình, có dữ liệu thật, có khung tư duy rõ ràng để hỏi đúng câu hỏi và đọc đúng câu trả lời. Người thứ hai chỉ gõ một câu hỏi mơ hồ và nhận về một câu trả lời cũng mơ hồ không kém.
+    </p>
+    <div class="quote">
+      AI không tạo ra tư duy cho bạn. AI khuếch đại tư duy bạn đã có sẵn, dù tốt hay chưa tốt.
+    </div>
+    <p>
+      Nếu dữ liệu đầu vào là những thông tin chung chung, thiếu ngữ cảnh, không phản ánh đúng thực tế doanh nghiệp, thì dù model có tốt đến đâu, kết quả trả về cũng sẽ chung chung theo. Ngược lại, nếu bạn có kiến thức ngành sâu, dữ liệu vận hành thật, và biết mình đang cần giải quyết vấn đề gì, thì AI trở thành một người cộng sự xử lý thông tin cực nhanh, dựa trên chính nền tảng kiến thức bạn cung cấp.
+    </p>
+    <p>
+      Nói cách khác, việc học AI không nên bắt đầu bằng câu hỏi "dùng công cụ nào", mà nên bắt đầu bằng câu hỏi "mình đang có dữ liệu gì, và mình hiểu vấn đề của mình đến đâu".
+    </p>
+
+    <h2 id="input-process-output">Mọi tiến trình làm việc với AI đều có 3 phần: Input - Process - Output</h2>
+    <p>
+      Để biến việc dùng AI từ ngẫu hứng thành có hệ thống, mình luôn nhìn mọi tác vụ AI theo ba phần, giống như một dây chuyền sản xuất nhỏ: Input, Process và Output. Thiếu một phần, cả tiến trình sẽ ra kết quả không ổn định.
+    </p>
+    <div class="flow">
+      <strong>Input</strong> (dữ liệu, ngữ cảnh, mục tiêu) → <strong>Process</strong> (quy trình xử lý, bước kiểm tra) → <strong>Output</strong> (kết quả, kiểm chứng, lưu lại)
+    </div>
+    <div class="lesson-grid">
+      <div class="lesson-card">
+        <strong>Input</strong>
+        <span>Những gì bạn đưa vào: dữ liệu thật, tài liệu nội bộ, ngữ cảnh công việc, mục tiêu cụ thể của tác vụ.</span>
+      </div>
+      <div class="lesson-card">
+        <strong>Process</strong>
+        <span>Cách bạn yêu cầu AI xử lý: các bước, vai trò AI cần đóng, tiêu chí để đánh giá kết quả trung gian.</span>
+      </div>
+      <div class="lesson-card">
+        <strong>Output</strong>
+        <span>Kết quả cuối cùng: được kiểm chứng lại với thực tế, chỉnh sửa nếu cần, và lưu lại thành tài sản dùng cho lần sau.</span>
+      </div>
+    </div>
+    <p>
+      Nhìn theo khung này, một "prompt hay" không phải là một câu thần chú viết đẹp. Một prompt hay là một prompt gói gọn đủ ba phần: dữ liệu đầu vào rõ ràng, yêu cầu xử lý cụ thể, và định nghĩa rõ output mong muốn trông như thế nào.
+    </p>
+
+    <h2 id="input">Input: nạp đúng dữ liệu và đúng ngữ cảnh</h2>
+    <p>
+      Phần Input là nơi 80% chất lượng kết quả được quyết định, nhưng cũng là phần bị bỏ qua nhiều nhất. Nhiều người gõ thẳng câu hỏi mà không hề cho AI biết bối cảnh: doanh nghiệp đang ở giai đoạn nào, khách hàng là ai, dữ liệu quá khứ ra sao, ràng buộc nào cần tuân theo.
+    </p>
+    <ul class="checklist">
+      <li>Cho AI biết rõ vai trò của nó trong tác vụ này: nó đang đóng vai chuyên gia gì, phục vụ cho ai.</li>
+      <li>Đưa dữ liệu thật vào, thay vì mô tả chung chung: số liệu, đoạn hội thoại khách hàng, tài liệu nội bộ liên quan.</li>
+      <li>Nêu rõ ràng buộc: ngân sách, thời gian, văn phong thương hiệu, những điều tuyệt đối không được làm.</li>
+      <li>Nói rõ mục tiêu cuối cùng của tác vụ, không chỉ mô tả hành động cần làm.</li>
+    </ul>
+    <p>
+      Càng làm việc trong một ngành cụ thể lâu, bạn càng có nhiều dữ liệu và kinh nghiệm riêng để đưa vào Input. Đây chính là lý do vì sao mình nói tư duy nằm ở dữ liệu và kiến thức: người có nhiều dữ liệu thật và hiểu sâu ngành của mình, sẽ luôn tạo ra Input tốt hơn, bất kể họ đang dùng model nào.
+    </p>
+
+    <h2 id="process">Process: quy trình xử lý, không phải một câu prompt ngẫu hứng</h2>
+    <p>
+      Nhiều tác vụ phức tạp không nên giao cho AI xử lý trong một bước duy nhất. Giống như con người, AI làm việc theo từng bước nhỏ sẽ chính xác hơn là được giao một yêu cầu quá lớn, quá mơ hồ.
+    </p>
+    <p>
+      Ví dụ, thay vì yêu cầu AI "viết cho tôi một chiến lược marketing", một quy trình có hệ thống sẽ chia nhỏ: bước một, phân tích dữ liệu khách hàng hiện có; bước hai, xác định lại chân dung khách hàng mục tiêu dựa trên dữ liệu đó; bước ba, đề xuất thông điệp phù hợp với từng nhóm khách hàng; bước bốn, gợi ý kênh phân phối theo ngân sách đã nêu ở Input. Mỗi bước là một lần kiểm tra chất lượng trước khi đi tiếp bước sau.
+    </p>
+    <div class="note">
+      Một quy trình tốt cho phép bạn dừng lại giữa chừng để sửa, thay vì phải làm lại từ đầu khi phát hiện kết quả cuối bị sai. Đây cũng chính là lý do doanh nghiệp nên viết lại các quy trình làm việc thường xuyên với AI thành SOP, thay vì để mỗi người tự mò mỗi lần.
+    </div>
+
+    <h2 id="output">Output: kết quả phải kiểm chứng được, không phải chỉ nghe hay</h2>
+    <p>
+      Đây là phần nhiều người bỏ qua nhất, vì AI luôn trả lời với giọng điệu tự tin, mạch lạc, nghe rất thuyết phục, kể cả khi nội dung sai hoặc không phù hợp với thực tế doanh nghiệp.
+    </p>
+    <ul class="checklist">
+      <li>Đối chiếu output với dữ liệu thật đã đưa vào ở Input, xem có mâu thuẫn gì không.</li>
+      <li>Hỏi lại: nếu áp dụng kết quả này vào thực tế ngay ngày mai, có gì rủi ro hay bất hợp lý không?</li>
+      <li>Với những tác vụ ảnh hưởng đến quyết định quan trọng, luôn có một người có chuyên môn rà soát lại trước khi dùng.</li>
+      <li>Lưu lại Input, Process và Output tốt thành một tài liệu mẫu, để lần sau không phải làm lại từ đầu.</li>
+    </ul>
+    <p>
+      Bước lưu lại này thường bị bỏ qua nhưng lại quan trọng không kém các bước trước. Khi bạn lưu lại được một tiến trình Input - Process - Output đã chứng minh hiệu quả, bạn đang xây một tài sản tri thức của riêng mình, thứ có thể tái sử dụng và cải tiến dần theo thời gian, thay vì mỗi lần dùng AI lại bắt đầu lại từ con số không.
+    </p>
+
+    <h2 id="ap-dung">Cách bắt đầu xây mindset này cho công việc của bạn</h2>
+    <p>
+      Không cần phải hiểu hết mọi tính năng của một công cụ AI mới bắt đầu được. Điều cần làm trước tiên là chọn một tác vụ đang lặp lại thường xuyên trong công việc, rồi áp khung Input - Process - Output vào đó.
+    </p>
+    <ul class="checklist">
+      <li>Chọn một tác vụ cụ thể, lặp lại nhiều lần: trả lời khách hàng, viết báo giá, tổng hợp báo cáo, lên kế hoạch nội dung.</li>
+      <li>Viết ra rõ ràng: Input cần những dữ liệu gì, Process gồm những bước nào, Output cần đạt tiêu chuẩn ra sao.</li>
+      <li>Chạy thử với bất kỳ công cụ AI nào đang có sẵn, không cần chờ công cụ "tốt nhất".</li>
+      <li>Ghi lại kết quả, điều chỉnh Input và Process cho lần sau, thay vì đổi sang công cụ khác.</li>
+      <li>Khi quy trình đã ổn định, mới nghĩ đến việc tự động hóa hoặc tích hợp sâu hơn vào hệ thống.</li>
+    </ul>
+
+    <section class="question-box">
+      <h2>Ba câu hỏi để tự kiểm tra mindset dùng AI của bạn</h2>
+      <p>
+        Khi giao việc cho AI, mình có đang cho nó đủ dữ liệu và ngữ cảnh thật, hay chỉ gõ một câu hỏi chung chung?
+      </p>
+      <p>
+        Mình có một quy trình các bước rõ ràng cho tác vụ này, hay đang hy vọng một câu prompt duy nhất giải quyết được hết?
+      </p>
+      <p>
+        Mình có đang kiểm chứng và lưu lại kết quả tốt để dùng lại, hay mỗi lần dùng AI lại bắt đầu từ số không?
+      </p>
+    </section>
+
+    <section class="closing">
+      <h2>Kết luận</h2>
+      <p>
+        Công cụ AI sẽ còn thay đổi liên tục, có thể chỉ vài tháng nữa sẽ có model mới mạnh hơn, rẻ hơn, nhanh hơn. Nhưng một quy trình Input - Process - Output rõ ràng, cùng với dữ liệu và kiến thức bạn tích lũy được, sẽ không lỗi thời theo từng đợt cập nhật công cụ.
+      </p>
+      <p>
+        Nếu phải chọn nơi để đầu tư thời gian học AI, hãy đầu tư vào việc hiểu rõ dữ liệu của mình, xây quy trình rõ ràng cho từng tác vụ, và rèn khả năng đọc, kiểm chứng kết quả. Công cụ nào bạn dùng, cuối cùng, chỉ là chi tiết.
+      </p>
+      <div class="tags" aria-label="Tags">
+        <span>AI & Automation</span>
+        <span>Mindset</span>
+        <span>Input Process Output</span>
+        <span>Quy trình làm việc</span>
+        <span>Dữ liệu</span>
+      </div>
+    </section>
+  </article>
+</div>
+<div class="floating-contact" aria-label="Liên hệ nhanh">
+  <a class="phone" href="tel:0919073456" aria-label="Gọi hotline 0919073456" title="Gọi hotline"><img src="../assets/icon-phone.png" alt=""></a>
+  <a class="zalo" href="https://zalo.me/0919073456" target="_blank" rel="noopener" aria-label="Nhắn Zalo" title="Zalo"><img src="../assets/icon-zalo.png" alt=""></a>
+  <a class="messenger" href="https://www.facebook.com/biz.nguyenhoangtuan/" target="_blank" rel="noopener" aria-label="Nhắn Messenger" title="Messenger"><img src="../assets/icon-messenger.png" alt=""></a>
+</div>
+</body>
+</html>
