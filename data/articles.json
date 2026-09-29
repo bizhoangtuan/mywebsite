@@ -1,5 +1,35 @@
 [
   {
+    "title": "Tư duy dùng AI: đừng chọn model, hãy xây quy trình Input - Process - Output",
+    "category": "AI & AUTOMATION",
+    "readTime": "9 PHÚT ĐỌC",
+    "slug": "tu-duy-su-dung-ai-input-process-output",
+    "url": "content/tu-duy-su-dung-ai-input-process-output.html",
+    "date": "2026-09-29",
+    "excerpt": "Mindset dùng AI có hệ thống: model chỉ là công cụ, tư duy nằm ở dữ liệu và kiến thức. Xây quy trình Input - Process - Output cho từng tác vụ thay vì chạy theo công cụ mới.",
+    "status": "published"
+  },
+  {
+    "title": "Khai Phát Tứ Năng: Từ tự quản trị bản thân đến kiến tạo tổ chức bền vững",
+    "category": "QUẢN TRỊ DOANH NGHIỆP",
+    "readTime": "12 PHÚT ĐỌC",
+    "slug": "recap-ceosg11-buoi2-khai-pha-tu-nang",
+    "url": "content/recap-ceosg11-buoi2-khai-pha-tu-nang.html",
+    "date": "2026-07-25",
+    "excerpt": "Recap buổi học thứ 2 CEOSG11 cùng thầy Lý Trường Chiến: Ngũ tự, Tứ năng, Đúng - Đủ - Đều, chiến lược 5 thành tố, Tam đối và Tứ công.",
+    "status": "published"
+  },
+  {
+    "title": "Là một chủ doanh nghiệp, bạn đã có đủ 5 chiếc mũ này chưa?",
+    "category": "QUẢN TRỊ DOANH NGHIỆP",
+    "readTime": "8 PHÚT ĐỌC",
+    "slug": "recap-ceosg11-buoi1-5-chiec-mu-founder-ceo",
+    "url": "content/recap-ceosg11-buoi1-5-chiec-mu-founder-ceo.html",
+    "date": "2026-07-18",
+    "excerpt": "Recap buổi học đầu tiên CEOSG11: 5 chiếc mũ của một Founder/CEO, khái niệm lì khôn - lì ngu và hệ điều hành KASH.",
+    "status": "published"
+  },
+  {
     "title": "Muốn tiến bộ, đừng chỉ cố gắng nhiều hơn",
     "category": "QUẢN TRỊ BẢN THÂN",
     "readTime": "6 PHÚT ĐỌC",

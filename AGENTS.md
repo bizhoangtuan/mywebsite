@@ -23,7 +23,9 @@ Ví dụ:
 
 content/ten-bai-viet.html
 
-2. Cập nhật posts.json
+2. Cập nhật data/articles.json (bài "Góc nhìn quản trị") hoặc data/frameworks.json (bài "Framework kinh doanh")
+
+LƯU Ý QUAN TRỌNG: blog.html đọc dữ liệu từ data/articles.json và data/frameworks.json, KHÔNG PHẢI posts.json ở thư mục gốc. File posts.json là file cũ, không còn được trang nào dùng — đừng cập nhật file đó.
 
 Mỗi bài phải có:
 
@@ -31,7 +33,10 @@ Mỗi bài phải có:
 * category
 * readTime
 * slug
+* url
 * date
+* excerpt
+* status (published)
 
 3. Không sửa index.html nếu không cần thiết
 
@@ -61,6 +66,6 @@ thì:
 
 1. Viết nội dung
 2. Tạo file HTML
-3. Cập nhật posts.json
+3. Cập nhật data/articles.json hoặc data/frameworks.json (không phải posts.json)
 4. Chờ review
 5. Không tự publish nếu chưa được xác nhận
