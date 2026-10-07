@@ -178,7 +178,32 @@ function initNetwork() {
             stabilization: { iterations: 150 }
         }
     });
-    network.on('click', p => { if (p.nodes.length) showContent(p.nodes[0]); });
+    network.on('click', p => { if (p.nodes.length) selectNode(p.nodes[0], { pushState: true, focus: true }); });
+
+    window.addEventListener('popstate', () => {
+        const id = new URLSearchParams(location.search).get('node');
+        if (id && contentMap[id]) selectNode(id, { pushState: false, focus: true });
+    });
+}
+
+function focusNode(id) {
+    if (!network) return;
+    network.selectNodes([id]);
+    network.focus(id, {
+        scale: 1.15,
+        animation: { duration: 650, easingFunction: 'easeInOutQuad' }
+    });
+}
+
+function selectNode(id, opts) {
+    opts = opts || {};
+    showContent(id);
+    if (opts.focus) focusNode(id);
+    if (opts.pushState) {
+        const url = new URL(location.href);
+        url.searchParams.set('node', id);
+        history.pushState({ node: id }, '', url);
+    }
 }
 
 function showContent(id) {
@@ -186,7 +211,7 @@ function showContent(id) {
     if (!d) return;
     document.getElementById('panel-eyebrow').textContent = d.eyebrow || "CHI TIẾT";
     document.getElementById('node-title').textContent = d.title;
-    
+
     let html = `<p>${d.short}</p>${d.detailed}`;
     if (d.tags && d.tags.length > 0) {
         const tagsHtml = d.tags.map(t => `<span class="tag">${t.trim()}</span>`).join('');
@@ -247,7 +272,12 @@ function loadData() {
             nodesData.clear(); nodesData.add(nodes); edgesData.clear(); edgesData.add(edges);
             document.getElementById('loading').style.display = 'none';
             if (!network) initNetwork();
-            if (nodes.length > 0) showContent("1");
+            if (nodes.length > 0) {
+                const requestedId = new URLSearchParams(location.search).get('node');
+                const startId = (requestedId && contentMap[requestedId]) ? requestedId : "1";
+                network.once('stabilizationIterationsDone', () => selectNode(startId, { pushState: false, focus: startId !== "1" }));
+                showContent(startId);
+            }
         }
     });
 }
