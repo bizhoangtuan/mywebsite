@@ -309,20 +309,41 @@
 
     container.innerHTML = `
       <div class="timeline-fill" data-timeline-fill></div>
-      ${sorted.map((item, index) => `
+      ${sorted.map((item, index) => {
+        const isLatest = index === sorted.length - 1;
+        return `
         <div class="timeline-item reveal" style="transition-delay:${Math.min(index, 6) * 80}ms">
           <div class="timeline-marker">${escapeHtml(item.session ?? index + 1)}</div>
           <div class="timeline-card">
-            <div class="timeline-date">${escapeHtml(formatDate(item.date))}${index === sorted.length - 1 ? ' · MỚI NHẤT' : ''}</div>
+            <div class="timeline-date">${escapeHtml(formatDate(item.date))}${isLatest ? ' · MỚI NHẤT' : ''}</div>
             <h3>${escapeHtml(item.title)}</h3>
             <div class="timeline-tags">${(item.tags || []).map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}</div>
-            <p class="timeline-recap">${escapeHtml(item.recap)}</p>
             ${item.takeaway ? `<div class="timeline-takeaway"><span>Takeaway</span>${escapeHtml(item.takeaway)}</div>` : ''}
-            ${item.url ? `<a class="timeline-link" href="${rootPath}${escapeHtml(item.url)}">Đọc bài recap đầy đủ →</a>` : ''}
+            <button type="button" class="timeline-toggle" aria-expanded="${isLatest}">
+              <span class="toggle-label">${isLatest ? 'Thu gọn' : 'Xem recap chi tiết'}</span>
+              <span class="chevron" aria-hidden="true">▾</span>
+            </button>
+            <div class="timeline-details${isLatest ? ' is-open' : ''}">
+              <div class="timeline-details-inner">
+                <p class="timeline-recap">${escapeHtml(item.recap)}</p>
+                ${item.url ? `<a class="timeline-link" href="${rootPath}${escapeHtml(item.url)}">Đọc bài recap đầy đủ →</a>` : ''}
+              </div>
+            </div>
           </div>
         </div>
-      `).join('')}
+      `;
+      }).join('')}
     `;
+
+    $$('.timeline-toggle', container).forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const details = btn.nextElementSibling;
+        const open = !details.classList.contains('is-open');
+        details.classList.toggle('is-open', open);
+        btn.setAttribute('aria-expanded', String(open));
+        $('.toggle-label', btn).textContent = open ? 'Thu gọn' : 'Xem recap chi tiết';
+      });
+    });
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const items = $$('.timeline-item', container);
