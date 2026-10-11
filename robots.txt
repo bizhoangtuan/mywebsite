@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://nguyenhoangtuan.com.vn/sitemap.xml
+Sitemap: https://www.nguyenhoangtuan.com.vn/sitemap.xml
