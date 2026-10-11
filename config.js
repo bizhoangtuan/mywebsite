@@ -218,7 +218,7 @@ const CONFIG = {
   meta: {
     title:       "Nguyễn Hoàng Tuấn | Giải pháp Vận hành & Tăng trưởng số",
     description: "Đồng hành cùng SME thiết lập hệ thống quản trị và chuyển đổi số. Tư vấn Haravan, Lark Suite, Digital Marketing và AI Automation để chuẩn hóa quy trình, dữ liệu và vận hành hiệu quả.",
-    ogImage:     "https://mywebsite.biz-hoangtuan.workers.dev/assets/share-image.png",
+    ogImage:     "https://nguyenhoangtuan.com.vn/assets/share-image.png",
   },
 
 };

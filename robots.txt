@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nguyenhoangtuan.com.vn/sitemap.xml

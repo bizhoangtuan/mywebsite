@@ -125,7 +125,7 @@
   }
 
   function articleCard(item, type = 'article') {
-    const url = item.url || `content/${item.slug}.html`;
+    const url = item.url || `/content/${item.slug}`;
     const label = type === 'framework' ? 'FW' : iconLabel(item, 'BL');
     return `
       <a class="card article-card" href="${escapeHtml(url)}" data-content-type="${escapeHtml(type)}">
@@ -144,7 +144,7 @@
     const topic = item.formTopic || item.name;
     const consultHref = `https://zalo.me/0919073456`;
     const isServicesPage = document.body.dataset.page === 'services';
-    const formHref = isServicesPage ? '#contact' : `services.html?service=${encodeURIComponent(topic)}#contact`;
+    const formHref = isServicesPage ? '#contact' : `/services?service=${encodeURIComponent(topic)}#contact`;
     return `
       <article class="card service-card" id="${escapeHtml(item.slug)}">
         <div class="service-category">${escapeHtml(item.category)}</div>
