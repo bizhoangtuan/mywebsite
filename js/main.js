@@ -17,7 +17,7 @@
   }
 
   function initMeta() {
-    if (!C.meta) return;
+    if (!C.meta || document.body.dataset.page !== 'home') return;
     document.title = C.meta.title || document.title;
     const metaDesc = $('#meta-desc');
     const ogTitle = $('#og-title');
