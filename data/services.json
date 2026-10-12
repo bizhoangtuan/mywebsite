@@ -64,5 +64,16 @@
     "tags": ["Zalo OA", "Tích vàng", "Xác minh", "Doanh nghiệp", "CSKH"],
     "formTopic": "Đăng ký Zalo OA và tích vàng",
     "status": "published"
+  },
+  {
+    "name": "Thiết lập tracking dữ liệu website & quảng cáo",
+    "slug": "thiet-lap-tracking-ga4-gtm-pixel-gsc",
+    "category": "TRACKING & ĐO LƯỜNG",
+    "summary": "Cài đặt và kiểm thử Google Tag Manager, GA4, Meta (Facebook) Pixel và Google Search Console để mọi hành vi trên website được đo đúng, đủ và sạch.",
+    "pain": "Anh/chị đang chạy quảng cáo, làm SEO nhưng số liệu rời rạc, không rõ khách rơi rụng ở bước nào, sự kiện mua hàng bị thiếu hoặc đếm sai nên khó ra quyết định.",
+    "outcome": "Mình cùng anh/chị thiết kế sơ đồ đo lường theo hành trình mua hàng, cài đặt tag/event, kiểm thử và bàn giao tài liệu để dữ liệu đủ tin cậy cho tối ưu traffic và tỷ lệ chuyển đổi.",
+    "tags": ["Google Tag Manager", "GA4", "Facebook Pixel", "Search Console", "Event Tracking", "Conversion"],
+    "formTopic": "Thiết lập tracking dữ liệu",
+    "status": "published"
   }
 ]
