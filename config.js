@@ -205,7 +205,7 @@ const CONFIG = {
   form: {
     // Dán Web App URL từ Google Apps Script vào đây
     // Ví dụ: "https://script.google.com/macros/s/AKfy.../exec"
-    webhookUrl: "https://script.google.com/macros/s/AKfycbw64XWqXG-HrnIe_V7uge6bjDN7M3oPRXEIE7nHd_dLUu6_M7CZtAO9zSYlIe2PtPs7gQ/exec",
+    webhookUrl: "https://script.google.com/macros/s/AKfycbyMuRDvk7h_5yVL27djnksw2wkzFI2379zMi8vUE9dLNzv5QODRDY-_TafA19VLVb0NDA/exec",
 
     // Tiêu đề thông báo thành công
     successTitle:   "Đã nhận thông tin!",
