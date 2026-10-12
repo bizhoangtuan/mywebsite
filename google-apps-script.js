@@ -21,6 +21,7 @@
  * ============================================================
  */
 
+const SCRIPT_VERSION = "2026-10-12-v3-html-email";
 const SHEET_NAME = "Form Liên hệ";   // Tên tab trong Google Sheet
 const NOTIFY_EMAIL = "biz.hoangtuan@gmail.com"; // Email nhận thông báo
 
@@ -35,6 +36,15 @@ const COLUMNS = [
   "Mô tả bài toán",
   "Nguồn"
 ];
+
+/**
+ * Mở URL /exec trên trình duyệt để kiểm tra deployment đang chạy phiên bản nào
+ */
+function doGet() {
+  return ContentService
+    .createTextOutput(JSON.stringify({ status: "ok", version: SCRIPT_VERSION }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
 
 /**
  * Hàm chính — chạy khi website POST form data đến đây
@@ -222,6 +232,7 @@ function sendNotificationEmail(data, timestamp) {
         '<div style="padding:16px 28px;background:#fbf3ea;border-top:1px solid #f0e6da;font-size:13px;color:#7b6a60;line-height:1.8;">' +
           'Thời gian gửi: <strong>' + esc(timestamp) + '</strong><br>' +
           'Nguồn: <strong>' + esc(source) + '</strong><br>' +
+          '<span style="color:#b8a99d;font-size:11px;">Script ' + SCRIPT_VERSION + '</span><br>' +
           '<a href="' + sheetUrl + '" style="color:#e65f35;font-weight:700;">Mở danh sách lead trên Google Sheet</a>' +
         '</div>' +
 

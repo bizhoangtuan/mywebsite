@@ -394,6 +394,28 @@
     sections.forEach((section) => observer.observe(section));
   }
 
+  function initHeroRotator() {
+    const target = $('.hero h1 span');
+    if (!target || document.body.dataset.page !== 'home') return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const words = [target.textContent.trim(), 'chủ shop online', 'doanh nghiệp B2B', 'đội ngũ Sales'];
+    target.innerHTML = `<span class="rot-word">${escapeHtml(words[0])}</span>`;
+    const el = target.firstElementChild;
+    let i = 0;
+    setInterval(() => {
+      if (document.hidden) return;
+      el.classList.add('is-out');
+      setTimeout(() => {
+        i = (i + 1) % words.length;
+        el.textContent = words[i];
+        el.classList.remove('is-out');
+        el.classList.add('is-in');
+        void el.offsetWidth;
+        el.classList.remove('is-in');
+      }, 350);
+    }, 3200);
+  }
+
   initMeta();
   initProfile();
   initStats();
@@ -401,6 +423,7 @@
   initTabs();
   initServiceCtas();
   initScrollReveal();
+  initHeroRotator();
   initJourney();
   initContent();
 })();
